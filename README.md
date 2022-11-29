@@ -3,6 +3,8 @@ Training program "Back-end Developer: PHP/Symfony" (OpenClassrooms)<br>
 Project 6:  Collaborative blog about snowboard tricks using PHP & Symfony (study project)<br>
 🚧 Work in progress
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/078705714170477ebbc49cc9c0bc58a3)](https://www.codacy.com/gh/AnnaigJegourel/OC-P6-Snowtricks/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AnnaigJegourel/OC-P6-Snowtricks&amp;utm_campaign=Badge_Grade)
+
 ## Configuration / Technologies 🚧
 
 xamppserver<br>
