@@ -4,7 +4,6 @@ Project 6:  Collaborative blog about snowboard tricks using PHP & Symfony (study
 🚧 Work in progress
 
 <a href="https://codeclimate.com/github/AnnaigJegourel/OC-P6-Snowtricks/maintainability"><img src="https://api.codeclimate.com/v1/badges/589aae61309fe342df5d/maintainability" /></a>
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/078705714170477ebbc49cc9c0bc58a3)](https://www.codacy.com/gh/AnnaigJegourel/OC-P6-Snowtricks/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AnnaigJegourel/OC-P6-Snowtricks&amp;utm_campaign=Badge_Grade)
 
 ## Configuration / Technologies 🚧
