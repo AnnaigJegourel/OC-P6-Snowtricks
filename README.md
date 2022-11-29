@@ -1,4 +1,7 @@
 # OC-P6-Snowtricks
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c980f69e1c1f4f7987fc1befe5996e73)](https://app.codacy.com/gh/AnnaigJegourel/OC-P6-Snowtricks?utm_source=github.com&utm_medium=referral&utm_content=AnnaigJegourel/OC-P6-Snowtricks&utm_campaign=Badge_Grade_Settings)
+
 Training program "Back-end Developer: PHP/Symfony" (OpenClassrooms)<br>
 Project 6:  Collaborative blog about snowboard tricks using PHP & Symfony (study project)<br>
 🚧 Work in progress
