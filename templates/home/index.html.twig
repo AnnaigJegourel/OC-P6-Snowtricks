@@ -8,25 +8,23 @@
     <h1>Bienvenue sur Snowtricks!</h1>
     <p>Le site communautaire par et pour les passionné-es de snowboard</p>
     <img src="#" alt="image heroe">
-    <button onclick="#">Voir la liste des figures</button>
+    <button onclick=".trickslist">Voir la liste des figures</button>
 </section>
 
 <section class="tricksList">
-    {# for trick in allTricks #}
+    {% for trick in allTricks %}
     <article>
-        <h2> Nom de la figure
-<!--           <a href="{{path('trick_detail', {'id': article.id})}}"> {{trick.name}} </a> -->
+        <h2>
+            <a href="#{#path('trick_detail', {'id': trick.id})#}"> {{trick.name}} </a>
         </h2>
-        <img src="#" alt="image de la figure">
- <!--           {#trick.image#} -->
-        </img>
-        {# if logged in#}
-            <a href="{{path('trick_update', {'id': article.id})}}"> {{trick.name}} </a>
-            <button onclick="#"> supprimer </button>
+        <img src="#" alt="image de la figure"></img>
+        {# if isLogged() #}
+            <a href="#{#path('trick_update', {'id': trick.id})#}">Modifier</a>
+            <button onclick="#">Supprimer</button>
         {# endif #}
     </article>
-    {# endfor #}
-    <button onlclick="#">Retour en haut de la liste (icone)</button>
+    {% endfor %}
+    <button onlclick=".trickslist">Retour en haut de la liste</button>
 </section>
 
 {% endblock %}
