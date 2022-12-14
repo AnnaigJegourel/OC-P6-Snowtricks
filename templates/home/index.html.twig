@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue!{% endblock %}
+
+{% block body %}
+
+<section class="heroe">
+    <h1>Bienvenue sur Snowtricks!</h1>
+    <p>Le site communautaire par et pour les passionné-es de snowboard</p>
+    <img src="#" alt="image heroe">
+    <button onclick=".trickslist">Voir la liste des figures</button>
+</section>
+
+<section class="tricksList">
+    {% for trick in allTricks %}
+    <article>
+        <h2>
+            <a href="#{#path('trick_detail', {'id': trick.id})#}"> {{trick.name}} </a>
+        </h2>
+        <img src="#" alt="image de la figure"></img>
+        {# if isLogged() #}
+            <a href="#{#path('trick_update', {'id': trick.id})#}">Modifier</a>
+            <button onclick="#">Supprimer</button>
+        {# endif #}
+    </article>
+    {% endfor %}
+    <button onlclick=".trickslist">Retour en haut de la liste</button>
+</section>
+
+{% endblock %}
