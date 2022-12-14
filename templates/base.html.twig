@@ -14,6 +14,56 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        
+        <header>
+
+            <a href="{{path('app_home')}}">
+                <img src="#" alt="Snowtricks' Logo">
+            </a>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('app_home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_home') }}#trickslist">Tricks</a>
+                    </li>
+                    {# if is_granted('IS_AUTHENTICATED')#}
+                        <li>
+                            <a href="{# path('app_user_profile') #}">Profile</a>
+                        </li>
+                        <li>
+                            <a href="{# path('signout') #}">Sign out</a>
+                        </li>
+                    {# else #}
+                        <li>
+                            <a href="{# path('app_signin') #}">Sign in</a>
+                        </li>
+                        <li>
+                            <a href="{# path('signup') #}">Sign up</a>
+                        </li>
+                    {# endif #}
+                </ul>
+            </nav>
+
+            {% for message in app.flashes('notice') %}
+                <div class="flash-notice">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        </header>
+
+        {% block main %}{% endblock %}
+
+        <footer>
+                <p>Copyright Annaig Jégourel - {{ "now"|date("Y") }}</p>
+                <p>
+                    <a href="#">{{'back_to_top' | trans }}</a>
+                </p>
+
+        </footer>
+
     </body>
 </html>
