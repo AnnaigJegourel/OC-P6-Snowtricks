@@ -31,7 +31,7 @@
                     </li>
                     {# if is_granted('IS_AUTHENTICATED')#}
                         <li>
-                            <a href="{# path('app_user_profile') #}">Profile</a>
+                            <a href="{# path('app_user_show', {'id': user.id}) #}">Profile</a>
                         </li>
                         <li>
                             <a href="{# path('signout') #}">Sign out</a>
@@ -41,7 +41,7 @@
                             <a href="{# path('app_signin') #}">Sign in</a>
                         </li>
                         <li>
-                            <a href="{# path('signup') #}">Sign up</a>
+                            <a href="{{ path('app_user_new') }}">Sign up</a>
                         </li>
                     {# endif #}
                 </ul>
