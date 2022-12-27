@@ -7,7 +7,7 @@
 <section class="heroe">
     <h1>Welcome to Snowtricks!</h1>
     <p>Collaborative blog about snowboard tricks - by and for snowboard fans</p>
-    <img src="#" alt="image heroe">
+    <img src="img/Towin.jpg" alt="Nick Francke making a “Tow-in” Straight Jump"></img>
     <button onclick=".trickslist">See tricks list</button>
 </section>
 
@@ -17,7 +17,7 @@
         <h2>
             <a href="#{#path('trick_detail', {'id': trick.id})#}"> {{trick.name}} </a>
         </h2>
-        <img src="#" alt="a picture of the trick"></img>
+        <img src="{{trick.image}}" alt="description?"></img>
         {# if isLogged() #}
             <a href="#{#path('trick_update', {'id': trick.id})#}">Modify this trick</a>
             <button onclick="#">Delete this trick</button>
