@@ -15,12 +15,12 @@ class HomeController extends AbstractController
             "trick1" => [
                 "id" => 1,
                 "name" => "mute",
-                "image"=> "image mute"
+                "image"=> "/img/mute.png"
             ],
             "trick2" => [
                 "id" => 2,
-                "name" => "sad",
-                "image"=> "image sad"
+                "name" => "flip",
+                "image"=> "/img/flip.jpg"
             ]
         ];
 
