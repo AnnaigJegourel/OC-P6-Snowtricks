@@ -31,17 +31,17 @@
                     </li>
                     {# if is_granted('IS_AUTHENTICATED')#}
                         <li>
-                            <a href="{# path('app_user_show', {'id': user.id}) #}">Profile</a>
+                            <a href="{# path('app_user_show', {'id': user.id}) #}">Profile (show user)</a>
                         </li>
                         <li>
-                            <a href="{# path('signout') #}">Sign out</a>
+                            <a href="{{ path('app_logout') }}">Log out</a>
                         </li>
                     {# else #}
                         <li>
-                            <a href="{# path('app_signin') #}">Sign in</a>
+                            <a href="{{ path('app_login') }}">Log in</a>
                         </li>
                         <li>
-                            <a href="{{ path('app_user_new') }}">Sign up</a>
+                            <a href="{{ path('app_user_new') }}">Sign up (new user)</a>
                         </li>
                     {# endif #}
                 </ul>
