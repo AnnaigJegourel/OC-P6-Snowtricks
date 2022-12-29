@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
-    /* #[Route('/', name: 'app_trick_index', methods: ['GET'])]
-    public function index(TrickRepository $trickRepository): Response
-    {
-        return $this->render('trick/index.html.twig', [
-            'tricks' => $trickRepository->findAll(),
-        ]);
-    }*/
-
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrickRepository $trickRepository): Response
     {
@@ -31,7 +23,7 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->save($trick, true);
 
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/new.html.twig', [
@@ -57,7 +49,7 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->save($trick, true);
 
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
@@ -73,6 +65,6 @@ class TrickController extends AbstractController
             $trickRepository->remove($trick, true);
         }
 
-        return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
