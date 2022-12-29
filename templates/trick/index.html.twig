@@ -36,7 +36,7 @@
                     <td>
                         <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
                         <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-                        <a href="#">delete</a>
+                        {{ include('trick/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
@@ -49,10 +49,7 @@
 
         <a href="{{ path('app_trick_new') }}">Create new</a>
 
-        <button onlclick="#tricksindex">Back to the top of the list</button>
-        <p>
-            <a href="#tricksindex">back to index top</a>
-        </p>
+        <a href="#tricksindex">back to index top</a>
     </section>
 
 {% endblock %}
