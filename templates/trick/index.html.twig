@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block main %}
+    <h1>Welcome to Snowtricks!</h1>
+    
+    <section class="heroe">
+        <h2>Collaborative blog about snowboard tricks - by and for snowboard fans</h2>
+        <img src="img/Towin.jpg" alt="Nick Francke making a “Tow-in” Straight Jump"></img>
+        <!--
+        <button onclick=".trickslist">See tricks list</button>
+        -->
+    </section>
+
+    <section id="tricksindex">
+        <h2>Tricks Index</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for trick in tricks %}
+                <tr>
+                    <td>{{ trick.id }}</td>
+                    <td>{{ trick.name }}</td>
+                    <td>{{ trick.description }}</td>
+                    <td>{{ trick.category }}</td>
+                    <td>
+                        <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
+                        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+                        {{ include('trick/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_trick_new') }}">Create new</a>
+
+        <a href="#tricksindex">back to index top</a>
+    </section>
+
+{% endblock %}
