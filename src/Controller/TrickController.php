@@ -13,13 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
-    #[Route('/', name: 'app_trick_index', methods: ['GET'])]
+    /* #[Route('/', name: 'app_trick_index', methods: ['GET'])]
     public function index(TrickRepository $trickRepository): Response
     {
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
         ]);
-    }
+    }*/
 
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrickRepository $trickRepository): Response
