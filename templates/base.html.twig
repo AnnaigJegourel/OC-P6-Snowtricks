@@ -31,7 +31,7 @@
                     </li>
                     {% if is_granted('IS_AUTHENTICATED')%}
                         <li>
-                            <a href="{# path('app_user_show', {'id': user.id}) #}">Profile (show user)</a>
+                            <a href="{{ path('app_user_show', {'id': user.id}) }}">Profile (show user)</a>
                         </li>
                         <li>
                             <a href="{{ path('app_logout') }}">Log out</a>
