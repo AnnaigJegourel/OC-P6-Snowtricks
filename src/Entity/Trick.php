@@ -58,6 +58,12 @@ class Trick
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
+
+                // Only change the updated af if the file is really uploaded to avoid database updates.
+                // This is needed when the file should be set when loading the entity.
+                //if ($this->imageFile instanceof UploadedFile) {
+                // $this->updatedAt = new \DateTime('now');
+                //}
         }
     }
 
