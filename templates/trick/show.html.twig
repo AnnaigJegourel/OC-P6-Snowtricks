@@ -7,6 +7,12 @@
 
     <table class="table">
         <tbody>
+            {% if trick.imageName %}
+                <tr>
+                    <img src="{{ vich_uploader_asset(trick, "imageFile") }}" alt="picture of a snowboarder doing a {{ trick.name }}" style="width: 25%; height:auto;"/>
+                </tr>
+            {% endif %}
+
             <tr>
                 <th>Id</th>
                 <td>{{ trick.id }}</td>

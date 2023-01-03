@@ -27,23 +27,23 @@
                         <a href="{{ path('app_home') }}">Home</a>
                     </li>
                     <li>
-                        <a href="{{ path('app_home') }}#trickslist">Tricks</a>
+                        <a href="{{ path('app_home') }}#tricksindex">Tricks</a>
                     </li>
-                    {# if is_granted('IS_AUTHENTICATED')#}
+                    {% if is_granted('IS_AUTHENTICATED')%}
                         <li>
-                            <a href="{# path('app_user_show', {'id': user.id}) #}">Profile (show user)</a>
+                            <a href="{{ path('app_user_show', {'id': user.id}) }}">Profile (show user)</a>
                         </li>
                         <li>
                             <a href="{{ path('app_logout') }}">Log out</a>
                         </li>
-                    {# else #}
+                    {% else %}
                         <li>
                             <a href="{{ path('app_login') }}">Log in</a>
                         </li>
                         <li>
                             <a href="{{ path('app_user_new') }}">Sign up (new user)</a>
                         </li>
-                    {# endif #}
+                    {% endif %}
                 </ul>
             </nav>
 
