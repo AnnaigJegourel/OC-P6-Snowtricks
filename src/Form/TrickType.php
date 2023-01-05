@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Trick;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,10 @@ class TrickType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('category')
+            ->add('category', CollectionType::class, [
+                'entry_type' => CategoryType::class,
+                'entry_options' => ['label' => false],
+            ])
             ->add('imageFile', FileType::class, [
                 'required'=>false
             ])
