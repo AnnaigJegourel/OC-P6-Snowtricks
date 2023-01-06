@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Trick;
+use App\Form\CategoryType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,9 +19,19 @@ class TrickController extends AbstractController
     public function new(Request $request, TrickRepository $trickRepository): Response
     {
         $trick = new Trick();
+        $category = new Category();
+        //dd($category);
+
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+        //dd($form);
 
+        $categoryForm = $this->createForm(CategoryType::class, $category);
+        $categoryForm->handleRequest($request);
+        //dd($categoryForm);
+
+
+//ajouter validation categoryForm?
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->save($trick, true);
 
@@ -29,6 +41,8 @@ class TrickController extends AbstractController
         return $this->renderForm('trick/new.html.twig', [
             'trick' => $trick,
             'form' => $form,
+            //'category' => $category,
+            'categoryForm' => $categoryForm,
         ]);
     }
 
