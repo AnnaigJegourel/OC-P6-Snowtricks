@@ -33,8 +33,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $activated = null;
+    #[ORM\Column]
+    private ?bool $isActivated = false;
+
+    //#[ORM\Column(nullable: true)]
+    //private ?bool $activated = null;
 
     public function getId(): ?int
     {
@@ -130,14 +133,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isActivated(): ?bool
+    // public function isActivated(): ?bool
+    // {
+    //     return $this->activated;
+    // }
+
+    // public function setActivated(bool $activated): self
+    // {
+    //     $this->activated = $activated;
+
+    //     return $this;
+    // }
+
+    public function isIsActivated(): ?bool
     {
-        return $this->activated;
+        return $this->isActivated;
     }
 
-    public function setActivated(bool $activated): self
+    public function setIsActivated(bool $isActivated): self
     {
-        $this->activated = $activated;
+        $this->isActivated = $isActivated;
 
         return $this;
     }
