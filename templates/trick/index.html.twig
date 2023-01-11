@@ -32,7 +32,7 @@
                     <td>{{ trick.id }}</td>
                     <td>{{ trick.name }}</td>
                     <td>{{ trick.description }}</td>
-                    <td>{{ trick.category }}</td>
+                    <td>{{ trick.category.name }}</td>
                     <td>
                         <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
                         <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
