@@ -30,11 +30,14 @@ class Trick
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?int $category = null;
+    //#[ORM\Column]
+    //private ?int $category = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tricks')]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -106,17 +109,17 @@ class Trick
         return $this;
     }
 
-    public function getCategory(): ?int
-    {
-        return $this->category;
-    }
+    // public function getCategory(): ?int
+    // {
+    //     return $this->category;
+    // }
 
-    public function setCategory(int $category): self
-    {
-        $this->category = $category;
+    // public function setCategory(int $category): self
+    // {
+    //     $this->category = $category;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
@@ -126,6 +129,18 @@ class Trick
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

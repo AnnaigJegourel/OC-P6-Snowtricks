@@ -19,7 +19,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Category</th>
@@ -29,10 +28,9 @@
             <tbody>
             {% for trick in tricks %}
                 <tr>
-                    <td>{{ trick.id }}</td>
                     <td>{{ trick.name }}</td>
                     <td>{{ trick.description }}</td>
-                    <td>{{ trick.category }}</td>
+                    <td>{{ trick.category.name }}</td>
                     <td>
                         <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
                         {% if is_granted('IS_AUTHENTICATED')%}
