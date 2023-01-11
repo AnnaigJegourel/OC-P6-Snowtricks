@@ -19,15 +19,15 @@ class TrickController extends AbstractController
     public function new(Request $request, TrickRepository $trickRepository): Response
     {
         $trick = new Trick();
-        $category = new Category();
+        //$category = new Category();
         //dd($category);
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         //dd($form);
 
-        $categoryForm = $this->createForm(CategoryType::class, $category);
-        $categoryForm->handleRequest($request);
+        //$categoryForm = $this->createForm(CategoryType::class, $category);
+       // $categoryForm->handleRequest($request);
         //dd($categoryForm);
 
 
@@ -42,7 +42,7 @@ class TrickController extends AbstractController
             'trick' => $trick,
             'form' => $form,
             //'category' => $category,
-            'categoryForm' => $categoryForm,
+            //'categoryForm' => $categoryForm,
         ]);
     }
 
