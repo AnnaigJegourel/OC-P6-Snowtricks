@@ -22,7 +22,7 @@ class TrickType extends AbstractType
                 'class' => Category::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('category')
-                        ->orderBy('category.name', 'ASC');
+                        ->orderBy('category.id', 'ASC');
                 },
                 'choice_label' => 'name',
                         ])
