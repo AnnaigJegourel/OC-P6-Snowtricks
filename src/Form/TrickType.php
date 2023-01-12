@@ -26,8 +26,18 @@ class TrickType extends AbstractType
                 },
                 'choice_label' => 'name',
                         ])
-            ->add('imageFile', FileType::class, [
-                'required'=>false
+            // ->add('imageFile', FileType::class, [
+            //     'required'=>false
+            // ])
+            ->add('images', CollectionType::class, [
+                'entry_type' => ImageType::class,
+                //'prototype'			=> true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false,
+                'label'=>false,
+                'by_reference' => false,
+                'disabled' => false,
             ])
         ;
     }
