@@ -1,4 +1,35 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {# form_widget(form) #}
+
+    {{ form_errors(form) }}
+    
+    <h3>Nom du trick:</h3>
+    {{ form_row(form.name) }}
+
+    <h3>Description du trick:</h3>
+    {{ form_row(form.description) }}
+
+    <h3>Catégorie du trick:</h3>
+    {{ form_row(form.category) }}
+
+
+    <h3>Images du trick:</h3>
+    {# form_row(form.images) #}
+    {{ form_label(form.images) }}
+    {{ form_errors(form.images) }}
+
+    <ul>
+    {% for image in form.images %}
+        <li>
+            {{ form_errors(form.images) }}
+            {{ form_widget(form.images) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+
+    <h3>C'est tout bon?</h3>
     <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <h3>-Fin du formulaire-</h3>
 {{ form_end(form) }}
