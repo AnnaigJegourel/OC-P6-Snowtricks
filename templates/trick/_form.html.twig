@@ -18,15 +18,23 @@
     {{ form_label(form.images) }}
     {{ form_errors(form.images) }}
 
-    <ul>
-    {% for image in form.images %}
-        <li>
-            {{ form_errors(form.images) }}
-            {{ form_widget(form.images) }}
-        </li>
-    {% endfor %}
+    <ul id="images-fields-list"
+        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.images|length }}"
+    >
+        {% for image in form.images %}
+            <li>
+                {{ form_errors(form.images) }}
+                {{ form_widget(form.images) }}
+            </li>
+        {% endfor %}
     </ul>
 
+    <button type="button"
+        class="add-another-collection"
+        data-list-selector="#images-fields-list">Add another image
+    </button>
 
     <h3>C'est tout bon?</h3>
     <button class="btn">{{ button_label|default('Save') }}</button>
