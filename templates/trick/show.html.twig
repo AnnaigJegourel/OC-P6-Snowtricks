@@ -7,9 +7,9 @@
 
     <table class="table">
         <tbody>
-            {% if trick.imageName %}
+            {% if trick.images.name %}
                 <tr>
-                    <img src="{{ vich_uploader_asset(trick, "imageFile") }}" alt="picture of a snowboarder doing a {{ trick.name }}" style="width: 25%; height:auto;"/>
+                    <img src="{{ vich_uploader_asset(trick.images, "file") }}" alt="picture of a snowboarder doing a {{ trick.name }}" style="width: 25%; height:auto;"/>
                 </tr>
             {% endif %}
 
