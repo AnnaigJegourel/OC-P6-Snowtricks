@@ -23,7 +23,7 @@ class ImageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Image::class,
-            //"allow_extra_fields" => true,
+            "allow_extra_fields" => true,
         ]);
     }
 }
