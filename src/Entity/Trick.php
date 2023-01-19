@@ -41,7 +41,12 @@ class Trick
     #[ORM\ManyToOne(inversedBy: 'tricks')]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Image::class, orphanRemoval: true)]
+    #[ORM\OneToMany(
+        mappedBy: 'trick',
+        targetEntity: Image::class,
+        orphanRemoval: true,
+        cascade: ['persist']
+        )]
     private Collection $images;
 
     public function __construct()
