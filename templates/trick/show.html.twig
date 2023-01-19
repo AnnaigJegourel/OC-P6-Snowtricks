@@ -7,10 +7,15 @@
 
     <table class="table">
         <tbody>
-            {% if trick.images.name %}
-                <tr>
-                    <img src="{{ vich_uploader_asset(trick.images, "file") }}" alt="picture of a snowboarder doing a {{ trick.name }}" style="width: 25%; height:auto;"/>
-                </tr>
+            {% if trick.images %}
+                {% for image in trick.images %}
+                    <tr>
+                        <img   src="{{ vich_uploader_asset(image, "file") }}" 
+                                alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                style="width: 25%; height:auto;"
+                        />
+                    </tr>
+                {% endfor %}
             {% endif %}
 
             <tr>
