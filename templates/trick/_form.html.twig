@@ -1,47 +1,42 @@
 {{ form_start(form) }}
-    {# form_widget(form) #}
 
     {{ form_errors(form) }}
     
-    <h3>Nom du trick:</h3>
     {{ form_row(form.name) }}
-
-    <h3>Description du trick:</h3>
     {{ form_row(form.description) }}
-
-    <h3>Catégorie du trick:</h3>
     {{ form_row(form.category) }}
-
-
-    <h3>Images du trick:</h3>
-    {# form_row(form.images) #}
+    
     {{ form_label(form.images) }}
-    {{ form_errors(form.images) }}
+    {# form_errors(form.images) #}
 
     <ul id="images-fields-list"
         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
         data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
         data-widget-counter="{{ form.images|length }}"
-        class="holder-images"
-    >
-        {% for image in form.images %}
-            <li>
-                {{ form_errors(form.images) }}
-                {{ form_widget(form.images) }}
-            </li>
-        {% endfor %}
+        class="holder-images">
+
+        {# form_row(form.images) #}
+
+        {# form_start(form.images) #}
+
+            {{ form_errors(form.images) }}
+            {{ form_widget(form.images) }}
+            {# form_row(form.image.file) #}
+
+        {# form_end(form.images) #}
     </ul>
+
     <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
     {# <button type="button"
         class="add-another-collection"
         data-list-selector="#images-fields-list">Add another image
     </button> #}
 
-    <h3>C'est tout bon?</h3>
+    <p>C'est tout bon?</p>
     <button class="btn">{{ button_label|default('Save') }}</button>
 
-    <h3>-Fin du formulaire-</h3>
+    <p>-Fin du formulaire-</p>
 {{ form_end(form) }}
 
 {% block javascripts %}
@@ -55,7 +50,7 @@
 
             removeFormButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                // remove the li for the iamge form
+                // remove the li for the image form
                 item.remove();
             });
         }
