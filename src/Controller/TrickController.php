@@ -24,7 +24,6 @@ class TrickController extends AbstractController
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-        //dd($form);
 
         //$categoryForm = $this->createForm(CategoryType::class, $category);
        // $categoryForm->handleRequest($request);
@@ -33,6 +32,8 @@ class TrickController extends AbstractController
 
 //ajouter validation categoryForm?
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form);
+
             $trickRepository->save($trick, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
@@ -58,6 +59,8 @@ class TrickController extends AbstractController
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
+        //dd($request);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
