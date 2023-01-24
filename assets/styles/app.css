@@ -1,7 +1,20 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
-body {
-    background-color: lightgray;
+.main {
+    padding: 2%;
 }
+
+.headfoot {
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+    color: #fff;
+}
+
+.nav .li {
+    width: 20%;
+    margin: 1%;
+}
+
+@tailwind utilities;
