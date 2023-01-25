@@ -7,6 +7,7 @@ use App\Entity\Trick;
 use App\Form\CategoryType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,6 +65,15 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($trick->getImages());
+            //$entityManager = $registry->getManager();
+            foreach($trick->getImages() as $image) {
+                if($image->getName() === null) {
+//                    $entityManager->remove($image);
+                    $trick->removeImage($image);
+                }
+            }
+//            $entityManager->flush();
             $trickRepository->save($trick, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
