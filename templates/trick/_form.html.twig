@@ -21,7 +21,16 @@
 
     <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
 
-    <p>C'est tout bon?</p>
+
+
+    <h2>Vidéos:</h2>
+    {{ form_label(form.videos)}}
+    {{ form_errors(form.videos)}}
+    {{ form_widget(form.videos)}}
+
+
+
+    <h2>C'est tout bon?</h2>
     <button class="btn">{{ button_label|default('Save') }}</button>
 
     <p>-Fin du formulaire-</p>
