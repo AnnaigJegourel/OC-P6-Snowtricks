@@ -17,6 +17,7 @@ class TrickController extends AbstractController
     public function new(Request $request, TrickRepository $trickRepository): Response
     {
         $trick = new Trick();
+
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
@@ -47,6 +48,15 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach($trick->getImages() as $image) {
+            // Add an image->Exception : 
+            // "Typed property App\Entity\Image::$name must not be accessed before initialization":
+            // Ajouter une condition pour vérifier si les nom de l'image est créée? dans db? dans form?
+            //     if(property_exists($image, "name") && $image->getName() === null) {
+                if($image->getName() === null) {
+                    $trick->removeImage($image);
+                }
+            }
             $trickRepository->save($trick, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);

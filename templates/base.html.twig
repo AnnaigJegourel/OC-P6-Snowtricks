@@ -3,26 +3,35 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <!--link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"-->
+        <link rel="icon" href="images/Logo.png" type="image/x-icon">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            
+            <!-- Renders a link tag (if your module requires any CSS)
+                <link rel="stylesheet" href="/build/app.css"> -->
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+
+            <!-- Renders app.js & a webpack runtime.js file
+                <script src="/build/runtime.js" defer></script>
+                <script src="/build/app.js" defer></script>
+                The "defer" attribute on the script tags delays the execution of the JavaScript until the page loads e -->
         {% endblock %}
     </head>
-    <body>
+    <body class="bg-white text-slate-600">
         
-        <header>
+        <header class="basics headfoot bg-sky-600 p-2">
 
             <a href="{{path('app_home')}}">
-                <img src="#" alt="Snowtricks' Logo">
+                <img src="images/Logo.png" alt="Snowtricks' Logo: black&white vector image of jumping snowboarder" style="width: 10%; height:auto;">
             </a>
 
             <nav>
-                <ul>
+                <ul class="flex">
                     <li>
                         <a href="{{ path('app_home') }}">Home</a>
                     </li>
@@ -31,7 +40,7 @@
                     </li>
                     {% if is_granted('IS_AUTHENTICATED')%}
                         <li>
-                            <a href="{{ path('app_user_show', {'id': user.id}) }}">Profile (show user)</a>
+                            <a href="{# path('app_user_show', {'id': user.id}) #}">Profile (show user)</a>
                         </li>
                         <li>
                             <a href="{{ path('app_logout') }}">Log out</a>
@@ -57,7 +66,7 @@
 
         {% block main %}{% endblock %}
 
-        <footer>
+        <footer class="basics headfoot bg-slate-600">
                 <p>Copyright Annaig Jégourel - {{ "now"|date("Y") }}</p>
                 <p>
                     <a href="#">{{'back_to_top' | trans }}</a>

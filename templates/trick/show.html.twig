@@ -7,16 +7,17 @@
 
     <table class="table">
         <tbody>
-            {% if trick.imageName %}
-                <tr>
-                    <img src="{{ vich_uploader_asset(trick, "imageFile") }}" alt="picture of a snowboarder doing a {{ trick.name }}" style="width: 25%; height:auto;"/>
-                </tr>
+            {% if trick.images %}
+                {% for image in trick.images %}
+                    <tr>
+                        <img   src="{{ vich_uploader_asset(image, "file") }}" 
+                                alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                style="width: 25%; height:auto;"
+                        />
+                    </tr>
+                {% endfor %}
             {% endif %}
 
-            <tr>
-                <th>Id</th>
-                <td>{{ trick.id }}</td>
-            </tr>
             <tr>
                 <th>Name</th>
                 <td>{{ trick.name }}</td>
@@ -27,14 +28,16 @@
             </tr>
             <tr>
                 <th>Category</th>
-                <td>{{ trick.category }}</td>
+                <td>{{ trick.category.name }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_home') }}">back to list</a>
 
-    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+    {% if is_granted('IS_AUTHENTICATED')%}
+        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+        {{ include('trick/_delete_form.html.twig') }}
+    {% endif %}
 
-    {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}

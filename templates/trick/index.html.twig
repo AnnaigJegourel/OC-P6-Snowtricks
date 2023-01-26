@@ -3,11 +3,11 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block main %}
-    <h1>Welcome to Snowtricks!</h1>
+    <h1 class="text-3xl font-bold text-center">Welcome to Snowtricks!</h1>
     
     <section class="heroe">
         <h2>Collaborative blog about snowboard tricks - by and for snowboard fans</h2>
-        <img src="img/Towin.jpg" alt="Nick Francke making a “Tow-in” Straight Jump"></img>
+        <img src="images/Towin.jpg" alt="Nick Francke making a “Tow-in” Straight Jump"></img>
         <!--
         <button onclick=".trickslist">See tricks list</button>
         -->
@@ -19,7 +19,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Category</th>
@@ -29,10 +28,9 @@
             <tbody>
             {% for trick in tricks %}
                 <tr>
-                    <td>{{ trick.id }}</td>
                     <td>{{ trick.name }}</td>
                     <td>{{ trick.description }}</td>
-                    <td>{{ trick.category }}</td>
+                    <td>{{ trick.category.name }}</td>
                     <td>
                         <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
                         {% if is_granted('IS_AUTHENTICATED')%}

@@ -1,4 +1,80 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    {{ form_errors(form) }}
+    
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.category) }}
+    
+    {{ form_label(form.images) }}
+
+    <ul id="images-fields-list"
+        data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.images|length }}"
+        class="holder-images">
+
+            {{ form_errors(form.images) }}
+            {{ form_widget(form.images) }}
+    </ul>
+
+    <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
+
+    <p>C'est tout bon?</p>
     <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <p>-Fin du formulaire-</p>
 {{ form_end(form) }}
+
+{% block javascripts %}
+    <script>
+    window.addEventListener('load', function () {
+        const addTagFormDeleteLink = (item) => {
+            const removeFormButton = document.createElement('button');
+            removeFormButton.innerText = 'Delete this image';
+
+            item.append(removeFormButton);
+
+            removeFormButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                // remove the li for the image form
+                item.remove();
+            });
+        }
+        // prend le prototype, remplace __name__ et insère dans le html
+        const addFormToCollection = (e) => {
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+            const item = document.createElement('li');
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                /__name__/g,
+                collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+
+            collectionHolder.dataset.index++;
+            // add a delete link to the new form
+            addTagFormDeleteLink(item);
+        };
+        
+        // détecte le click sur le bouton ayant la classe add_item_link & execute la fonction addFormToCollection
+        document
+        .querySelectorAll('.add_item_link')
+        .forEach(btn => {
+            btn.addEventListener("click", addFormToCollection)
+        });
+        document
+        .querySelectorAll('ul.holder-images li')
+        .forEach((img) => {
+            addTagFormDeleteLink(img)
+        })
+
+    })
+    </script>
+{% endblock %}
