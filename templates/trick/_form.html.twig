@@ -7,7 +7,6 @@
     {{ form_row(form.category) }}
     
     {{ form_label(form.images) }}
-    {# form_errors(form.images) #}
 
     <ul id="images-fields-list"
         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
@@ -16,22 +15,11 @@
         data-widget-counter="{{ form.images|length }}"
         class="holder-images">
 
-        {# form_row(form.images) #}
-
-        {# form_start(form.images) #}
-
             {{ form_errors(form.images) }}
             {{ form_widget(form.images) }}
-            {# form_row(form.image.file) #}
-
-        {# form_end(form.images) #}
     </ul>
 
     <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
-    {# <button type="button"
-        class="add-another-collection"
-        data-list-selector="#images-fields-list">Add another image
-    </button> #}
 
     <p>C'est tout bon?</p>
     <button class="btn">{{ button_label|default('Save') }}</button>

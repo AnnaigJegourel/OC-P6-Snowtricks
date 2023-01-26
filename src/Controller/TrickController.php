@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Trick;
-use App\Form\CategoryType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,21 +17,11 @@ class TrickController extends AbstractController
     public function new(Request $request, TrickRepository $trickRepository): Response
     {
         $trick = new Trick();
-        //$category = new Category();
-        //dd($category);
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
-        //$categoryForm = $this->createForm(CategoryType::class, $category);
-       // $categoryForm->handleRequest($request);
-        //dd($categoryForm);
-
-
-//ajouter validation categoryForm?
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form);
-
             $trickRepository->save($trick, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
@@ -43,8 +30,6 @@ class TrickController extends AbstractController
         return $this->renderForm('trick/new.html.twig', [
             'trick' => $trick,
             'form' => $form,
-            //'category' => $category,
-            //'categoryForm' => $categoryForm,
         ]);
     }
 
@@ -60,20 +45,18 @@ class TrickController extends AbstractController
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
-        //dd($request);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($trick->getImages());
-            //$entityManager = $registry->getManager();
             foreach($trick->getImages() as $image) {
+            // Add an image->Exception : 
+            // "Typed property App\Entity\Image::$name must not be accessed before initialization":
+            // Ajouter une condition pour vérifier si les nom de l'image est créée? dans db? dans form?
+            //     if(property_exists($image, "name") && $image->getName() === null) {
                 if($image->getName() === null) {
-//                    $entityManager->remove($image);
                     $trick->removeImage($image);
                 }
             }
-//            $entityManager->flush();
             $trickRepository->save($trick, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
