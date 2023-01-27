@@ -7,6 +7,7 @@
 
     <table class="table">
         <tbody>
+
             {% if trick.images %}
                 {% for image in trick.images %}
                     <tr>
@@ -18,29 +19,35 @@
                 {% endfor %}
             {% endif %}
 
+            {% if trick.videos %}
+                <th>VIDEOS IN DATABASE:</th>
+                {% for video in trick.videos %}
+                    <tr>
+                        <iframe width="560"
+                                height="315"
+                                src="{{ video.link }}"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                        </iframe>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
             <tr>
                 <th>Name</th>
                 <td>{{ trick.name }}</td>
             </tr>
+
             <tr>
                 <th>Description</th>
                 <td>{{ trick.description }}</td>
             </tr>
+
             <tr>
                 <th>Category</th>
                 <td>{{ trick.category.name }}</td>
-            </tr>
-
-            <tr>
-                <p>This is an IFRAME tag:</p>
-                <iframe width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/SQyTWk7OxSI"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                </iframe>
             </tr>
 
         </tbody>
