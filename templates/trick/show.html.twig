@@ -11,26 +11,31 @@
             {% if trick.images %}
                 {% for image in trick.images %}
                     <tr>
-                        <img   src="{{ vich_uploader_asset(image, "file") }}" 
-                                alt="picture of a snowboarder doing a {{ trick.name }}" 
-                                style="width: 25%; height:auto;"
-                        />
+                        <th>Image #{{image.id}}</th>
+                        <td>
+                            <img   src="{{ vich_uploader_asset(image, "file") }}" 
+                                    alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                    style="width: 25%; height:auto;"
+                            />
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
 
             {% if trick.videos %}
-                <th>VIDEOS IN DATABASE:</th>
                 {% for video in trick.videos %}
                     <tr>
-                        <iframe width="560"
-                                height="315"
-                                src="{{ video.link }}"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen>
-                        </iframe>
+                        <th>Video #{{video.id}}</th>
+                        <td>
+                            <iframe width="560"
+                                    height="315"
+                                    src="{{ video.link }}"
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                            </iframe>
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
