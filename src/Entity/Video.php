@@ -19,6 +19,9 @@ class Video
     #[ORM\ManyToOne(inversedBy: 'videos')]
     private ?Trick $trick = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -32,6 +35,9 @@ class Video
     public function setLink(?string $link): self
     {
         $this->link = $link;
+        if (null !== $link) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
@@ -44,6 +50,18 @@ class Video
     public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

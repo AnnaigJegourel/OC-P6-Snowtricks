@@ -38,7 +38,9 @@ class Trick
 
     #[ORM\OneToMany(
         mappedBy: 'trick', 
-        targetEntity: Video::class
+        targetEntity: Video::class,
+        orphanRemoval: true,
+        cascade: ['persist']
         )]
     private Collection $videos;
 
