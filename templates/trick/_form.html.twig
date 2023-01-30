@@ -1,11 +1,13 @@
 {{ form_start(form) }}
 
+    <!-- Trick -->
     {{ form_errors(form) }}
     
     {{ form_row(form.name) }}
     {{ form_row(form.description) }}
     {{ form_row(form.category) }}
     
+    <!-- Images -->
     {{ form_label(form.images) }}
 
     <ul id="images-fields-list"
@@ -23,23 +25,39 @@
 
 
 
-    <h2>Vidéos:</h2>
-    {{ form_label(form.videos)}}
-    {{ form_errors(form.videos)}}
-    {{ form_widget(form.videos)}}
+    <!-- Videos -->
+    <h2>Pour ajouter une vidéo, copiez le lien "intégrer" dans YouTube:</h2>
+    {{ form_label(form.videos) }}
+
+    <ul id="videos-fields-list"
+        data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
+        data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ form.videos|length }}"
+        class="holder-videos">
+
+            {{ form_errors(form.videos) }}
+            {{ form_widget(form.videos) }}
+    </ul>
+
+    <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
+
+
+
 
 
 
     <h2>C'est tout bon?</h2>
     <button class="btn">{{ button_label|default('Save') }}</button>
 
-    <p>-Fin du formulaire-</p>
+    <p>-FIN DU FORM-</p>
 {{ form_end(form) }}
 
 {% block javascripts %}
     <script>
     window.addEventListener('load', function () {
         const addTagFormDeleteLink = (item) => {
+            //Ce bouton n'apparaît pas!
             const removeFormButton = document.createElement('button');
             removeFormButton.innerText = 'Delete this image';
 
@@ -47,10 +65,11 @@
 
             removeFormButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                // remove the li for the image form
+                // remove the li for the ITEM form
                 item.remove();
             });
         }
+
         // prend le prototype, remplace __name__ et insère dans le html
         const addFormToCollection = (e) => {
             const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
@@ -78,11 +97,21 @@
         .forEach(btn => {
             btn.addEventListener("click", addFormToCollection)
         });
+
+        //ajout du lien delete pour chaque image? cf. const/fonction cidessus en 1e?
         document
         .querySelectorAll('ul.holder-images li')
         .forEach((img) => {
             addTagFormDeleteLink(img)
         })
+
+        //ajout du lien delete pour chaque video...
+        document
+        .querySelectorAll('ul.holder-videos li')
+        .forEach((vd) => {
+            addTagFormDeleteLink(vd)
+        })
+
 
     })
     </script>
