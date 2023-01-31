@@ -36,6 +36,7 @@ class Video
     {
         $this->link = $link;
         if (null !== $link) {
+            $this->link = str_replace('youtu.be/', 'youtube.com/embed/', $link);
             $this->updatedAt = new \DateTimeImmutable();
         }
 
