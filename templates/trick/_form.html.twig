@@ -26,7 +26,7 @@
 
 
     <!-- Videos -->
-    <h2>Pour ajouter une vidéo, copiez le lien "intégrer" dans YouTube:</h2>
+    <h2>Pour ajouter une vidéo, copiez le lien YouTube (et ajoutez "embed" à l'url!!!):</h2>
     {{ form_label(form.videos) }}
 
     <ul id="videos-fields-list"
@@ -57,9 +57,9 @@
     <script>
     window.addEventListener('load', function () {
         const addTagFormDeleteLink = (item) => {
-            //Ce bouton n'apparaît pas!
+            //Bouton dans update / new (sélection avant envoi en db)
             const removeFormButton = document.createElement('button');
-            removeFormButton.innerText = 'Delete this image';
+            removeFormButton.innerText = 'Remove this item';
 
             item.append(removeFormButton);
 
