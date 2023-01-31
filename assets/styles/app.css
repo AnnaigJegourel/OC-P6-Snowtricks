@@ -8,13 +8,14 @@
 .headfoot {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 2%;
     color: #fff;
 }
 
-.nav .li {
-    width: 20%;
-    margin: 1%;
+nav li {
+    margin: 0 4% 0 4%;
+    text-decoration: underline;
 }
 
 @tailwind utilities;
