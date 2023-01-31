@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -20,11 +19,8 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable:true)]
-    //private ?string $name = null;
     private ?string $name;
 
-    // #[ORM\Column(type: Types::BINARY)]
-    // private $file = null;
     #[AnnotationUploadableField(mapping: "trick_picture", fileNameProperty: "name")]
     private ?File $file = null;
 
@@ -45,7 +41,7 @@ class Image
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -58,29 +54,13 @@ class Image
     }
 
     /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $file
      */
-    // public function setImageFile(?File $imageFile = null): void
     public function setFile($file): self
     {
         $this->file = $file;
-
         if (null !== $file) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
-
-                // Only change the updated af if the file is really uploaded to avoid database updates.
-                // This is needed when the file should be set when loading the entity.
-                //if ($this->imageFile instanceof UploadedFile) {
-                // $this->updatedAt = new \DateTime('now');
-                //}
         }
 
         return $this;
