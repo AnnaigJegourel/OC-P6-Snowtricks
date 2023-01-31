@@ -25,9 +25,19 @@ class TrickType extends AbstractType
                         ->orderBy('category.id', 'ASC');
                 },
                 'choice_label' => 'name',
-                        ])
+            ])
             ->add('images', CollectionType::class, [
                 'entry_type'    => ImageType::class,
+                'prototype'		=> true,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'required'      => false,
+                'label'         => false,
+                'by_reference'  => false,
+                'disabled'      => false,
+            ])
+            ->add('videos', CollectionType::class, [
+                'entry_type'    => VideoType::class,
                 'prototype'		=> true,
                 'allow_add'     => true,
                 'allow_delete'  => true,
