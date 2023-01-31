@@ -18,7 +18,7 @@
         class="holder-images">
 
             {{ form_errors(form.images) }}
-            {{ form_widget(form.images) }}
+            {#form_widget(form.images) #}
     </ul>
 
     <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
@@ -26,7 +26,7 @@
 
 
     <!-- Videos -->
-    <h2>Pour ajouter une vidéo, copiez le lien YouTube (et ajoutez "embed" à l'url!!!):</h2>
+    <h2>Pour ajouter une vidéo, copiez le lien YouTube</h2>
     {{ form_label(form.videos) }}
 
     <ul id="videos-fields-list"
@@ -37,7 +37,21 @@
         class="holder-videos">
 
             {{ form_errors(form.videos) }}
-            {{ form_widget(form.videos) }}
+            {# form_widget(form.videos) #}
+            {% for input_video in form.videos %}
+                <li>                        
+                    <iframe width="560"
+                                height="315"
+                                src="{{input_video.vars.value.link}}"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                    </iframe>
+                    {# {{dump(input_video.vars.value.link)}} #}
+                    {{ form_widget(input_video) }}
+                </li>
+            {% endfor %}
     </ul>
 
     <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
@@ -98,7 +112,7 @@
             btn.addEventListener("click", addFormToCollection)
         });
 
-        //ajout du lien delete pour chaque image? cf. const/fonction cidessus en 1e?
+        //ajout du lien delete pour chaque image en bdd cf. const/fonction cidessus en 1e?
         document
         .querySelectorAll('ul.holder-images li')
         .forEach((img) => {
@@ -109,6 +123,7 @@
         document
         .querySelectorAll('ul.holder-videos li')
         .forEach((vd) => {
+            console.log(vd)
             addTagFormDeleteLink(vd)
         })
 
