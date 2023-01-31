@@ -33,8 +33,11 @@ class TrickController extends AbstractController
 //ajouter validation categoryForm?
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form);
-
             $trickRepository->save($trick, true);
+            $this->addFlash(
+                'notice',
+                "Your trick has been created!"
+            );
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
@@ -66,6 +69,11 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->save($trick, true);
 
+            $this->addFlash(
+                'notice',
+                "Your trick has been updated!"
+            );
+
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -81,6 +89,10 @@ class TrickController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
             $trickRepository->remove($trick, true);
         }
+        $this->addFlash(
+            'notice',
+            "Your trick has been deleted!"
+        );
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }

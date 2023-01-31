@@ -56,9 +56,9 @@
                 </ul>
             </nav>
 
-            {% for message in app.flashes('notice') %}
+            {% for notice in app.flashes('notice') %}
                 <div class="flash-notice">
-                    {{ message }}
+                    {{ notice }}
                 </div>
             {% endfor %}
 
