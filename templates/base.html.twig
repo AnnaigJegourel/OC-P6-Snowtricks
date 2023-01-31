@@ -56,13 +56,13 @@
                 </ul>
             </nav>
 
-            {% for notice in app.flashes('notice') %}
-                <div class="flash-notice">
-                    {{ notice }}
-                </div>
-            {% endfor %}
-
         </header>
+
+        {% for notice in app.flashes('notice') %}
+            <div class="flash-notice bg-sky-200 text-center italic text-amber-700 animate-pulse">
+                {{ notice }}
+            </div>
+        {% endfor %}
 
         {% block main %}{% endblock %}
 
