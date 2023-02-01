@@ -28,6 +28,7 @@
                     {# {% for image in trick.images %} #}
                         <img    
                             src="public/images/tricks_pictures/{{input_image.vars.value.name}}" 
+                            {# {{dump(vich_uploader_asset(image, "file"))}} #}
                             {# src="{{ vich_uploader_asset(image, input_image.vars.value.file) }}"  #}
                             alt="picture of a snowboarder doing a {{ trick.name }}" 
                             style="width: 25%; height:auto;"
