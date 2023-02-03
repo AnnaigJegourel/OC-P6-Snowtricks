@@ -18,22 +18,13 @@
         class="holder-images">
 
             {{ form_errors(form.images) }}
-            {#form_widget(form.images) #}
-            
             {% for input_image in form.images %}
                 <li>     
-                    {# {{dump(input_image)}} #}
-                    {# {{dump(input_image.vars.value.name)}} #}
-                    {# {{dump(input_image.vars.value.file)}} #}
-                    {# {% for image in trick.images %} #}
-                        <img    
-                            src="public/images/tricks_pictures/{{input_image.vars.value.name}}" 
-                            {# {{dump(vich_uploader_asset(image, "file"))}} #}
-                            {# src="{{ vich_uploader_asset(image, input_image.vars.value.file) }}"  #}
-                            alt="picture of a snowboarder doing a {{ trick.name }}" 
-                            style="width: 25%; height:auto;"
-                        />
-                    {# {% endfor %} #}
+                    <img    
+                        src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
+                        alt="picture of a snowboarder doing a {{ trick.name }}" 
+                        style="width: 25%; height:auto;"
+                    />
                     {{ form_widget(input_image) }}
                 </li>
             {% endfor %}
@@ -52,7 +43,6 @@
         class="holder-videos">
 
             {{ form_errors(form.videos) }}
-            {# form_widget(form.videos) #}
             {% for input_video in form.videos %}
                 <li>                        
                     <iframe width="560"
@@ -63,7 +53,6 @@
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen>
                     </iframe>
-                    {# {{dump(input_video.vars.value.link)}} #}
                     {{ form_widget(input_video) }}
                 </li>
             {% endfor %}
@@ -136,8 +125,6 @@
             console.log(vd)
             addTagFormDeleteLink(vd)
         })
-
-
     })
     </script>
 {% endblock %}
