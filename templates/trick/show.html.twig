@@ -13,6 +13,7 @@
                     <tr>
                         <th>Image #{{image.id}}</th>
                         <td>
+                        {# {{dump(vich_uploader_asset(image, "file"))}} #}
                             <img   src="{{ vich_uploader_asset(image, "file") }}" 
                                     alt="picture of a snowboarder doing a {{ trick.name }}" 
                                     style="width: 25%; height:auto;"
