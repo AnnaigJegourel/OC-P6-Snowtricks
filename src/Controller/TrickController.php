@@ -61,9 +61,6 @@ class TrickController extends AbstractController
                 // $name = '';
                 // $name = $image->getName();
                 // dd($name);
-                if($image->getName() === null) {
-                    $trick->removeImage($image);
-                }
             }
             $trickRepository->save($trick, true);
 
