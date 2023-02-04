@@ -20,6 +20,7 @@ class TrickController extends AbstractController
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+        // dd($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->save($trick, true);
@@ -57,6 +58,9 @@ class TrickController extends AbstractController
             // "Typed property App\Entity\Image::$name must not be accessed before initialization":
             // Ajouter une condition pour vérifier si les nom de l'image est créée? dans db? dans form?
             //     if(property_exists($image, "name") && $image->getName() === null) {
+                // $name = '';
+                // $name = $image->getName();
+                // dd($name);
                 if($image->getName() === null) {
                     $trick->removeImage($image);
                 }
