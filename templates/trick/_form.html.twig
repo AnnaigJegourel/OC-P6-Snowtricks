@@ -19,6 +19,7 @@
 
             {{ form_errors(form.images) }}
             {% for input_image in form.images %}
+            {# {{dump(input_image)}} #}
                 <li>     
                     <img    
                         src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
