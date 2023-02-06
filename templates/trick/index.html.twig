@@ -10,73 +10,41 @@
         <p class="text-2xl">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
     </section>
 
+    {% if is_granted('IS_AUTHENTICATED')%}
+    <div class="text-center">
+        <a class="p-6 rounded-lg shadow-lg bg-slate-500 hover:bg-cyan-500 text-white text-center text-2xl italic font-medium m-1" href="{{ path('app_trick_new') }}">Create a new Trick!</a>
+    </div>
+    {% endif %}
+
     <!-- TRICKS CARDS -->
-    <div class="flex flex-wrap place-items-center h-screen">
+    <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         
+        {% for trick in tricks %}
         <!-- card -->
-        <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
-            <!-- remplacer "1" par "trick.id" -->
-            <a href="{{ path('app_trick_show', {'id': 1}) }}" class="w-full block h-full">
+        <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+            <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
                 <!-- Remplacer par 1ere img du Tricks si existe-->
                 <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
                 <div class="flex justify-between items-center bg-white w-full p-4">
-                    <p class="text-cyan-500 text-2xl font-medium underline m-1">
-                        <!-- Remplacer par "trick.name" -->
-                        Frontside 180
-                    </p>
+                    <p class="text-cyan-500 text-2xl font-medium m-1">{{ trick.name }}</p>
                     {% if is_granted('IS_AUTHENTICATED')%}
                         <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/pen.png)">
-                            <a href="{{ path('app_trick_edit', {'id': 1}) }}"></a>
+                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}"></a>
                         </div>
                         <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/trash-can.png)">
-                            {# {{ include('trick/_delete_form.html.twig') }} #}
+                            {{ include('trick/_delete_form.html.twig') }}
                         </div>
                     {% endif %}
                 </div>
             </a>
         </div>
         <!-- (card end)-->
+        {% endfor %}
 
-    </div>
-
-    <!-- TRICKS TABLE -->
-    <section id="tricksindex">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for trick in tricks %}
-                <tr>
-                    <td>{{ trick.name }}</td>
-                    <td>{{ trick.description }}</td>
-                    <td>{{ trick.category.name }}</td>
-                    <td>
-                        <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
-                        {% if is_granted('IS_AUTHENTICATED')%}
-                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-                            {{ include('trick/_delete_form.html.twig') }}
-                        {% endif %}
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        {% if is_granted('IS_AUTHENTICATED')%}
-            <a href="{{ path('app_trick_new') }}">Create new</a>
-        {% endif %}
-
-        <a href="#tricksindex">back to index top</a>
     </section>
 
+    <div class="text-right">
+        <a  class="m-6 p-6 rounded-lg shadow-lg hover:bg-slate-400 bg-cyan-500 text-white text-center italic text-2xl font-medium"
+            href="#tricksindex">Back to index top</a>
+    </div>
 {% endblock %}
