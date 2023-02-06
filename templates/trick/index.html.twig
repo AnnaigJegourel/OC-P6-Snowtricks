@@ -4,11 +4,46 @@
 
 {% block main %}
     
+    <!-- HERO -->
     <section class="h-screen bg-right bg-no-repeat bg-cover bg-gradient-to-t font-serif italic text-slate-800 text-center" style="background-image: url(images/hero.jpg)">
         <h1 class="pt-20 pb-12 text-6xl font-bold">Welcome to Snowtricks!</h1>
         <p class="text-2xl">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
     </section>
 
+    <!-- TRICKS CARDS -->
+    <div class="flex flex-wrap place-items-center h-screen">
+        
+        <!-- card -->
+        <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+            <!-- remplacer "1" par "trick.id" -->
+            <a href="{{ path('app_trick_show', {'id': 1}) }}" class="w-full block h-full">
+                <!-- Remplacer par 1ere img du Tricks ou img par défaut-->
+                <img alt="default image: logo" src="images/Logo.png" class="h-70 w-full object-cover"/>
+                <div class="flex justify-between items-center bg-white w-full p-4">
+                    <p class="text-cyan-600 text-2xl font-medium underline">
+                        <!-- Remplacer par "trick.name" -->
+                        Mute
+                    </p>
+                    {% if is_granted('IS_AUTHENTICATED')%}
+                        <div class="flex justify-between items-center py-3 text-xs text-white font-medium">
+                            <!-- Remplacer mots par icones crayon & corbeille -->
+                            <div class="m-1 px-2 py-1 rounded bg-cyan-500">
+                                <a href="{{ path('app_trick_edit', {'id': 1}) }}">edit</a>
+                            </div>
+                            <div class="m-1 px-2 py-1 rounded bg-pink-500">
+                                delete
+                                {# {{ include('trick/_delete_form.html.twig') }} #}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        <!-- (card end)-->
+
+    </div>
+
+    <!-- TRICKS TABLE -->
     <section id="tricksindex">
         <table class="table">
             <thead>
