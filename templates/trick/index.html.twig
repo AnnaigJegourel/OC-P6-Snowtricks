@@ -17,23 +17,19 @@
         <div class="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
             <!-- remplacer "1" par "trick.id" -->
             <a href="{{ path('app_trick_show', {'id': 1}) }}" class="w-full block h-full">
-                <!-- Remplacer par 1ere img du Tricks ou img par défaut-->
-                <img alt="default image: logo" src="images/Logo.png" class="h-70 w-full object-cover"/>
+                <!-- Remplacer par 1ere img du Tricks si existe-->
+                <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
                 <div class="flex justify-between items-center bg-white w-full p-4">
-                    <p class="text-cyan-600 text-2xl font-medium underline">
+                    <p class="text-cyan-500 text-2xl font-medium underline m-1">
                         <!-- Remplacer par "trick.name" -->
-                        Mute
+                        Frontside 180
                     </p>
                     {% if is_granted('IS_AUTHENTICATED')%}
-                        <div class="flex justify-between items-center py-3 text-xs text-white font-medium">
-                            <!-- Remplacer mots par icones crayon & corbeille -->
-                            <div class="m-1 px-2 py-1 rounded bg-cyan-500">
-                                <a href="{{ path('app_trick_edit', {'id': 1}) }}">edit</a>
-                            </div>
-                            <div class="m-1 px-2 py-1 rounded bg-pink-500">
-                                delete
-                                {# {{ include('trick/_delete_form.html.twig') }} #}
-                            </div>
+                        <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/pen.png)">
+                            <a href="{{ path('app_trick_edit', {'id': 1}) }}"></a>
+                        </div>
+                        <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/trash-can.png)">
+                            {# {{ include('trick/_delete_form.html.twig') }} #}
                         </div>
                     {% endif %}
                 </div>
