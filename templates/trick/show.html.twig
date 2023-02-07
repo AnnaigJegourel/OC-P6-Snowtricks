@@ -67,10 +67,16 @@
 
         {{ include('trick/_delete_form.html.twig') }}
 
-        {# {{ include('comment/_form.html.twig') }} #}
+        {# {{ include('comment/new.html.twig') }} #}
+        <div class="bg-pink-100 text-center text-bold">
+            <a href="{{ path('app_comment_new') }}">Leave a comment!</a>
+            {# {{ include('comment/_form.html.twig') }} #}
+        </div>
 
     {% endif %}
 
-    {{ include('comment/index.html.twig') }}
+    <div class="bg-slate-300 text-center text-bold">
+        {{ include('comment/index.html.twig') }}
+    </div>
 
 {% endblock %}
