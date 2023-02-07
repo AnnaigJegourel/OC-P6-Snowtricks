@@ -5,9 +5,9 @@
 {% block main %}
     
     <!-- HERO -->
-    <section class="h-screen bg-right bg-no-repeat bg-cover bg-gradient-to-t font-serif italic text-slate-800 text-center" style="background-image: url(images/hero.jpg)">
-        <h1 class="pt-20 pb-12 text-6xl font-bold">Welcome to Snowtricks!</h1>
-        <p class="text-2xl">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
+    <section class="h-screen bg-right bg-no-repeat bg-cover bg-gradient-to-t" style="background-image: url(images/hero.jpg)">
+        <h1>Welcome to Snowtricks!</h1>
+        <p class="text-2xl font-serif italic text-slate-800 text-center">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
     </section>
 
     {% if is_granted('IS_AUTHENTICATED')%}
