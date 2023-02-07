@@ -13,6 +13,18 @@
     color: #fff;
 }
 
+h1 {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+    text-align: center;
+    font-size: 3.75rem; /* 60px */
+    line-height: 1;
+    font-weight: 700;
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-style: italic;
+    color: rgb(30 41 59);
+}
+
 nav li {
     margin: 0 4% 0 4%;
     text-decoration: underline;
