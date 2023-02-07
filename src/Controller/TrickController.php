@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,12 +41,25 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_trick_show', methods: ['GET'])]
-    public function show(Trick $trick, CommentRepository $commentRepository): Response
+    #[Route('/{id}', name: 'app_trick_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Trick $trick, CommentRepository $commentRepository): Response
     {
+        //create comment form
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentRepository->save($comment, true);
+    
+            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
             'comments' => $commentRepository->findAll(),
+            'comment' => $comment,
+            // 'form' => $form,
         ]);
     }
 
