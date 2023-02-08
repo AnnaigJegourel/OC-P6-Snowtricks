@@ -48,18 +48,19 @@ class TrickController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-    
+        // dd($form);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $commentRepository->save($comment, true);
-    
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('trick/show.html.twig', [
+        return $this->renderForm('trick/show.html.twig', [
             'trick' => $trick,
             'comments' => $commentRepository->findAll(),
             'comment' => $comment,
-            // 'form' => $form,
+            'form' => $form,
         ]);
     }
 
