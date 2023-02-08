@@ -3,7 +3,16 @@
     <!-- Trick -->
     {{ form_errors(form) }}
     
-    {{ form_row(form.name) }}
+    {# {{ form_row(form.name) }} #}
+    <div class="form-control">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'bg-slate-300 p-2'}}) }}
+
+        <div class="form-error">
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+
     {{ form_row(form.description) }}
     {{ form_row(form.category) }}
     
