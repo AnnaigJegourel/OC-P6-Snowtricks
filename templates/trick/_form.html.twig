@@ -3,11 +3,20 @@
     <!-- Trick -->
     {{ form_errors(form) }}
     
-    {{ form_row(form.name) }}
+    {# {{ form_row(form.name) }} #}
+    <div class="form-control">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'bg-slate-300 p-2'}}) }}
+
+        <div class="form-error">
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+
     {{ form_row(form.description) }}
     {{ form_row(form.category) }}
     
-    <!-- Images -->
+    <!-- Pictures -->
     {{ form_label(form.images) }}
 
     <ul id="images-fields-list"
@@ -18,15 +27,22 @@
         class="holder-images">
 
             {{ form_errors(form.images) }}
-            {#form_widget(form.images) #}
+            {% for input_image in form.images %}
+            {# {{dump(input_image)}} #}
+                <li>     
+                    <img    
+                        src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
+                        alt="picture of a snowboarder doing a {{ trick.name }}" 
+                        style="width: 25%; height:auto;"
+                    />
+                    {{ form_widget(input_image) }}
+                </li>
+            {% endfor %}
     </ul>
 
     <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
 
-
-
     <!-- Videos -->
-    <h2>Pour ajouter une vidéo, copiez le lien YouTube</h2>
     {{ form_label(form.videos) }}
 
     <ul id="videos-fields-list"
@@ -37,7 +53,6 @@
         class="holder-videos">
 
             {{ form_errors(form.videos) }}
-            {# form_widget(form.videos) #}
             {% for input_video in form.videos %}
                 <li>                        
                     <iframe width="560"
@@ -48,7 +63,6 @@
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen>
                     </iframe>
-                    {# {{dump(input_video.vars.value.link)}} #}
                     {{ form_widget(input_video) }}
                 </li>
             {% endfor %}
@@ -56,15 +70,10 @@
 
     <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
 
-
-
-
-
-
-    <h2>C'est tout bon?</h2>
+    <!-- BOUTON ET FIN DU FORM D'ENSEMBLE -->
+    <p>SAUVEGARDER</p>
     <button class="btn">{{ button_label|default('Save') }}</button>
 
-    <p>-FIN DU FORM-</p>
 {{ form_end(form) }}
 
 {% block javascripts %}
@@ -126,8 +135,6 @@
             console.log(vd)
             addTagFormDeleteLink(vd)
         })
-
-
     })
     </script>
 {% endblock %}

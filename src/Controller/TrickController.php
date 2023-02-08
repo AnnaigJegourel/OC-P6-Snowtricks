@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
 use App\Repository\TrickRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/trick')]
 class TrickController extends AbstractController
@@ -20,6 +23,7 @@ class TrickController extends AbstractController
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+        // dd($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->save($trick, true);
@@ -37,11 +41,25 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_trick_show', methods: ['GET'])]
-    public function show(Trick $trick): Response
+    #[Route('/{id}', name: 'app_trick_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Trick $trick, CommentRepository $commentRepository): Response
     {
+        //create comment form
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentRepository->save($comment, true);
+    
+            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'comments' => $commentRepository->findAll(),
+            'comment' => $comment,
+            // 'form' => $form,
         ]);
     }
 
@@ -57,9 +75,9 @@ class TrickController extends AbstractController
             // "Typed property App\Entity\Image::$name must not be accessed before initialization":
             // Ajouter une condition pour vérifier si les nom de l'image est créée? dans db? dans form?
             //     if(property_exists($image, "name") && $image->getName() === null) {
-                if($image->getName() === null) {
-                    $trick->removeImage($image);
-                }
+                // $name = '';
+                // $name = $image->getName();
+                // dd($name);
             }
             $trickRepository->save($trick, true);
 

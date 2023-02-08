@@ -18,8 +18,8 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable:true)]
-    private ?string $name;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
     #[AnnotationUploadableField(mapping: "trick_picture", fileNameProperty: "name")]
     private ?File $file = null;
