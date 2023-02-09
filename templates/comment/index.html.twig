@@ -12,8 +12,8 @@
         <tbody>
         {% for comment in comments %}
             <tr>
-                <td>{{ comment.author.avatar }}</td>
-                {# <td>{{ comment.author.username }}</td> #}
+                <td>{{ comment.author.avatar }}-AVATAR-</td>
+                <td>{{ comment.author.username }}</td>
                 <td>{{ comment.content }}</td>
                 {# <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
             </tr>
