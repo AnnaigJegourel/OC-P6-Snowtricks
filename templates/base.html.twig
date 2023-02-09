@@ -29,7 +29,7 @@
         <header class="headfoot bg-cyan-700 p-2 drop-shadow-lg">
 
             <a class="w-14 h-14" href="{{path('app_home')}}">
-                <img src="images/Logo.png" alt="Snowtricks' Logo: black&white vector image of jumping snowboarder">
+                <img src="{{ asset("images/Logo.png") }}" alt="Snowtricks' Logo">
             </a>
 
             <nav class="w-3/6">
@@ -61,7 +61,7 @@
         </header>
 
         {% for notice in app.flashes('notice') %}
-            <div class="flash-notice bg-sky-200 text-center italic text-amber-700 animate-pulse">
+            <div class="flash-notice bg-rose-200 text-center italic text-rose-700 animate-pulse">
                 {{ notice }}
             </div>
         {% endfor %}
