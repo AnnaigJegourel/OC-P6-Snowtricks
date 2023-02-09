@@ -79,7 +79,7 @@ class TrickController extends AbstractController
         return $this->renderForm('trick/show.html.twig', [
             'trick' => $trick,
             // 'comments' => $commentRepository->findAll(),
-            'comments' => $commentRepository->findByTrick(),
+            'comments' => $commentRepository->findByTrick($trick),
             'comment' => $comment,
             'form' => $form,
         ]);
