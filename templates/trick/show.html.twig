@@ -8,6 +8,7 @@
     <table class="table">
         <tbody>
 
+<!-- LES IMAGES -->
             {% if trick.images %}
                 {% for image in trick.images %}
                     <tr>
@@ -23,6 +24,7 @@
                 {% endfor %}
             {% endif %}
 
+<!-- LES VIDEOS -->
             {% if trick.videos %}
                 {% for video in trick.videos %}
                     <tr>
@@ -41,6 +43,7 @@
                 {% endfor %}
             {% endif %}
 
+<!-- LES INFOS -->
             <tr>
                 <th>Name</th>
                 <td>{{ trick.name }}</td>
@@ -59,6 +62,7 @@
         </tbody>
     </table>
 
+<!-- LINKS -->
     <a href="{{ path('app_home') }}">back to list</a>
 
     {% if is_granted('IS_AUTHENTICATED')%}
@@ -67,10 +71,11 @@
 
         {{ include('trick/_delete_form.html.twig') }}
 
-        {# {{ include('comment/new.html.twig') }} #}
+<!-- LES COMMENTAIRES -->
         <div class="bg-pink-100 text-center text-bold">
             <a href="{{ path('app_comment_new') }}">Leave a comment!</a>
-            {# {{ include('comment/_form.html.twig') }} #}
+            {{ include('comment/_form.html.twig') }}
+            {# {{ include('comment/new.html.twig') }} #}
         </div>
 
     {% endif %}
