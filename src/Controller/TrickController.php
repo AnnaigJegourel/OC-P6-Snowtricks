@@ -3,12 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+// use DateTimeImmutable;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
 use App\Repository\TrickRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/trick')]
 class TrickController extends AbstractController
@@ -38,11 +42,46 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_trick_show', methods: ['GET'])]
-    public function show(Trick $trick): Response
+    #[Route('/{id}', name: 'app_trick_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Trick $trick, CommentRepository $commentRepository): Response
     {
-        return $this->render('trick/show.html.twig', [
+        //create comment form
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        // dd($form);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // SI PAS CONNECTé
+            if (null === $this->getUser()) {
+                $this->addFlash('notice', 'You need to be logged in to write a comment');
+
+                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+            }
+            //TENTATIVE 2:
+            $user = $this->getUser();
+            $comment->setAuthor($user)
+                    ->setTrick($trick);
+            //TENTATIVE 1:
+            // $now = new DateTimeImmutable();
+            // $comment->setTrick($trick)
+            //         ->setCreatedAt($now)
+            //         ->setAuthor($this->getUser())
+            //         ;
+            $commentRepository->save($comment, true);
+            $this->addFlash(
+                'notice',
+                "Your comment has been created"
+            );
+
+            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
+        }
+// dd($commentRepository->findAll()); = array
+        return $this->renderForm('trick/show.html.twig', [
             'trick' => $trick,
+            // 'comments' => $commentRepository->findAll(),
+            'comments' => $commentRepository->findByTrick($trick),
+            'comment' => $comment,
+            'form' => $form,
         ]);
     }
 

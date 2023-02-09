@@ -1,0 +1,26 @@
+    <h2>Comment index</h2>
+
+    <table class="table">
+        {# <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead> #}
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.author.avatar }}-AVATAR-</td>
+                <td>{{ comment.author.username }}</td>
+                <td>{{ comment.content }}</td>
+                {# <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
