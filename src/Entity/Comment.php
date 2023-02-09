@@ -40,6 +40,9 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
+        $this->createdAt = new \DateTimeImmutable();
+        // $this->trick = $this->setTrick($this->getTrick());
+        // this author
 
         return $this;
     }
