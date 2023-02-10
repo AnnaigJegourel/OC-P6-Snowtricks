@@ -43,23 +43,6 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-
-
-
-    
-    // public function findByTrick(Trick $trick): array
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.trick = :trick')
-    //         ->setParameter('trick', $trick)
-    //         ->orderBy('c.createdAt', 'DESC')
-    //         // ->setMaxResults(10)
-    //         ->getQuery()
-    //         ->getResult()
-    //     ;
-    // }
-
-
     public function getCommentPaginator(Trick $trick, int $offset): Paginator
     {
         $query = $this->createQueryBuilder('c')
