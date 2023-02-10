@@ -19,27 +19,40 @@
     <!-- TRICKS CARDS -->
     <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         
-        {% for trick in tricks %}
-        <!-- card -->
-        <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
-            <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
-                <!-- Remplacer par 1ere img du Tricks si existe-->
-                <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
-                <div class="flex justify-between items-center bg-white w-full p-4">
-                    <p class="text-cyan-500 text-2xl font-medium m-1">{{ trick.name }}</p>
-                    {% if is_granted('IS_AUTHENTICATED')%}
-                        <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/pen.png)">
-                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}"></a>
+        {% if tricks|length > 0 %}
+            <div>THERE ARE {{ tricks|length }} TRICKS</div>
+                {% for trick in tricks %}
+                <!-- card -->
+                <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
+                        <!-- Remplacer par 1ere img du Tricks si existe-->
+                        <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
+                        <div class="flex justify-between items-center bg-white w-full p-4">
+                            <p class="text-cyan-500 text-2xl font-medium m-1">{{ trick.name }}</p>
+                            {% if is_granted('IS_AUTHENTICATED')%}
+                                <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/pen.png)">
+                                    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}"></a>
+                                </div>
+                                <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/trash-can.png)">
+                                    {{ include('trick/_delete_form.html.twig') }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="w-5/12 h-14 bg-no-repeat bg-cover m-1" style="background-image: url(images/trash-can.png)">
-                            {{ include('trick/_delete_form.html.twig') }}
-                        </div>
-                    {% endif %}
+                    </a>
                 </div>
-            </a>
-        </div>
-        <!-- (card end)-->
-        {% endfor %}
+                <!-- (card end)-->
+                {% endfor %}
+
+                {% if previous >= 0 %}
+                    <a href="{{ path('app_home', { offset: previous }) }}"><strong><em>PREVIOUS</em></strong></a>
+                {% endif %}
+                {% if next < tricks|length %}
+                    <a href="{{ path('app_home', { offset: next }) }}"><strong><em>NEXT</em></strong></a>
+                {% endif %}
+            </div>
+        {% else %}
+            <div>No tricks have been posted yet.</div>
+        {% endif %}
 
     </section>
 
