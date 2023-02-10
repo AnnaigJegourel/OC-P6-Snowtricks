@@ -7,7 +7,8 @@
 
     {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_home') }}">back to list</a>
-
-    {{ include('trick/_delete_form.html.twig') }}
+    <div class="text-center text-2xl font-medium text-slate-800 bg-slate-100">
+        {{ include('trick/_delete_form.html.twig') }}
+        <button class="m-6 p-6 rounded-lg shadow-lg text-center bg-slate-300 hover:bg-cyan-500">Delete the trick</button>
+    </div>
 {% endblock %}
