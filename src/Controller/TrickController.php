@@ -48,9 +48,11 @@ class TrickController extends AbstractController
     #[Route('/{id}', name: 'app_trick_show', methods: ['GET', 'POST'])]
     public function show(Request $request, Trick $trick, CommentRepository $commentRepository): Response
     {
+        //Paginator
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $commentRepository->getCommentPaginator($trick, $offset);
 
+        //Comment form
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -75,6 +77,7 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
+        //Render
         return $this->renderForm('trick/show.html.twig', [
             'trick' => $trick,
             'comment' => $comment,
