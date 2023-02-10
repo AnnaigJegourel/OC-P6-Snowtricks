@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
-// use DateTimeImmutable;
+use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\CommentType;
@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
+    // CREATE
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TrickRepository $trickRepository): Response
     {
@@ -27,6 +28,8 @@ class TrickController extends AbstractController
         // dd($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $now = new DateTimeImmutable();
+            $trick->setUpdatedAt($now);
             $trickRepository->save($trick, true);
             $this->addFlash(
                 'notice',
@@ -42,6 +45,7 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // READ ONE TRICK
     #[Route('/{id}', name: 'app_trick_show', methods: ['GET', 'POST'])]
     public function show(Request $request, Trick $trick, CommentRepository $commentRepository): Response
     {
@@ -91,7 +95,7 @@ class TrickController extends AbstractController
             'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
         ]);
     }
-
+    // UPDATE
     #[Route('/{id}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
@@ -99,6 +103,9 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $now = new DateTimeImmutable();
+            $trick->setUpdatedAt($now);
+
             foreach($trick->getImages() as $image) {
             // Add an image->Exception : 
             // "Typed property App\Entity\Image::$name must not be accessed before initialization":
@@ -123,7 +130,7 @@ class TrickController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    // DELETE
     #[Route('/{id}', name: 'app_trick_delete', methods: ['POST'])]
     public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
