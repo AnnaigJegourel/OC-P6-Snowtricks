@@ -1,6 +1,30 @@
-    <h2>Comment index</h2>
+    <h2>--- Comments about this trick ---</h2>
 
-    <table class="table">
+    {% if comments|length > 0 %}
+        <div>THERE ARE {{ comments|length }} COMMENTS</div>
+            {% for comment in comments %}
+                {% if comment.author.avatar %}
+                    <img src="{{ asset('images/users_pictures/' ~ comment.author.avatar) }}" />
+                {% endif %}
+                <p><strong>{{ comment.author.username }}</strong></p>
+                <p>{{ comment.content }}</p>
+            {% endfor %}
+
+            {% if previous >= 0 %}
+                <a href="{{ path('app_trick_show', { id: trick.id, offset: previous }) }}"><strong><em>PREVIOUS</em></strong></a>
+            {% endif %}
+            {% if next < comments|length %}
+                <a href="{{ path('app_trick_show', { id: trick.id, offset: next }) }}"><strong><em>NEXT</em></strong></a>
+            {% endif %}
+        </div>
+    {% else %}
+        <div>No comments have been posted yet for this trick.</div>
+    {% endif %}
+
+
+
+    {# <h2>Comments sous forme de tableau avec Paginator mais pas next/previous</h2>
+    <table class="table"> #}
         {# <thead>
             <tr>
                 <th>Id</th>
@@ -9,18 +33,18 @@
                 <th>actions</th>
             </tr>
         </thead> #}
-        <tbody>
+        {# <tbody>
         {% for comment in comments %}
             <tr>
                 <td>{{ comment.author.avatar }}-AVATAR-</td>
                 <td>{{ comment.author.username }}</td>
-                <td>{{ comment.content }}</td>
+                <td>{{ comment.content }}</td> #}
                 {# <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
-            </tr>
+            {# </tr>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table> #}
