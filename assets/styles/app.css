@@ -27,7 +27,6 @@ h1 {
 
 nav li {
     margin: 0 4% 0 4%;
-    text-decoration: underline;
 }
 
 @tailwind utilities;
