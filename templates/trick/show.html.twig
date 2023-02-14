@@ -81,14 +81,14 @@
                 </ul>
             </article>
 
-            <div id="trick-comments" class="p-2 md:px-10 md:pb-10 lg:px-40">
+            <div id="trick-comments" class="p-2 md:px-10 md:pb-10 lg:px-20">
                 {% if is_granted('IS_AUTHENTICATED') %}
                     <div class="bg-slate-300 px-2 py-8 text-center text-bold">
                         <p>Leave a comment!</p>
                         {{ include('comment/_form.html.twig') }}
                     </div>
                 {% endif %}
-                <div class="bg-slate-300 text-center text-bold">
+                <div class="pt-6 px-2 md:pt-20 md:px-20 text-center text-bold">
                     {{ include('comment/index.html.twig') }}
                 </div>
             </div>
