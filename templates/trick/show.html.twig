@@ -39,10 +39,11 @@
         </section>
         <section id="trick-details" class="bg-white p-6">
             <div id="medias" class="md:flex">
+
                 <ul class="md:w-3/6 flex flex-wrap">
                     {% if trick.images %}
                         {% for image in trick.images %}
-                            <li class="w-3/6 lg:w-2/6 p-2">
+                            <li class="sm:w-3/6 lg:w-2/6 p-2">
                                 <img   src="{{ vich_uploader_asset(image, "file") }}" 
                                         alt="picture of a snowboarder doing a {{ trick.name }}" 
                                         {# style="width: 100%; height:auto;" #}
@@ -52,14 +53,16 @@
                         {% endfor %}
                     {% endif %}
                 </ul>
-                <ul class="md:w-3/6">
+
+                <ul class="md:w-3/6 flex flex-wrap">
                     {% if trick.videos %}
                         {% for video in trick.videos %}
-                            <li class="p-2">
+                            <li class="sm:w-3/6  lg:w-2/6 p-2">
                                 <iframe src="{{ video.link }}"
                                         {# class="object-cover" #}
                                         {# width="560"
                                         height="315" #}
+                                        class="w-full"
                                         title="YouTube video player"
                                         frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
