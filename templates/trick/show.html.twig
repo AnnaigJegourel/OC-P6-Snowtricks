@@ -40,7 +40,7 @@
         <section id="trick-details" class="bg-white p-6">
             <div id="medias" class="md:flex">
 
-                <ul class="md:w-3/6 flex flex-wrap">
+                <ul class="md:w-3/6 flex flex-wrap justify-center">
                     {% if trick.images %}
                         {% for image in trick.images %}
                             <li class="sm:w-3/6 lg:w-2/6 p-2">
@@ -54,15 +54,15 @@
                     {% endif %}
                 </ul>
 
-                <ul class="md:w-3/6 flex flex-wrap">
+                <ul class="md:w-3/6 flex flex-wrap justify-center">
                     {% if trick.videos %}
                         {% for video in trick.videos %}
                             <li class="sm:w-3/6  lg:w-2/6 p-2">
                                 <iframe src="{{ video.link }}"
-                                        {# class="object-cover" #}
                                         {# width="560"
                                         height="315" #}
                                         class="w-full"
+                                        {# class="object-cover" #}
                                         title="YouTube video player"
                                         frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
