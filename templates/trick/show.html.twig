@@ -39,7 +39,6 @@
         </section>
         <section id="trick-details" class="bg-white p-6">
             <div id="medias" class="md:flex">
-
                 <ul class="md:w-3/6 flex flex-wrap justify-center">
                     {% if trick.images %}
                         {% for image in trick.images %}
@@ -53,7 +52,6 @@
                         {% endfor %}
                     {% endif %}
                 </ul>
-
                 <ul class="md:w-3/6 flex flex-wrap justify-center">
                     {% if trick.videos %}
                         {% for video in trick.videos %}
@@ -73,7 +71,8 @@
                     {% endif %}
                 </ul>
             </div>
-            <article>
+
+            <article class="p-2 md:p-10 lg:px-40">
                 <p> {{ trick.description }} </p>
                 <ul>
                     <li> {{ trick.name }} </li>
@@ -81,7 +80,8 @@
                     <li> {{ trick.updatedAt|date("m/d/Y") }} </li>
                 </ul>
             </article>
-            <div id="trick-comments">
+
+            <div id="trick-comments" class="p-2 md:p-10 lg:px-40">
                 {% if is_granted('IS_AUTHENTICATED') %}
                     <div class="bg-pink-100 text-center text-bold">
                         <p>Leave a comment!</p>
