@@ -38,24 +38,26 @@
             </div>
         </section>
         <section id="trick-details" class="bg-white p-6">
-            <div id="medias">
-                <ul>
+            <div id="medias" class="md:flex">
+                <ul class="md:w-3/6 flex flex-wrap">
                     {% if trick.images %}
                         {% for image in trick.images %}
-                            <li>
+                            <li class="w-3/6 lg:w-2/6 p-2">
                                 <img   src="{{ vich_uploader_asset(image, "file") }}" 
                                         alt="picture of a snowboarder doing a {{ trick.name }}" 
-                                        {# style="width: 25%; height:auto;" #}
+                                        {# style="width: 100%; height:auto;" #}
+                                        {# class="object-cover" #}
                                 />
                             </li>
                         {% endfor %}
                     {% endif %}
                 </ul>
-                <ul>
+                <ul class="md:w-3/6">
                     {% if trick.videos %}
                         {% for video in trick.videos %}
-                            <li>
+                            <li class="p-2">
                                 <iframe src="{{ video.link }}"
+                                        {# class="object-cover" #}
                                         {# width="560"
                                         height="315" #}
                                         title="YouTube video player"
