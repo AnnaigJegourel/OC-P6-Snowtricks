@@ -1,29 +1,43 @@
-    <h2>--- Comments about this trick ---</h2>
-
-    {% if comments|length > 0 %}
-        <div>THERE ARE {{ comments|length }} COMMENTS</div>
-            {% for comment in comments %}
-                {% if comment.author.avatar %}
-                    <img src="{{ asset('images/users_pictures/' ~ comment.author.avatar) }}" />
-                {% else %}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                        <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
-                    </svg>
-                {% endif %}
-                <p><strong>{{ comment.author.username }}</strong></p>
-                <p>{{ comment.content }}</p>
-            {% endfor %}
-
+{% if comments|length > 0 %}
+    <div class="mb-4 lg:mb-8 text-bold text-lg lg:text-xl">There are {{ comments|length }} comments about this trick. </div>
+        {% for comment in comments %}
+            {% set avatar = asset('images/users_pictures/default.jpg') %}
+            {% if comment.author.avatar %}
+                {% set avatar = asset('images/tricks_pictures/'~comment.author.avatar) %}
+            {% endif %}
+            <div id="one_comment" class="flex my-3 border-2 p-1">
+                <div id="author" class="w-20 p-1">
+                    <img src="{{ avatar }}" class="">
+                    {{ comment.author.username }}
+                </div>
+                <p class="p-2 text-left ">
+                    {{ comment.content }}
+                </p>
+            </div>
+        {% endfor %}
+        
+        <div class="grid grid-cols-10">
             {% if previous >= 0 %}
-                <a href="{{ path('app_trick_show', { id: trick.id, offset: previous }) }}"><strong><em>PREVIOUS</em></strong></a>
+                <a href="{{ path('app_trick_show', { id: trick.id, offset: previous }) }}" class="col-start-10 col-span-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </a>
+            </div>
             {% endif %}
             {% if next < comments|length %}
-                <a href="{{ path('app_trick_show', { id: trick.id, offset: next }) }}"><strong><em>NEXT</em></strong></a>
+                <a href="{{ path('app_trick_show', { id: trick.id, offset: next }) }} ">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </a>
             {% endif %}
         </div>
-    {% else %}
-        <div>No comments have been posted yet for this trick.</div>
-    {% endif %}
+
+    </div>
+{% else %}
+    <div>No comments have been posted yet for this trick.</div>
+{% endif %}
 
 
 
