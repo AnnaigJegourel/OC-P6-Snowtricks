@@ -3,115 +3,120 @@
 {% block title %}Trick{% endblock %}
 
 {% block main %}
-<div id="trick-main" class="md:flex md:flex-col md:items-center">
 
-    {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
-    {% if trick.images %}
-        {% for image in trick.images %}
-            {% if trick.images[0].name %}
-                {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+{% set bgImage = asset('images/hero.jpg') %}
+<div    class="bg-slate-100" 
+        style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
+    <div id="trick-main" class="md:flex md:flex-col md:items-center md:shadow-lg">
+
+        {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
+        {% if trick.images %}
+            {% for image in trick.images %}
+                {% if trick.images[0].name %}
+                    {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <section    id="trick-hero"
+                    class="grid grid-cols-14 p-5 text-center md:w-4/6 md:mt-10"
+                    style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
+
+            {% if is_granted('IS_AUTHENTICATED')%}
+            <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
+                <div class="p-1">
+                    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+                        <svg class="w-6 h-6 fill-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="p-1">
+                    {{ include('trick/_delete_form.html.twig') }}
+                </div>
+            </div>
             {% endif %}
-        {% endfor %}
-    {% endif %}
 
-    <section    id="trick-hero"
-                class="grid grid-cols-14 p-5 text-center md:w-4/6 md:mt-10"
-                style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
-
-        {% if is_granted('IS_AUTHENTICATED')%}
-        <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
-            <div class="p-1">
-                <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">
-                    <svg class="w-6 h-6 fill-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
-                        <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
-                    </svg>
-                </a>
+            <div class="col-start-2 col-span-12 m-6 md:m-30 text-center">
+                <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60"> {{ trick.name }} </h1>
             </div>
-            <div class="p-1">
-                {{ include('trick/_delete_form.html.twig') }}
+
+
+            {# {% if is_granted('IS_AUTHENTICATED')%}
+            <!-- self-end (horizontal) ne marche pas!? -->
+            <ul class="self-end w-fit h-fit rounded-lg shadow-lg bg-white/60 p-1">
+                <li class="pt-1">
+                    <a href="href={{ path('app_trick_edit', {'id': trick.id}) }}">
+                        <svg class="w-6 h-6 fill-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="self-end">
+                    {{ include('trick/_delete_form.html.twig') }}
+                </li>
+            </ul>
+            {% endif %} #}
+
+        </section>
+
+        <section id="trick-details">
+            <div id="medias">
+                <ul>
+                    {% if trick.images %}
+                        {% for image in trick.images %}
+                            <li>
+                                <img   src="{{ vich_uploader_asset(image, "file") }}" 
+                                        alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                        style="width: 25%; height:auto;"
+                                />
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <ul>
+                    {% if trick.videos %}
+                        {% for video in trick.videos %}
+                            <li>
+                                <iframe width="560"
+                                        height="315"
+                                        src="{{ video.link }}"
+                                        title="YouTube video player"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                                </iframe>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
             </div>
-        </div>
-        {% endif %}
 
-        <div class="col-start-2 col-span-12 m-6 md:m-30 text-center">
-            <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60"> {{ trick.name }} </h1>
-        </div>
+            <article>
+                <p> {{ trick.description }} </p>
+                <ul>
+                    <li> {{ trick.name }} </li>
+                    <li> {{ trick.category.name }} </li>
+                    <li> {{ trick.updatedAt|date("m/d/Y") }} </li>
+                </ul>
+            </article>
 
+        </section>
 
-        {# {% if is_granted('IS_AUTHENTICATED')%}
-        <!-- self-end (horizontal) ne marche pas!? -->
-        <ul class="self-end w-fit h-fit rounded-lg shadow-lg bg-white/60 p-1">
-            <li class="pt-1">
-                <a href="href={{ path('app_trick_edit', {'id': trick.id}) }}">
-                    <svg class="w-6 h-6 fill-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
-                        <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
-                    </svg>
-                </a>
-            </li>
-            <li class="self-end">
-                {{ include('trick/_delete_form.html.twig') }}
-            </li>
-        </ul>
-        {% endif %} #}
-
-    </section>
-
-    <section id="trick-details">
-        <div id="medias">
-            <ul>
-                {% if trick.images %}
-                    {% for image in trick.images %}
-                        <li>
-                            <img   src="{{ vich_uploader_asset(image, "file") }}" 
-                                    alt="picture of a snowboarder doing a {{ trick.name }}" 
-                                    style="width: 25%; height:auto;"
-                            />
-                        </li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-            <ul>
-                {% if trick.videos %}
-                    {% for video in trick.videos %}
-                        <li>
-                            <iframe width="560"
-                                    height="315"
-                                    src="{{ video.link }}"
-                                    title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen>
-                            </iframe>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-        </div>
-
-        <article>
-            <p> {{ trick.description }} </p>
-            <ul>
-                <li> {{ trick.name }} </li>
-                <li> {{ trick.category.name }} </li>
-                <li> {{ trick.updatedAt|date("m/d/Y") }} </li>
-            </ul>
-        </article>
-
-    </section>
-
-    <section    id="trick-comments">
-        {% if is_granted('IS_AUTHENTICATED')%}
-            <div class="bg-pink-100 text-center text-bold">
-                <p>Leave a comment!</p>
-                {{ include('comment/_form.html.twig') }}
+        <section    id="trick-comments">
+            {% if is_granted('IS_AUTHENTICATED')%}
+                <div class="bg-pink-100 text-center text-bold">
+                    <p>Leave a comment!</p>
+                    {{ include('comment/_form.html.twig') }}
+                </div>
+            {% endif %}
+            <div class="bg-slate-300 text-center text-bold">
+                {{ include('comment/index.html.twig') }}
             </div>
-        {% endif %}
-        <div class="bg-slate-300 text-center text-bold">
-            {{ include('comment/index.html.twig') }}
-        </div>
-    </section>
+        </section>
 
+    </div>
 </div>
 {% endblock %}
