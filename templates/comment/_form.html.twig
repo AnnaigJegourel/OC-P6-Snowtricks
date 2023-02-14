@@ -1,4 +1,11 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button>{{ button_label|default('Save') }}</button>
+
+    {{ form_errors(form) }}
+
+    <div class="form-control">
+        {{ form_widget(form.content, {'attr': {'class': 'm-4 w-4/6 rounded bg-slate-50 p-2'}}) }}
+    </div>
+
+    <button class="rounded shadow-md bg-slate-700 py-1 px-2 text-white">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}

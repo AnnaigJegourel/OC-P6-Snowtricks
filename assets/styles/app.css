@@ -17,7 +17,7 @@ h1 {
     padding-top: 5rem;
     padding-bottom: 3rem;
     text-align: center;
-    font-size: 3.75rem; /* 60px */
+    font-size: 2rem;
     line-height: 1;
     font-weight: 700;
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -27,7 +27,12 @@ h1 {
 
 nav li {
     margin: 0 4% 0 4%;
-    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3.75rem; /* 60px */
+    }
 }
 
 @tailwind utilities;
