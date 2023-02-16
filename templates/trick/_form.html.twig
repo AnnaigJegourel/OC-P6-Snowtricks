@@ -1,92 +1,131 @@
-{{ form_start(form) }}
-
-    <!-- Trick -->
-    {{ form_errors(form) }}
+{% set bgImage = asset('images/hero.jpg') %}
+<div    class="bg-slate-100 md:border-y-2 md:border-t-cyan-700" 
+        style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
     
-    {# {{ form_row(form.name) }} #}
-    <div class="form-control">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name, {'attr': {'class': 'm-4 rounded bg-slate-300 p-2'}}) }}
+    <!-- HERO -->
+    <div id="trick-form" class="md:mt-40 md:mb-20 md:mx-32 md:flex md:flex-col md:items-center  md:shadow-lg">
+        {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
+        {% if trick.images %}
+            {% for image in trick.images %}
+                {% if trick.images[0].name %}                        
+                    {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <section    id="form-hero" class="w-full grid grid-cols-14 p-5 text-center"
+                    style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
+            {% if is_granted('IS_AUTHENTICATED')%}
+            <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
+                <div class="p-1">
+                    <a href="#">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="p-1">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-start-2 col-span-12 m-6 md:m-20 text-center">
+                <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60">
+                    {% if trick %}
+                        {{ trick.name }}
+                    {% else %}
+                        New Trick
+                    {% endif %}
+                </h1>
+            </div>
+        </section>
 
-        <div class="form-error">
-            {{ form_errors(form.name) }}
+        <!-- FORM -->
+        {{ form_start(form) }}
+        {# {{ form_errors(form) }}
+        <div class="form-control">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'm-4 rounded bg-slate-300 p-2'}}) }}
+            <div class="form-error">
+                {{ form_errors(form.name) }}
+            </div>
         </div>
+        <div class="form-control">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {'attr': {'class': 'm-4 rounded-lg bg-slate-100 p-2'}}) }}
+        </div>
+        <div class="form-control">
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category, {'attr': {'class': 'm-4 rounded-lg border-2 border-cyan-300 bg-slate-200 p-2'}}) }}
+        </div> #}
+        
+        <!-- PICTURES -->
+        {# <div class="form-control bg-cyan-100">
+            {{ form_label(form.images) }}
+            <ul id="images-fields-list"
+                data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ form.images|length }}"
+                class="holder-images">
+                    {{ form_errors(form.images) }}
+                    {% for input_image in form.images %}
+                        <li>     
+                            <img    
+                                src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
+                                alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                style="width: 25%; height:auto;"
+                            />
+                            {{ form_widget(input_image) }}
+                        </li>
+                    {% endfor %}
+            </ul>
+            <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
+        </div> #}
+        
+        <!-- VIDEOS -->
+        {# <div class="form-control bg-rose-100">
+            {{ form_label(form.videos) }}
+            <ul id="videos-fields-list"
+                data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ form.videos|length }}"
+                class="holder-videos">
+                    {{ form_errors(form.videos) }}
+                    {% for input_video in form.videos %}
+                        <li>                        
+                            <iframe width="560"
+                                        height="315"
+                                        src="{{input_video.vars.value.link}}"
+                                        title="YouTube video player"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                            </iframe>
+                            {{ form_widget(input_video) }}
+                        </li>
+                    {% endfor %}
+            </ul>
+            <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
+        </div> #}
+
+        <!-- BOUTON FINAL -->
+        {# <button class="btn">{{ button_label|default('Save') }}</button> #}
+
+        {{ form_end(form) }}
     </div>
+</div>
 
-    <div class="form-control">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description, {'attr': {'class': 'm-4 rounded-lg bg-slate-100 p-2'}}) }}
-    </div>
 
-    <div class="form-control">
-        {{ form_label(form.category) }}
-        {{ form_widget(form.category, {'attr': {'class': 'm-4 rounded-lg border-2 border-cyan-300 bg-slate-200 p-2'}}) }}
-    </div>
-    
-    <!-- Pictures -->
-    <div class="form-control bg-cyan-100">
-        {{ form_label(form.images) }}
 
-        <ul id="images-fields-list"
-            data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
-            data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
-            data-widget-tags="{{ '<li></li>'|e }}"
-            data-widget-counter="{{ form.images|length }}"
-            class="holder-images">
 
-                {{ form_errors(form.images) }}
-                {% for input_image in form.images %}
-                {# {{dump(input_image)}} #}
-                    <li>     
-                        <img    
-                            src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
-                            alt="picture of a snowboarder doing a {{ trick.name }}" 
-                            style="width: 25%; height:auto;"
-                        />
-                        {{ form_widget(input_image) }}
-                    </li>
-                {% endfor %}
-        </ul>
 
-        <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
-    </div>
-
-    <!-- Videos -->
-    <div class="form-control bg-rose-100">
-        {{ form_label(form.videos) }}
-
-        <ul id="videos-fields-list"
-            data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
-            data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
-            data-widget-tags="{{ '<li></li>'|e }}"
-            data-widget-counter="{{ form.videos|length }}"
-            class="holder-videos">
-
-                {{ form_errors(form.videos) }}
-                {% for input_video in form.videos %}
-                    <li>                        
-                        <iframe width="560"
-                                    height="315"
-                                    src="{{input_video.vars.value.link}}"
-                                    title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen>
-                        </iframe>
-                        {{ form_widget(input_video) }}
-                    </li>
-                {% endfor %}
-        </ul>
-
-        <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
-    </div>
-
-    <!-- BOUTON ET FIN DU FORM D'ENSEMBLE -->
-    <p>SAUVEGARDER</p>
-    <button class="btn">{{ button_label|default('Save') }}</button>
-
-{{ form_end(form) }}
-
+<!-- CODE JS -->
 {% block javascripts %}
     <script>
     window.addEventListener('load', function () {
