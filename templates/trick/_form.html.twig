@@ -56,29 +56,34 @@
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
-            <div id="medias_form" class="hidden sm:block md:flex">
+            <div id="medias_form" class="no-hidden sm:block md:flex">
                 <!-- PICTURES -->
-                <div class="form-control bg-cyan-100">
-                    {{ form_label(form.images) }}
+                <div class="form-control mb-4 p-1">
+                {{ form_label(form.images) }}
                     <ul id="images-fields-list"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
                         data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
                         data-widget-tags="{{ '<li></li>'|e }}"
                         data-widget-counter="{{ form.images|length }}"
-                        class="holder-images">
+                        class="holder-images md:w-3/6 flex flex-wrap justify-center">
                             {{ form_errors(form.images) }}
                             {% for input_image in form.images %}
-                                <li>     
+                                <li class="sm:w-3/6 lg:w-2/6 p-2">     
                                     <img    
                                         src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
                                         alt="picture of a snowboarder doing a {{ trick.name }}" 
-                                        style="width: 25%; height:auto;"
                                     />
-                                    {{ form_widget(input_image) }}
+                                    <div class="bg-slate-200">
+                                        {{ form_widget(input_image) }}
+                                    </div>
                                 </li>
                             {% endfor %}
                     </ul>
-                    <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
+                    <button type="button"
+                            class="add_item_link h-fit rounded shadow-md bg-slate-700 py-1 px-2 text-white"
+                            data-collection-holder-class="holder-images">
+                                Add an image
+                    </button>
                 </div>
                 <!-- VIDEOS -->
                 <div class="form-control bg-rose-100">
