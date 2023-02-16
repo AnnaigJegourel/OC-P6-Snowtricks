@@ -37,8 +37,8 @@
                 <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60"> {{ trick.name }} </h1>
             </div>
         </section>
-        <section id="trick-details" class="bg-white p-6">
-            <button class="sm:hidden" onclick="toggleMedias()">See medias</button>
+        <section id="trick-details" class="bg-white p-6 text-center">
+            <button class="sm:hidden mt-2 mb-6   rounded-lg shadow-md p-2 bg-cyan-400 text-center align-middle text-slate-600" onclick="toggleMedias()">See / hide medias</button>
 
             <div id="medias" class="hidden sm:block md:flex">
                 <ul class="md:w-3/6 flex flex-wrap justify-center">
@@ -75,11 +75,11 @@
             </div>
 
             <article class="p-2 md:p-10 lg:px-40">
-                <p> {{ trick.description }} </p>
+                <p class="text-lefts"> {{ trick.description }} </p>
                 <ul class="flex justify-center my-5 p-2">
-                    <li class="w-3/6 rounded-lg shadow-md p-2 bg-cyan-300 text-center align-middle text-slate-600"> {{ trick.name }} </li>
-                    <li class="mx-2 md:mx-6 w-3/6 rounded-lg shadow-md p-2 bg-cyan-300 text-center align-middle text-slate-600"> {{ trick.category.name }} </li>
-                    <li class="w-3/6 rounded-lg shadow-md p-2 bg-cyan-300 text-center align-middle text-slate-600"> {{ trick.updatedAt|date("m/d/Y") }} </li>
+                    <li class="w-3/6 p-1 bg-slate-200 text-center align-middle text-slate-600"> {{ trick.name }} </li>
+                    <li class="mx-2 md:mx-6 w-3/6 p-1 bg-slate-200 text-center align-middle text-slate-600"> {{ trick.category.name }} </li>
+                    <li class="w-3/6 p-1 bg-slate-200 text-center align-middle text-slate-600"> {{ trick.updatedAt|date("m/d/Y") }} </li>
                 </ul>
             </article>
 
