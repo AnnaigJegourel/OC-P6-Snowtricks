@@ -56,55 +56,56 @@
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
-            <!-- PICTURES -->
-            <div class="form-control bg-cyan-100">
-                {{ form_label(form.images) }}
-                <ul id="images-fields-list"
-                    data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
-                    data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
-                    data-widget-tags="{{ '<li></li>'|e }}"
-                    data-widget-counter="{{ form.images|length }}"
-                    class="holder-images">
-                        {{ form_errors(form.images) }}
-                        {% for input_image in form.images %}
-                            <li>     
-                                <img    
-                                    src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
-                                    alt="picture of a snowboarder doing a {{ trick.name }}" 
-                                    style="width: 25%; height:auto;"
-                                />
-                                {{ form_widget(input_image) }}
-                            </li>
-                        {% endfor %}
-                </ul>
-                <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
-            </div>
-            
-            <!-- VIDEOS -->
-            <div class="form-control bg-rose-100">
-                {{ form_label(form.videos) }}
-                <ul id="videos-fields-list"
-                    data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
-                    data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
-                    data-widget-tags="{{ '<li></li>'|e }}"
-                    data-widget-counter="{{ form.videos|length }}"
-                    class="holder-videos">
-                        {{ form_errors(form.videos) }}
-                        {% for input_video in form.videos %}
-                            <li>                        
-                                <iframe width="560"
-                                            height="315"
-                                            src="{{input_video.vars.value.link}}"
-                                            title="YouTube video player"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            allowfullscreen>
-                                </iframe>
-                                {{ form_widget(input_video) }}
-                            </li>
-                        {% endfor %}
-                </ul>
-                <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
+            <div id="medias_form" class="hidden sm:block md:flex">
+                <!-- PICTURES -->
+                <div class="form-control bg-cyan-100">
+                    {{ form_label(form.images) }}
+                    <ul id="images-fields-list"
+                        data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+                        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+                        data-widget-tags="{{ '<li></li>'|e }}"
+                        data-widget-counter="{{ form.images|length }}"
+                        class="holder-images">
+                            {{ form_errors(form.images) }}
+                            {% for input_image in form.images %}
+                                <li>     
+                                    <img    
+                                        src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
+                                        alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                        style="width: 25%; height:auto;"
+                                    />
+                                    {{ form_widget(input_image) }}
+                                </li>
+                            {% endfor %}
+                    </ul>
+                    <button type="button" class="add_item_link" data-collection-holder-class="holder-images">Add an image</button>
+                </div>
+                <!-- VIDEOS -->
+                <div class="form-control bg-rose-100">
+                    {{ form_label(form.videos) }}
+                    <ul id="videos-fields-list"
+                        data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
+                        data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
+                        data-widget-tags="{{ '<li></li>'|e }}"
+                        data-widget-counter="{{ form.videos|length }}"
+                        class="holder-videos">
+                            {{ form_errors(form.videos) }}
+                            {% for input_video in form.videos %}
+                                <li>                        
+                                    <iframe width="560"
+                                                height="315"
+                                                src="{{input_video.vars.value.link}}"
+                                                title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                allowfullscreen>
+                                    </iframe>
+                                    {{ form_widget(input_video) }}
+                                </li>
+                            {% endfor %}
+                    </ul>
+                    <button type="button" class="add_item_link" data-collection-holder-class="holder-videos">Add a video</button>
+                </div>
             </div>
 
             <!-- INFORMATIONS -->
@@ -139,63 +140,70 @@
 <!-- CODE JS -->
 {% block javascripts %}
     <script>
-    window.addEventListener('load', function () {
-        const addTagFormDeleteLink = (item) => {
-            //Bouton dans update / new (sélection avant envoi en db)
-            const removeFormButton = document.createElement('button');
-            removeFormButton.innerText = 'Remove this item';
+        window.addEventListener('load', function () {
+            const addTagFormDeleteLink = (item) => {
+                //Bouton dans update / new (sélection avant envoi en db)
+                const removeFormButton = document.createElement('button');
+                removeFormButton.innerText = 'Remove this item';
 
-            item.append(removeFormButton);
+                item.append(removeFormButton);
 
-            removeFormButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                // remove the li for the ITEM form
-                item.remove();
+                removeFormButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // remove the li for the ITEM form
+                    item.remove();
+                });
+            }
+
+            // prend le prototype, remplace __name__ et insère dans le html
+            const addFormToCollection = (e) => {
+                const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+                const item = document.createElement('li');
+
+                item.innerHTML = collectionHolder
+                    .dataset
+                    .prototype
+                    .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                    );
+
+                collectionHolder.appendChild(item);
+
+                collectionHolder.dataset.index++;
+                // add a delete link to the new form
+                addTagFormDeleteLink(item);
+            };
+            
+            // détecte le click sur le bouton ayant la classe add_item_link & execute la fonction addFormToCollection
+            document
+            .querySelectorAll('.add_item_link')
+            .forEach(btn => {
+                btn.addEventListener("click", addFormToCollection)
             });
+
+            //ajout du lien delete pour chaque image en bdd cf. const/fonction cidessus en 1e?
+            document
+            .querySelectorAll('ul.holder-images li')
+            .forEach((img) => {
+                addTagFormDeleteLink(img)
+            })
+
+            //ajout du lien delete pour chaque video...
+            document
+            .querySelectorAll('ul.holder-videos li')
+            .forEach((vd) => {
+                console.log(vd)
+                addTagFormDeleteLink(vd)
+            })
+        })
+    </script>
+
+    <script>
+        function toggleMedias() {
+            var element = document.getElementById("medias_form");
+            element.classList.toggle("hidden");
         }
-
-        // prend le prototype, remplace __name__ et insère dans le html
-        const addFormToCollection = (e) => {
-            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
-            const item = document.createElement('li');
-
-            item.innerHTML = collectionHolder
-                .dataset
-                .prototype
-                .replace(
-                /__name__/g,
-                collectionHolder.dataset.index
-                );
-
-            collectionHolder.appendChild(item);
-
-            collectionHolder.dataset.index++;
-            // add a delete link to the new form
-            addTagFormDeleteLink(item);
-        };
-        
-        // détecte le click sur le bouton ayant la classe add_item_link & execute la fonction addFormToCollection
-        document
-        .querySelectorAll('.add_item_link')
-        .forEach(btn => {
-            btn.addEventListener("click", addFormToCollection)
-        });
-
-        //ajout du lien delete pour chaque image en bdd cf. const/fonction cidessus en 1e?
-        document
-        .querySelectorAll('ul.holder-images li')
-        .forEach((img) => {
-            addTagFormDeleteLink(img)
-        })
-
-        //ajout du lien delete pour chaque video...
-        document
-        .querySelectorAll('ul.holder-videos li')
-        .forEach((vd) => {
-            console.log(vd)
-            addTagFormDeleteLink(vd)
-        })
-    })
     </script>
 {% endblock %}
