@@ -34,12 +34,13 @@
             </div>
             {% endif %}
             <div class="col-start-2 col-span-12 m-6 md:m-20 text-center">
+                {% if trick.name %}
+                    {% set trick_name = trick.name %}
+                {% else %}
+                    {% set trick_name = "New trick" %}
+                {% endif %}
                 <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60">
-                    {% if trick %}
-                        {{ trick.name }}
-                    {% else %}
-                        New Trick
-                    {% endif %}
+                    {{ trick_name }}
                 </h1>
             </div>
         </section>
