@@ -40,6 +40,7 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
+        $this->createdAt = new \DateTimeImmutable();
 
         return $this;
     }
