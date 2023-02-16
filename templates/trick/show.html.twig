@@ -5,9 +5,15 @@
 {% block main %}
 
 {% set bgImage = asset('images/hero.jpg') %}
+<<<<<<< HEAD
 <div    class="bg-slate-100 border-y-2 border-t-cyan-700" 
         style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
     <div id="trick-main" class="md:m-20 md:flex md:flex-col md:items-center  md:shadow-lg">
+=======
+<div    class="bg-slate-100 md:border-y-2 md:border-t-cyan-700" 
+        style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
+    <div id="trick-main" class="md:mt-40 md:mb-20 md:mx-32 md:flex md:flex-col md:items-center  md:shadow-lg">
+>>>>>>> dev
         {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
         {% if trick.images %}
             {% for image in trick.images %}
@@ -37,8 +43,15 @@
                 <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60"> {{ trick.name }} </h1>
             </div>
         </section>
+<<<<<<< HEAD
         <section id="trick-details" class="bg-white p-6">
             <div id="medias" class="md:flex">
+=======
+        <section id="trick-details" class="bg-white p-6 text-center">
+            <button class="sm:hidden mt-2 mb-6   rounded-lg shadow-md p-2 bg-cyan-400 text-center align-middle text-slate-600" onclick="toggleMedias()">See / hide medias</button>
+
+            <div id="medias" class="hidden sm:block md:flex">
+>>>>>>> dev
                 <ul class="md:w-3/6 flex flex-wrap justify-center">
                     {% if trick.images %}
                         {% for image in trick.images %}
@@ -73,18 +86,30 @@
             </div>
 
             <article class="p-2 md:p-10 lg:px-40">
+<<<<<<< HEAD
                 <p> {{ trick.description }} </p>
                 <ul class="flex justify-center my-5 p-2">
                     <li class="w-3/6 rounded-lg shadow-md p-2 bg-cyan-300 text-center align-middle text-slate-600"> {{ trick.name }} </li>
                     <li class="mx-2 md:mx-6 w-3/6 rounded-lg shadow-md p-2 bg-cyan-300 text-center align-middle text-slate-600"> {{ trick.category.name }} </li>
                     <li class="w-3/6 rounded-lg shadow-md p-2 bg-cyan-300 text-center align-middle text-slate-600"> {{ trick.updatedAt|date("m/d/Y") }} </li>
+=======
+                <p class="text-lefts"> {{ trick.description }} </p>
+                <ul class="flex justify-center my-5 p-2">
+                    <li class="w-3/6 p-1 bg-slate-200 text-center align-middle text-slate-600"> {{ trick.name }} </li>
+                    <li class="mx-2 md:mx-6 w-3/6 p-1 bg-slate-200 text-center align-middle text-slate-600"> {{ trick.category.name }} </li>
+                    <li class="w-3/6 p-1 bg-slate-200 text-center align-middle text-slate-600"> {{ trick.updatedAt|date("m/d/Y") }} </li>
+>>>>>>> dev
                 </ul>
             </article>
 
             <div id="trick-comments" class="p-2 md:px-10 md:pb-10 lg:px-20">
                 {% if is_granted('IS_AUTHENTICATED') %}
                     <div class="bg-slate-300 px-2 py-8 text-center text-bold">
+<<<<<<< HEAD
                         <p>Leave a comment!</p>
+=======
+                        {# <p>Leave a comment!</p> #}
+>>>>>>> dev
                         {{ include('comment/_form.html.twig') }}
                     </div>
                 {% endif %}
@@ -95,4 +120,16 @@
         </section>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function toggleMedias() {
+            var element = document.getElementById("medias");
+            element.classList.toggle("hidden");
+        }
+    </script>
+>>>>>>> dev
 {% endblock %}
