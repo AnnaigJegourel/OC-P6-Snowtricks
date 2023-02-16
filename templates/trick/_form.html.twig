@@ -56,7 +56,7 @@
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
-            <div id="medias_form" class="no-hidden sm:block md:flex">
+            <div id="medias_form" class="hidden sm:block md:flex">
                 <!-- PICTURES -->
                 <div id="images_form" class="form-control mb-4 p-1">
                 {{ form_label(form.images) }}
@@ -117,24 +117,31 @@
             </div>
 
             <!-- INFORMATIONS -->
-            <div class="form-control">
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name, {'attr': {'class': 'm-4 rounded bg-slate-300 p-2'}}) }}
-                <div class="form-error">
-                    {{ form_errors(form.name) }}
+            <div id="trick-infos" class="text-center">
+                <div class="form-control">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-300 bg-slate-100 p-2'}}) }}
+                    <div class="form-error">
+                        {{ form_errors(form.name) }}
+                    </div>
                 </div>
-            </div>
-            <div class="form-control">
-                {{ form_label(form.description) }}
-                {{ form_widget(form.description, {'attr': {'class': 'm-4 rounded-lg bg-slate-100 p-2'}}) }}
-            </div>
-            <div class="form-control">
-                {{ form_label(form.category) }}
-                {{ form_widget(form.category, {'attr': {'class': 'm-4 rounded-lg border-2 border-cyan-300 bg-slate-200 p-2'}}) }}
-            </div>
+                <div class="form-control">
+                    {{ form_widget(form.description, {'attr': {'class': 'm-4 w-5/6 h-40 rounded-lg border-2 border-slate-300 bg-slate-100 p-2'}}) }}
+                </div>
+                <div class="form-control">
+                    {{ form_label(form.category) }}
+                    {{ form_widget(form.category, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-300 bg-slate-100 p-2'}}) }}
+                </div>
+                <!-- BOUTONS  -->
+                <button class="btn my-2 rounded border-2 border-black shadow-md bg-slate-500 py-1 px-2 text-slate-100">
+                        Delete
+                        {{ include('trick/_delete_form.html.twig') }}
+                </button>
+                <button class="btn my-2 rounded border-2 border-black shadow-md bg-slate-100 py-1 px-2 text-slate-700">
+                        {{ button_label|default('Save') }}
+                </button>
 
-            <!-- BOUTON FINAL -->
-            <button class="btn">{{ button_label|default('Save') }}</button>
+            </div>
 
             {{ form_end(form) }}
         </div>
