@@ -38,7 +38,9 @@
             </div>
         </section>
         <section id="trick-details" class="bg-white p-6">
-            <div id="medias" class="md:flex">
+            <button class="sm:hidden" onclick="toggleMedias()">See medias</button>
+
+            <div id="medias" class="hidden sm:block md:flex">
                 <ul class="md:w-3/6 flex flex-wrap justify-center">
                     {% if trick.images %}
                         {% for image in trick.images %}
@@ -95,4 +97,13 @@
         </section>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function toggleMedias() {
+            var element = document.getElementById("medias");
+            element.classList.toggle("hidden");
+        }
+    </script>
 {% endblock %}
