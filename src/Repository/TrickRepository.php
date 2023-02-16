@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Trick;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Trick>
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TrickRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 15;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Trick::class);
@@ -37,6 +40,18 @@ class TrickRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getTrickPaginator(int $offset): Paginator
+    {
+        $query = $this->createQueryBuilder('t')
+            ->orderBy('t.updatedAt', 'DESC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return new Paginator($query);
     }
 
 //    /**

@@ -1,4 +1,13 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button>{{ button_label|default('Save') }}</button>
+    <div class="lg:flex lg:justify-center lg:items-center">
+
+        {{ form_errors(form) }}
+
+        <div class="form-control lg:w-4/6">
+            {{ form_widget(form.content, {'attr': {'class': 'm-4 w-5/6 rounded bg-slate-50 p-2'}}) }}
+        </div>
+        
+        <button class="h-fit rounded shadow-md bg-slate-700 py-1 px-2 text-white">{{ button_label|default('Leave a comment!') }}</button>
+
+    </div>
 {{ form_end(form) }}
