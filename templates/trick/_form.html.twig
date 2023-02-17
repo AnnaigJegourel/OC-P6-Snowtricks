@@ -167,7 +167,7 @@
         window.addEventListener('load', function () {
             const addTagFormDeleteLink = (item) => {
                 //Bouton dans update / new (sélection avant envoi en db)
-                const removeFormButton = document.createElement('button');
+                const removeFormButton = document.createElement('collection-btn');
                 removeFormButton.innerText = 'Remove this item';
 
                 item.append(removeFormButton);
