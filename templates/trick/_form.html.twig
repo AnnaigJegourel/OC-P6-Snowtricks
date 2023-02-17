@@ -59,7 +59,7 @@
             <div id="medias_form" class="hidden sm:block md:flex">
                 <!-- PICTURES -->
                 <div id="images_form" class="form-control mb-4 p-1">
-                {{ form_label(form.images) }}
+                    {{ form_label(form.images) }}
                     <ul id="images-fields-list"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
                         data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
@@ -133,18 +133,18 @@
                     {{ form_widget(form.category, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-300 bg-slate-100 p-2'}}) }}
                 </div>
                 <!-- BOUTONS  -->
-                <button class="btn my-2 rounded border-2 border-black shadow-md bg-slate-500 py-1 px-2 text-slate-100">
+                <button class="btn my-2 bg-slate-500 text-slate-100">
                         Delete
                         {{ include('trick/_delete_form.html.twig') }}
                 </button>
-                <button class="btn my-2 rounded border-2 border-black shadow-md bg-slate-100 py-1 px-2 text-slate-700">
+                <button class="btn my-2 bg-slate-100 text-slate-700">
                         {{ button_label|default('Save') }}
                 </button>
-
             </div>
 
             {{ form_end(form) }}
-        </div>
+        </section>
+
     </div>
 </div>
 
