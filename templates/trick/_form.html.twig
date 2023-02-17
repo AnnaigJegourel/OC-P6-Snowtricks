@@ -59,14 +59,14 @@
             {# <div id="medias_form" class="hidden sm:block md:flex"> #}
             <div id="medias_form" class="md:flex">
                 <!-- PICTURES -->
-                <div id="images_form" class="form-control mb-4 p-1">
+                <div id="images_form" class="form-control md:w-3/6 mb-4 p-1">
                     {{ form_label(form.images) }}
                     <ul id="images-fields-list"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
                         data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
                         data-widget-tags="{{ '<li></li>'|e }}"
                         data-widget-counter="{{ form.images|length }}"
-                        class="holder-images md:w-3/6 flex flex-wrap justify-center">
+                        class="holder-images flex flex-wrap justify-center">
                             {{ form_errors(form.images) }}
                             {% for input_image in form.images %}
                                 <li class="sm:w-3/6 lg:w-2/6 p-2">     
@@ -87,14 +87,14 @@
                     </button>
                 </div>
                 <!-- VIDEOS -->
-                <div id="videos_form" class="form-control mb-4 p-1">
+                <div id="videos_form" class="form-control  md:w-3/6 mb-4 p-1">
                     {{ form_label(form.videos) }}
                     <ul id="videos-fields-list"
                         data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
                         data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
                         data-widget-tags="{{ '<li></li>'|e }}"
                         data-widget-counter="{{ form.videos|length }}"
-                        class="holder-videos md:w-3/6 flex flex-wrap justify-center">
+                        class="holder-videos flex flex-wrap justify-center">
                             {{ form_errors(form.videos) }}
                             {% for input_video in form.videos %}
                                 <li class="sm:w-3/6  lg:w-2/6 p-2">                        
@@ -106,6 +106,18 @@
                                             allowfullscreen>
                                     </iframe>
                                     {{ form_widget(input_video, {'attr': {'class': 'mb-2 bg-slate-200 p-4'}}) }}
+
+                                    {# <div id="trick_videos_0">
+                                        <div>
+                                            <label for="trick_videos_0_link">
+                                                Youtube video link: 
+                                            </label>
+                                            <input  type="text" 
+                                                    id="trick_videos_0_link" 
+                                                    name="trick[videos][0][link]" 
+                                                    value="https://www.youtube.com/embed/Upnyf5QZHXY" />
+                                        </div>
+                                    </div>  #}
                                 </li>
                                 {# {{dump(input_video)}} #}
                             {% endfor %}
