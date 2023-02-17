@@ -21,7 +21,7 @@
     <!-- SEE / HIDE BUTTON -->
     <div class="grid grid-cols-8 md:grid-cols-12">
         <button class="mb-20 col-start-8 md:col-start-12"
-                onclick="toggleMedias()">
+                onclick="toggleTricks()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
             </svg>
@@ -71,14 +71,14 @@
             <div>No tricks have been posted yet.</div>
         {% endif %}
     </section> #}
-    <section id="tricks_index" class="mb-20 px-10 bg-rose-200">
+    <section id="tricks_index" class="mb-20 px-10">
         <!-- Cards -->
-        <div id="tricks_cards" class="hidden sm:block md:flex bg-slate-200">
+        <div id="tricks_cards" class="hidden sm:block md:flex">
             Coucou on est les tricks cards!
         </div>
 
         <!-- Index top button -->
-        <div class="grid grid-cols-8">
+        <div class="my-2 grid grid-cols-8">
             <a  class="col-start-8"
                 href="#tricksindex">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
@@ -91,7 +91,7 @@
 
 {% block javascripts %}
     <script>
-        function toggleMedias() {
+        function toggleTricks() {
             var element = document.getElementById("tricks_cards");
             element.classList.toggle("hidden");
         }
