@@ -11,13 +11,23 @@
     </section>
     <!-- CREATION BUTTON -->
     {% if is_granted('IS_AUTHENTICATED')%}
-        <div class="-mt-28 mb-28 text-center">
+        <div class="-mt-40 mb-12 sm:mb-16 text-center">
             <a  class="btn p-4 rounded border-2 border-cyan-600  bg-cyan-500 hover:bg-slate-500 text-center text-xl text-white italic font-medium"
                 href="{{ path('app_trick_new') }}">
                     Create a new Trick!
             </a>
         </div>
     {% endif %}
+    <!-- SEE / HIDE BUTTON -->
+    <div class="grid grid-cols-8 md:grid-cols-12">
+        <button class="mb-20 col-start-8 md:col-start-12"
+                onclick="toggleMedias()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+            </svg>
+        </button>
+    </div>
+
     <!-- TRICKS CARDS -->
     {# <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         {% if tricks|length > 0 %}
@@ -61,14 +71,7 @@
             <div>No tricks have been posted yet.</div>
         {% endif %}
     </section> #}
-
-    <section id="tricks_index" class="mb-20 px-10">
-        <!-- See/hide button -->
-        <button class="sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-500 text-center align-middle text-slate-600"
-                onclick="toggleMedias()">
-            See / hide tricks
-        </button>
-
+    <section id="tricks_index" class="mb-20 px-10 bg-rose-200">
         <!-- Cards -->
         <div id="tricks_cards" class="hidden sm:block md:flex bg-slate-200">
             Coucou on est les tricks cards!
