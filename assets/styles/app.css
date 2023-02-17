@@ -14,8 +14,10 @@
 }
 
 h1 {
-    padding-top: 5rem;
-    padding-bottom: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
     text-align: center;
     font-size: 2rem;
     line-height: 1;
@@ -53,7 +55,8 @@ collection-btn {
 
 @media (min-width: 768px) {
     h1 {
-        font-size: 3.75rem; /* 60px */
+        font-size: 3rem; /* 60px */
+        padding-top: 8.5rem;
     }
 }
 
