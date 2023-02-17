@@ -62,9 +62,9 @@
         {% endif %}
     </section> #}
 
-    <section id="tricks_index" class="mb-20">
+    <section id="tricks_index" class="mb-20 px-10">
         <!-- See/hide button -->
-        <button class="sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-400 text-center align-middle text-slate-600"
+        <button class="sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-500 text-center align-middle text-slate-600"
                 onclick="toggleMedias()">
             See / hide tricks
         </button>
@@ -75,9 +75,13 @@
         </div>
 
         <!-- Index top button -->
-        <div class="text-right">
-            <a  class="btn"
-                href="#tricksindex">Back to index top</a>
+        <div class="grid grid-cols-8">
+            <a  class="col-start-8"
+                href="#tricksindex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+                </svg>
+            </a>
         </div>
     </section>
 {% endblock %}
