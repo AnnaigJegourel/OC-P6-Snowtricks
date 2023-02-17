@@ -1,8 +1,8 @@
 {% set bgImage = asset('images/hero.jpg') %}
-<div    class="bg-slate-100 md:border-y-2 md:border-t-cyan-700" 
+<div    class="background bg-slate-100 md:border-y-2 md:border-t-cyan-700" 
         style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
     
-    <div id="trick-form" class="mb-20 md:mt-40 md:mx-32 md:flex md:flex-col md:items-center  md:shadow-lg">
+    <div id="trick-form" class="mb-20 md:mt-40 md:mx-32 md:flex md:flex-col md:items-center md:shadow-lg bg-white md:pb-6">
         
         <!-- HERO -->
         {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
@@ -47,7 +47,7 @@
         </section>
 
         <!-- FORM -->
-        <section id="form-details" class="bg-white p-2 text-center">
+        <section id="form-details" class="p-2 text-center">
 
             {{ form_start(form) }}
             {{ form_errors(form) }}
@@ -133,15 +133,23 @@
                     {{ form_widget(form.category, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-300 bg-slate-100 p-2'}}) }}
                 </div>
                 <!-- BOUTONS  -->
-                <button class="btn my-2 bg-slate-500 text-slate-100">
-                        Delete
-                        {{ include('trick/_delete_form.html.twig') }}
-                </button>
-                <button class="btn my-2 bg-slate-100 text-slate-700">
-                        {{ button_label|default('Save') }}
-                </button>
-            </div>
+                <div class="flex justify-center md:justify-end md:mr-10">
+                    <!-- delete -->
+                    <form method="post" action="{{ path('app_trick_delete', {'id': trick.id}) }}" onsubmit="return confirm('Are you sure you want to delete this trick?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                        <button class="btn m-2 w-20 bg-pink-700 text-slate-100">
+                                Delete                        
+                        </button>
+                    </form>
 
+                    <!-- edit -->
+                    <button class="btn m-2  w-20 bg-slate-100 text-slate-700">
+                            {{ button_label|default('Save') }}
+                    </button>
+                </div>
+
+
+            </div>
             {{ form_end(form) }}
         </section>
 
