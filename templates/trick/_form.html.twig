@@ -56,7 +56,8 @@
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
-            <div id="medias_form" class="hidden sm:block md:flex">
+            {# <div id="medias_form" class="hidden sm:block md:flex"> #}
+            <div id="medias_form" class="md:flex">
                 <!-- PICTURES -->
                 <div id="images_form" class="form-control mb-4 p-1">
                     {{ form_label(form.images) }}
@@ -80,9 +81,9 @@
                             {% endfor %}
                     </ul>
                     <button type="button"
-                            class="add_item_link h-fit rounded shadow-md bg-slate-700 py-1 px-2 text-white"
+                            class="add_item_link btn my-6 bg-slate-500 text-white"
                             data-collection-holder-class="holder-images">
-                                Add an image
+                                Add an image!
                     </button>
                 </div>
                 <!-- VIDEOS -->
@@ -109,9 +110,9 @@
                             {% endfor %}
                     </ul>
                     <button type="button"
-                            class="add_item_link rounded shadow-md bg-slate-700 py-1 px-2 text-white"
+                            class="add_item_link btn my-6 bg-slate-500 text-white"
                             data-collection-holder-class="holder-videos">
-                                Add a video
+                                Add a video!
                     </button>
                 </div>
             </div>
