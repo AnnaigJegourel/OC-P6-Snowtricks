@@ -105,8 +105,9 @@
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                             allowfullscreen>
                                     </iframe>
-                                    {{ form_widget(input_video) }}
+                                    {{ form_widget(input_video, {'attr': {'class': 'mb-2 bg-slate-200 p-4'}}) }}
                                 </li>
+                                {# {{dump(input_video)}} #}
                             {% endfor %}
                     </ul>
                     <button type="button"
