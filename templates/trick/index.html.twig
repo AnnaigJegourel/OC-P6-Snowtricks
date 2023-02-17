@@ -9,18 +9,17 @@
         <h1>Welcome to Snowtricks!</h1>
         <p class="px-4 text-center text-xl md:text-2xl font-serif italic text-slate-800">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
     </section>
-
+    <!-- CREATION BUTTON -->
     {% if is_granted('IS_AUTHENTICATED')%}
-    <div class="-mt-28 mb-28 text-center">
-        <a  class="btn p-4 rounded border-2 bg-slate-500 hover:bg-cyan-500 text-center text-xl text-white italic font-medium"
-            href="{{ path('app_trick_new') }}">
-                Create a new Trick!
-        </a>
-    </div>
+        <div class="-mt-28 mb-28 text-center">
+            <a  class="btn p-4 rounded border-2 border-cyan-600  bg-cyan-500 hover:bg-slate-500 text-center text-xl text-white italic font-medium"
+                href="{{ path('app_trick_new') }}">
+                    Create a new Trick!
+            </a>
+        </div>
     {% endif %}
-
     <!-- TRICKS CARDS -->
-    <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
+    {# <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         {% if tricks|length > 0 %}
             <div>THERE ARE {{ tricks|length }} TRICKS</div>
                 {% for trick in tricks %}
@@ -61,11 +60,33 @@
         {% else %}
             <div>No tricks have been posted yet.</div>
         {% endif %}
+    </section> #}
+
+    <section id="tricks_index" class="mb-20">
+        <!-- See/hide button -->
+        <button class="sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-400 text-center align-middle text-slate-600"
+                onclick="toggleMedias()">
+            See / hide tricks
+        </button>
+
+        <!-- Cards -->
+        <div id="tricks_cards" class="hidden sm:block md:flex bg-slate-200">
+            Coucou on est les tricks cards!
+        </div>
+
+        <!-- Index top button -->
+        <div class="text-right">
+            <a  class="btn"
+                href="#tricksindex">Back to index top</a>
+        </div>
     </section>
+{% endblock %}
 
-    <div class="text-right">
-        <a  class="m-6 p-6 rounded-lg shadow-lg hover:bg-slate-400 bg-cyan-500 text-white text-center italic text-2xl font-medium"
-            href="#tricksindex">Back to index top</a>
-    </div>
-
+{% block javascripts %}
+    <script>
+        function toggleMedias() {
+            var element = document.getElementById("tricks_cards");
+            element.classList.toggle("hidden");
+        }
+    </script>
 {% endblock %}
