@@ -47,7 +47,7 @@
         </section>
 
         <!-- FORM -->
-        <section id="form-details" class="p-2 text-center">
+        <section id="form-details" class="md:w-5/6 p-2 text-center">
 
             {{ form_start(form) }}
             {{ form_errors(form) }}
@@ -57,7 +57,7 @@
                         See / hide medias
             </button>
             {# <div id="medias_form" class="hidden sm:block md:flex"> #}
-            <div id="medias_form" class="md:flex">
+            <div id="medias_form" class="bg-slate-200 md:flex">
                 <!-- PICTURES -->
                 <div id="images_form" class="form-control md:w-3/6 mb-4 p-1">
                     {{ form_label(form.images) }}
@@ -74,8 +74,8 @@
                                         src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
                                         alt="picture of a snowboarder doing a {{ trick.name }}" 
                                     />
-                                    <div class="bg-slate-200">
-                                        {{ form_widget(input_image) }}
+                                    <div class="bg-slate-300">
+                                        {{ form_widget(input_image, {'attr': {'class': 'mb-2'}}) }}
                                     </div>
                                 </li>
                             {% endfor %}
@@ -105,7 +105,7 @@
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                             allowfullscreen>
                                     </iframe>
-                                    {{ form_widget(input_video, {'attr': {'class': 'mb-2 bg-slate-200 p-4'}}) }}
+                                    {{ form_widget(input_video, {'attr': {'class': 'mb-2 bg-slate-300 p-4'}}) }}
 
                                     {# <div id="trick_videos_0">
                                         <div>
