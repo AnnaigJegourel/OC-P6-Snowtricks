@@ -3,12 +3,13 @@
 {% block title %}New User{% endblock %}
 
 {% block main %}
-    <h1 class="not-italic font-sans font-semibold">Registration</h1>
+    <div class="mx-4 mt-20 md:mt-0 md:mb-20 px-4 md:px-40 lg:px-60 xl:px-80 md:border-transparent border-2 border-slate-500 text-center text-lg">
+        <h1 class="not-italic font-sans font-semibold">Registration</h1>
 
-    {{ include('user/_form.html.twig') }}
+        {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('app_login') }}">
-        <p class="my-3 underline hover:italic hover:text-cyan-500 text-center">Already an account?</p>
-    </a>
-
+        <a href="{{ path('app_login') }}">
+            <p class="my-3 underline hover:italic hover:text-cyan-500 text-center">Already an account?</p>
+        </a>
+    </div>
 {% endblock %}
