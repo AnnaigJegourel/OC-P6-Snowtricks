@@ -1,8 +1,36 @@
 {{ form_start(form) }}
-    <div class="form-control bg-cyan-100 md:border-2 md:border-slate-500 md:px-20 xl:px-40">
+{{ form_errors(form) }}
+    <div class="form-control md:border-2 md:border-slate-500 md:px-20 xl:px-40">
+        {# {{ form_widget(form, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-400 bg-slate-100 p-2'}}) }} #}
+        
+        <div id="username">
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+            <div class="form-error">
+                {{ form_errors(form.username) }}
+            </div>
+        </div>
 
-        {{ form_widget(form, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-400 bg-slate-100 p-2'}}) }}
-        <button class="btn my-8 py-2 px-12 hover:italic hover:bg-cyan-300">{{ button_label|default('Create an account') }}</button>
+        <div id="email">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            <div class="form-error">
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+
+        <div id="password">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+            <div class="form-error">
+                {{ form_errors(form.password) }}
+            </div>
+        </div>
+
+
+        <button class="btn my-8 py-2 px-12 hover:italic hover:bg-cyan-300">
+            {{ button_label|default('Create an account') }}
+        </button>
+
     </div>
-
 {{ form_end(form) }}
