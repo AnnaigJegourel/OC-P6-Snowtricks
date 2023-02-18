@@ -121,14 +121,14 @@
                         </div>
                     {% endfor %}
                 </div>
-                {% if previous >= 0 %}
-                    <a href="{{ path('app_home', { offset: previous }) }}"
-                        class="pt-6 text-lg italic underline">previous tricks</a>
-                {% endif %}
-                {% if next < tricks|length %}
-                    <a href="{{ path('app_home', { offset: next }) }}"
-                        class="pt-6 text-lg italic underline">next tricks</a>
-                {% endif %}
+                <div class="pt-6 text-lg underline hover:italic hover:text-cyan-500">
+                    {% if previous >= 0 %}
+                        <a href="{{ path('app_home', { offset: previous }) }}">previous tricks</a>
+                    {% endif %}
+                    {% if next < tricks|length %}
+                        <a href="{{ path('app_home', { offset: next }) }}">next tricks</a>
+                    {% endif %}
+                </div>
             {% else %}
                 <p>No tricks have been posted yet.</p>
             {% endif %}
