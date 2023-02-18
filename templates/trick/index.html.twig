@@ -42,6 +42,7 @@
                     <!-- card -->
                     <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                         <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
+                            
                             <!-- Remplacer par 1ere img du Tricks si existe-->
                             <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
 
@@ -95,24 +96,26 @@
                 <div id="cards_container">
                     <!-- Cards loop -->
                     {% for trick in tricks %}
-                        <div id="card" class="m-4 border-2 border-slate-500">
-                            {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
-                            {% if trick.images %}
-                                {% for image in trick.images %}
-                                    {% if trick.images[0].name %}
-                                        {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <img    class="h-40 w-full object-cover border-b-2 border-slate-500"
-                                    src="{{ mainImage }}"
-                                    alt="trick's main image" 
-                            />
-                            <div class="flex justify-between items-center bg-white w-full p-4">
-                                <p class="text-cyan-500 text-xl font-medium m-1">
-                                    {{ trick.name }}
-                                </p>
-                            </div>
+                        <div id="card" class="overflow-hidden m-4 shadow-lg hover:shadow-2xl border-2 border-slate-500 transition duration-500 ease-in-out hover:-translate-y-5 cursor-pointer">
+                            <a  href="{{ path('app_trick_show', {'id': trick.id}) }}">
+                                {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
+                                {% if trick.images %}
+                                    {% for image in trick.images %}
+                                        {% if trick.images[0].name %}
+                                            {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <img    class="h-40 w-full object-cover border-b-2 border-slate-500"
+                                        src="{{ mainImage }}"
+                                        alt="trick's main image" 
+                                />
+                                <div class="flex justify-between items-center bg-white w-full p-4">
+                                    <p class="text-cyan-500 text-xl font-medium m-1">
+                                        {{ trick.name }}
+                                    </p>
+                                </div>
+                            </a>
                         </div>
                     {% endfor %}
                     {% if previous >= 0 %}
