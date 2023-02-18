@@ -11,24 +11,25 @@
     </section>
     <!-- CREATION BUTTON -->
     {% if is_granted('IS_AUTHENTICATED')%}
-        <div class="-mt-40 mb-12 sm:mb-16 text-center">
+        <div class="-mt-40 mb-32 sm:mb-40 text-center">
             <a  class="btn p-4 rounded border-2 border-cyan-600  bg-cyan-500 hover:bg-slate-500 text-center text-xl text-white italic font-medium"
                 href="{{ path('app_trick_new') }}">
                     Create a new Trick!
             </a>
         </div>
     {% endif %}
-    <!-- SEE / HIDE BUTTON -->
+    <!-- DOWN BUTTON -->
     <div class="grid grid-cols-8 md:grid-cols-12">
-        <button class="mb-20 col-start-8 md:col-start-12"
-                onclick="toggleTricks()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
+        {# <button class="-mt-20 mb-40 col-start-8 md:col-start-12"
+                onclick="toggleTricks()"> #}
+        <a href="#tricks_index" class="-mt-20 mb-40 col-start-8 md:col-start-12">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="rgb(30 41 59)" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
             </svg>
-        </button>
+        </a>
+        {# </button> #}
     </div>
-
-    <!-- TRICKS CARDS -->
+    <!-- TRICKS INDEX -->
     {# <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         {% if tricks|length > 0 %}
             <div>THERE ARE {{ tricks|length }} TRICKS</div>
@@ -71,20 +72,32 @@
             <div>No tricks have been posted yet.</div>
         {% endif %}
     </section> #}
-    <section id="tricks_index" class="mb-20 px-10">
-        <!-- Cards -->
-        <div id="tricks_cards" class="hidden sm:block md:flex">
-            Coucou on est les tricks cards!
-        </div>
+    <section id="tricks_index" class="mb-20 px-10 text-center">
+        <!-- SEE / HIDE BUTTON -->
+        <button class="btn bg-cyan-400"
+                onclick="toggleTricks()">
+            See all tricks            
+        </button>
 
-        <!-- Index top button -->
-        <div class="my-2 grid grid-cols-8">
-            <a  class="col-start-8"
-                href="#tricksindex">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
-                </svg>
-            </a>
+        <!-- Cards -->
+        <div id="tricks_cards" class="hidden bg-slate-200">
+            {% for trick in tricks %}
+                <p>Coucou on est les tricks cards!</p>
+                <p>Coucou on est les tricks cards!</p>
+                <p>Coucou on est les tricks cards!</p>
+                <p>Coucou on est les tricks cards!</p>
+                <p>Coucou on est les tricks cards!</p>
+            {% endfor %}
+
+            <!-- Index top button -->
+            <div class="my-2 grid grid-cols-8">
+                <a  class="col-start-8"
+                    href="#tricks_index">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+                    </svg>
+                </a>
+            </div>
         </div>
     </section>
 {% endblock %}
