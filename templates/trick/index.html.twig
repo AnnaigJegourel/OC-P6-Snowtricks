@@ -73,14 +73,15 @@
         {% endif %}
     </section> #}
     <section id="tricks_index" class="mb-20 px-10 text-center">
-        <!-- SEE / HIDE BUTTON -->
-        <button class="btn bg-cyan-400"
+        <!-- See / hide button -->
+        {# <button class="btn bg-cyan-400"
                 onclick="toggleTricks()">
             See all tricks            
-        </button>
-
+        </button> #}
         <!-- Cards -->
-        <div id="tricks_cards" class="hidden bg-slate-200">
+        {# <div id="tricks_cards" class="hidden"> #}
+        <div id="tricks_cards" class="bg-slate-200">
+            <!-- Cards loop -->
             {% for trick in tricks %}
                 <p>Coucou on est les tricks cards!</p>
                 <p>Coucou on est les tricks cards!</p>
@@ -88,11 +89,10 @@
                 <p>Coucou on est les tricks cards!</p>
                 <p>Coucou on est les tricks cards!</p>
             {% endfor %}
-
             <!-- Index top button -->
             <div class="my-2 grid grid-cols-8">
                 <a  class="col-start-8"
-                    href="#tricks_index">
+                    href="#tricks_cards">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
                     </svg>
@@ -102,11 +102,11 @@
     </section>
 {% endblock %}
 
-{% block javascripts %}
+{# {% block javascripts %}
     <script>
         function toggleTricks() {
             var element = document.getElementById("tricks_cards");
             element.classList.toggle("hidden");
         }
     </script>
-{% endblock %}
+{% endblock %} #}
