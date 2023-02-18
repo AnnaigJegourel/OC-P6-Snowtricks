@@ -1,36 +1,32 @@
 {{ form_start(form) }}
+
 {{ form_errors(form) }}
-    <div class="form-control md:border-2 md:border-slate-500 md:px-20 xl:px-40">
-        {# {{ form_widget(form, {'attr': {'class': 'm-4 rounded-lg border-2 border-slate-400 bg-slate-100 p-2'}}) }} #}
-        
-        <div id="username">
+
+        <div id="username" class="flex flex-col mt-4 px-8">
             {{ form_label(form.username) }}
-            {{ form_widget(form.username) }}
+            {{ form_widget(form.username, {'attr': {'class': 'mb-4 border-b-2 border-slate-400'}}) }}
             <div class="form-error">
                 {{ form_errors(form.username) }}
             </div>
         </div>
 
-        <div id="email">
+        <div id="email" class="flex flex-col px-8">
             {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'mb-8 border-b-2 border-slate-400'}}) }}
             <div class="form-error">
                 {{ form_errors(form.email) }}
             </div>
         </div>
 
-        <div id="password">
+        <div id="password" class="flex flex-col px-8">
             {{ form_label(form.password) }}
             {{ form_widget(form.password) }}
             <div class="form-error">
                 {{ form_errors(form.password) }}
-            </div>
         </div>
-
 
         <button class="btn my-8 py-2 px-12 hover:italic hover:bg-cyan-300">
             {{ button_label|default('Create an account') }}
         </button>
 
-    </div>
 {{ form_end(form) }}
