@@ -22,13 +22,17 @@
     <div class="grid grid-cols-8 md:grid-cols-12">
         {# <button class="-mt-20 mb-40 col-start-8 md:col-start-12"
                 onclick="toggleTricks()"> #}
-        <a href="#tricks_index" class="-mt-20 mb-40 col-start-8 md:col-start-12">
+        <a href="#tricks_index" class="-mt-20 mb-20 col-start-8 md:col-start-12">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="rgb(30 41 59)" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
             </svg>
         </a>
         {# </button> #}
     </div>
+
+
+
+
     <!-- TRICKS INDEX -->
     {# <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         {% if tricks|length > 0 %}
@@ -81,14 +85,28 @@
         <!-- Cards -->
         {# <div id="tricks_cards" class="hidden"> #}
         <div id="tricks_cards" class="bg-slate-200">
-            <!-- Cards loop -->
-            {% for trick in tricks %}
-                <p>Coucou on est les tricks cards!</p>
-                <p>Coucou on est les tricks cards!</p>
-                <p>Coucou on est les tricks cards!</p>
-                <p>Coucou on est les tricks cards!</p>
-                <p>Coucou on est les tricks cards!</p>
-            {% endfor %}
+            {% if tricks|length > 0 %}
+                <div id="cards_container">
+                    <!-- Cards loop -->
+                    {% for trick in tricks %}
+                        <p>Coucou on est les tricks cards!</p>
+                        <p>Coucou on est les tricks cards!</p>
+                        <p>Coucou on est les tricks cards!</p>
+                        <p>Coucou on est les tricks cards!</p>
+                        <p>Coucou on est les tricks cards!</p>
+                    {% endfor %}
+                    {% if previous >= 0 %}
+                        <a href="{{ path('app_home', { offset: previous }) }}"
+                            class="pt-2 underline">previous tricks</a>
+                    {% endif %}
+                    {% if next < tricks|length %}
+                        <a href="{{ path('app_home', { offset: next }) }}"
+                            class="pt-2 underline">next tricks</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>No tricks have been posted yet.</p>
+            {% endif %}
             <!-- Index top button -->
             <div class="my-2 grid grid-cols-8">
                 <a  class="col-start-8"
@@ -100,6 +118,10 @@
             </div>
         </div>
     </section>
+
+
+
+
 {% endblock %}
 
 {# {% block javascripts %}
