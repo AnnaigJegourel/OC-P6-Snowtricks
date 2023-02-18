@@ -7,50 +7,71 @@
     <!-- HERO -->
     <section class="h-screen bg-right bg-no-repeat bg-cover bg-gradient-to-t" style="background-image: url(images/hero.jpg)">
         <h1>Welcome to Snowtricks!</h1>
-        <p class="text-2xl font-serif italic text-slate-800 text-center">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
+        <p class="px-4 text-center text-xl md:text-2xl font-serif italic text-slate-800">Collaborative blog about snowboard tricks - by and for snowboard fans</p>
     </section>
-
+    <!-- CREATION BUTTON -->
     {% if is_granted('IS_AUTHENTICATED')%}
-    <div class="text-center">
-        <a class="p-6 rounded-lg shadow-lg bg-slate-500 hover:bg-cyan-500 text-white text-center text-2xl italic font-medium m-1" href="{{ path('app_trick_new') }}">Create a new Trick!</a>
-    </div>
+        <div class="-mt-40 mb-32 sm:mb-40 text-center">
+            <a  class="btn p-4 rounded border-2 border-cyan-600  bg-cyan-500 hover:bg-slate-500 text-center text-xl text-white italic font-medium"
+                href="{{ path('app_trick_new') }}">
+                    Create a new Trick!
+            </a>
+        </div>
     {% endif %}
+    <!-- DOWN BUTTON -->
+    <div class="grid grid-cols-8 md:grid-cols-12">
+        {# <button class="-mt-20 mb-40 col-start-8 md:col-start-12"
+                onclick="toggleTricks()"> #}
+        <a href="#tricks_index" class="-mt-20 mb-20 col-start-8 md:col-start-12">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="rgb(30 41 59)" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+            </svg>
+        </a>
+        {# </button> #}
+    </div>
 
-    <!-- TRICKS CARDS -->
-    <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
-        
+
+
+
+    <!-- TRICKS INDEX -->
+    {# <section id="tricksindex" class="flex flex-wrap px-1.5 py-3 place-items-center h-screen">
         {% if tricks|length > 0 %}
             <div>THERE ARE {{ tricks|length }} TRICKS</div>
                 {% for trick in tricks %}
-                <!-- card -->
-                <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
-                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
-                        <!-- Remplacer par 1ere img du Tricks si existe-->
-                        <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
-                        <div class="flex justify-between items-center bg-white w-full p-4">
-                            <p class="text-cyan-500 text-2xl font-medium m-1">{{ trick.name }}</p>
 
-                            {% if is_granted('IS_AUTHENTICATED')%}
-                                <!-- Edit -->
-                                <div>
-                                    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-green-700">
-                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
-                                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <!-- Delete -->
-                                <div>
-                                    {{ include('trick/_delete_form.html.twig') }}
-                                </div>
-                            {% endif %}
-                        </div>
-                    </a>
-                </div>
-                <!-- (card end)-->
+                    <!-- card -->
+                    <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
+                        <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
+                            
+                            <!-- Remplacer par 1ere img du Tricks si existe-->
+                            <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
+
+                            <div class="flex justify-between items-center bg-white w-full p-4">
+                                <p class="text-cyan-500 text-2xl font-medium m-1">{{ trick.name }}</p>
+                                
+                                <!-- edit / delete -->
+                                {% if is_granted('IS_AUTHENTICATED')%}
+                                    <!-- Edit -->
+                                    <div>
+                                        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-green-700">
+                                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                                <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <!-- Delete -->
+                                    <div>
+                                        {{ include('trick/_delete_form.html.twig') }}
+                                    </div>
+                                {% endif %}
+                                
+                            </div>
+                        </a>
+                    </div>
+                    <!-- (card end)-->
+                    
                 {% endfor %}
-
                 {% if previous >= 0 %}
                     <a href="{{ path('app_home', { offset: previous }) }}"><strong><em>PREVIOUS</em></strong></a>
                 {% endif %}
@@ -61,11 +82,89 @@
         {% else %}
             <div>No tricks have been posted yet.</div>
         {% endif %}
-
+    </section> #}
+    <section id="tricks_index" class="pt-2 md:pt-20 mb-20 text-center">
+        <!-- See / hide button -->
+        {# <button class="btn bg-cyan-400"
+                onclick="toggleTricks()">
+            See all tricks            
+        </button> #}
+        <!-- Cards -->
+        {# <div id="tricks_cards" class="hidden"> #}
+        <div id="tricks_cards" class="">
+            {% if tricks|length > 0 %}
+                <div id="cards_container"
+                    class="flex flex-wrap justify-center">
+                    <!-- Cards loop -->
+                    {% for trick in tricks %}
+                        <div id="card"
+                            class="overflow-hidden m-4 w-60 shadow-lg hover:shadow-2xl border-2 border-slate-500 transition duration-500 ease-in-out hover:-translate-y-5 cursor-pointer">
+                            <a  href="{{ path('app_trick_show', {'id': trick.id}) }}">
+                                {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
+                                {% if trick.images %}
+                                    {% for image in trick.images %}
+                                        {% if trick.images[0].name %}
+                                            {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <img    class="h-28 w-full object-cover border-b-2 border-slate-500"
+                                        src="{{ mainImage }}"
+                                        alt="trick's main image" 
+                                />
+                                <div class="flex justify-between items-center bg-white w-full p-2">
+                                    <p class="text-cyan-500 text-xl font-medium m-1">
+                                        {{ trick.name }}
+                                    </p>
+                                    {% if is_granted('IS_AUTHENTICATED')%}
+                                        <div class="flex">
+                                            <div class="mx-2">
+                                                <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-green-700">
+                                                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                                        <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="mx-2">
+                                                {{ include('trick/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="pt-6 text-lg underline hover:italic hover:text-cyan-500">
+                    {% if previous >= 0 %}
+                        <a href="{{ path('app_home', { offset: previous }) }}">previous tricks</a>
+                    {% endif %}
+                    {% if next < tricks|length %}
+                        <a href="{{ path('app_home', { offset: next }) }}">next tricks</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>No tricks have been posted yet.</p>
+            {% endif %}
+            <!-- Index top button -->
+            <div class="my-2 grid grid-cols-8">
+                <a  class="col-start-8"
+                    href="#tricks_index">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+                    </svg>
+                </a>
+            </div>
+        </div>
     </section>
-
-    <div class="text-right">
-        <a  class="m-6 p-6 rounded-lg shadow-lg hover:bg-slate-400 bg-cyan-500 text-white text-center italic text-2xl font-medium"
-            href="#tricksindex">Back to index top</a>
-    </div>
 {% endblock %}
+
+{# {% block javascripts %}
+    <script>
+        function toggleTricks() {
+            var element = document.getElementById("tricks_cards");
+            element.classList.toggle("hidden");
+        }
+    </script>
+{% endblock %} #}
