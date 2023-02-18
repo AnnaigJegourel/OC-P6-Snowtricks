@@ -38,13 +38,17 @@
         {% if tricks|length > 0 %}
             <div>THERE ARE {{ tricks|length }} TRICKS</div>
                 {% for trick in tricks %}
+
                     <!-- card -->
                     <div class="overflow-hidden mt-8 shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-60 md:w-80 cursor-pointer m-auto">
                         <a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="w-full block h-full">
                             <!-- Remplacer par 1ere img du Tricks si existe-->
                             <img alt="placeholder" src="https://via.placeholder.com/450x450" class="h-60 w-full object-cover"/>
+
                             <div class="flex justify-between items-center bg-white w-full p-4">
                                 <p class="text-cyan-500 text-2xl font-medium m-1">{{ trick.name }}</p>
+                                
+                                <!-- edit / delete -->
                                 {% if is_granted('IS_AUTHENTICATED')%}
                                     <!-- Edit -->
                                     <div>
@@ -60,10 +64,12 @@
                                         {{ include('trick/_delete_form.html.twig') }}
                                     </div>
                                 {% endif %}
+                                
                             </div>
                         </a>
                     </div>
                     <!-- (card end)-->
+                    
                 {% endfor %}
                 {% if previous >= 0 %}
                     <a href="{{ path('app_home', { offset: previous }) }}"><strong><em>PREVIOUS</em></strong></a>
@@ -76,7 +82,7 @@
             <div>No tricks have been posted yet.</div>
         {% endif %}
     </section> #}
-    <section id="tricks_index" class="mb-20 px-10 text-center">
+    <section id="tricks_index" class="pt-2 md:pt-20 mb-20 px-10 text-center">
         <!-- See / hide button -->
         {# <button class="btn bg-cyan-400"
                 onclick="toggleTricks()">
@@ -84,24 +90,24 @@
         </button> #}
         <!-- Cards -->
         {# <div id="tricks_cards" class="hidden"> #}
-        <div id="tricks_cards" class="bg-slate-200">
+        <div id="tricks_cards" class="border-2 border-black">
             {% if tricks|length > 0 %}
                 <div id="cards_container">
                     <!-- Cards loop -->
                     {% for trick in tricks %}
-                        <p>Coucou on est les tricks cards!</p>
-                        <p>Coucou on est les tricks cards!</p>
-                        <p>Coucou on est les tricks cards!</p>
-                        <p>Coucou on est les tricks cards!</p>
-                        <p>Coucou on est les tricks cards!</p>
+                        <div class="border-2 flex justify-between items-center bg-white w-full p-4">
+                            <p class="text-cyan-500 text-xl font-medium m-1">
+                                {{ trick.name }}
+                            </p>
+                        </div>
                     {% endfor %}
                     {% if previous >= 0 %}
                         <a href="{{ path('app_home', { offset: previous }) }}"
-                            class="pt-2 underline">previous tricks</a>
+                            class="pt-2 text-lg italic underline">previous tricks</a>
                     {% endif %}
                     {% if next < tricks|length %}
                         <a href="{{ path('app_home', { offset: next }) }}"
-                            class="pt-2 underline">next tricks</a>
+                            class="pt-2 text-lg italic underline">next tricks</a>
                     {% endif %}
                 </div>
             {% else %}
@@ -110,7 +116,7 @@
             <!-- Index top button -->
             <div class="my-2 grid grid-cols-8">
                 <a  class="col-start-8"
-                    href="#tricks_cards">
+                    href="#tricks_index">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
                     </svg>
