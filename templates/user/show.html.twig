@@ -3,44 +3,30 @@
 {% block title %}User{% endblock %}
 
 {% block main %}
-    <h1>User</h1>
+    <h1 class="not-italic font-sans font-semibold">User Profile</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Avatar</th>
-                <td>{{ user.avatar }}</td>
-            </tr>
-            <tr>
-                <th>Activated</th>
-                <td>{{ user.activated ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="text-center">
+        {% set avatar = asset('images/users_pictures/default.jpg') %}
+        <div class="flex justify-center">
+            <img src="{{ avatar }}" class="mb-6 rounded-full h-20">
+        </div>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+        <div class="flex flex-col mt-4 mb-4 px-8">
+                <p class="text-lg">Your Id:</p>
+                <p class="italic">{{ user.id }}</p>
+        </div>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+        <div class="flex flex-col mb-4 px-8">
+            <p class="text-lg">Your username:</p>
+            <p class="italic">{{ user.username }}</p>
+        </div>
 
-    {{ include('user/_delete_form.html.twig') }}
+        <div class="flex flex-col mb-4 px-8">
+            <p class="text-lg">Your e-mail:</p>
+            <p class="italic">{{ user.email }}</p>
+        </div>
+
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}
