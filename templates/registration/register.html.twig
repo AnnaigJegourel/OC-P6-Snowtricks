@@ -3,19 +3,65 @@
 {% block title %}Register{% endblock %}
 
 {% block main %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div class="mx-4 mt-10 md:mt-0 md:mb-20 px-4 md:px-40 lg:px-60 xl:px-80 md:border-transparent border-2 border-slate-500 text-center text-lg">
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
 
-    <h1>Register</h1>
+        <h1 class="text-2xl sm:text-3xl md:text-5xl not-italic font-sans font-semibold">Registration</h1>
+    
+        <div class="md:border-2 md:border-slate-500 md:px-20 xl:px-40">
+            {{ form_start(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                <div class="form-control flex flex-col mt-4 px-8">
+                    {# {{ form_row(registrationForm.username) }} #}
+                    {{ form_label(registrationForm.username) }}
+                    {{ form_widget(registrationForm.username, {'attr': {'class': 'mb-4 border-b-2 border-slate-400'}}) }}
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.username) }}
+                    </div>
+                </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <div class="form-control flex flex-col px-8">
+                    {# {{ form_row(registrationForm.email) }} #}
+                    {{ form_label(registrationForm.email) }}
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'mb-8 border-b-2 border-slate-400'}}) }}
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                </div>
+
+                <div class="form-control flex flex-col px-8">
+                    {# {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }} #}
+                    {# {{ form_label(registrationForm.plainPassword, {'attr': {'label': 'Password'}}) }} #}
+                    {{ form_label(registrationForm.plainPassword) }}
+                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'mb-8 border-b-2 border-slate-400'}}) }}
+                    <div class="form-error">
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+
+                </div>
+                
+                {# <div class="flex flex-col px-8">
+                    {{ form_row(registrationForm.agreeTerms) }}
+                </div> #}
+                
+                <button type="submit"
+                    class="btn my-8 py-2 px-12 hover:italic hover:bg-cyan-300">
+                        Create an account
+                </button>
+
+            {{ form_end(registrationForm) }}
+
+            <a href="{{ path('app_login') }}">
+                <p class="my-3 underline hover:italic hover:text-cyan-500 text-center">
+                    Already an account?
+                </p>
+            </a>
+        </div>
+
+    </div>
 {% endblock %}
