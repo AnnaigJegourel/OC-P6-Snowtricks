@@ -21,6 +21,13 @@ class ResetPasswordRequestFormType extends AbstractType
                     ]),
                 ],
             ])
+            // ->add('username', [
+            //     'constraints' => [
+            //         new NotBlank([
+            //             'message' => 'Please enter your username',
+            //         ]),
+            //     ],
+            // ])
         ;
     }
 
