@@ -90,10 +90,10 @@
                 </div>
                 <div class="pt-6 text-lg underline hover:italic hover:text-cyan-500">
                     {% if previous >= 0 %}
-                        <a href="{{ path('app_home', { offset: previous }) }}">previous tricks</a>
+                        <a href="{{ path('app_home', { offset: previous }) }}#tricks_index">previous tricks</a>
                     {% endif %}
                     {% if next < tricks|length %}
-                        <a href="{{ path('app_home', { offset: next }) }}">next tricks</a>
+                        <a href="{{ path('app_home', { offset: next }) }}#tricks_index">next tricks</a>
                     {% endif %}
                 </div>
             {% else %}
