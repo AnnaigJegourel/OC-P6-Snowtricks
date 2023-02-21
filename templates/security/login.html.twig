@@ -3,40 +3,52 @@
 {% block title %}Log in!{% endblock %}
 
 {% block main %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <form method="post"
+        class="mx-4 mt-20 md:mt-0 md:mb-20 px-4 md:px-40 lg:px-60 xl:px-80 md:border-transparent border-2 border-slate-500 text-center text-lg">
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, 
+                <a href="{{ path('app_logout') }}">
+                    Logout
+                </a>
+            </div>
+        {% endif %}
+        <h1 class="not-italic font-sans font-semibold">Login</h1>
+        <div class="md:border-2 md:border-slate-500 md:px-20 xl:px-40">
+            <div class="flex flex-col mt-4 px-8">
+                <label for="inputUsername" class="">Username</label>
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" autocomplete="username" required autofocus
+                        class="form-control mb-4 border-b-2 border-slate-400">
+            </div>
+            <div class="flex flex-col px-8">
+                <label for="inputPassword" class="">Password</label>
+                <input type="password" name="password" id="inputPassword" autocomplete="current-password" required
+                        class="form-control mb-8 border-b-2 border-slate-400">
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            #}
+            <button class="btn my-8 py-2 px-12 hover:italic hover:bg-cyan-300" type="submit">
+                Login
+            </button>
+            <a href="{{ path('app_register') }}">
+                <p class="my-3 underline hover:italic hover:text-cyan-500">Register</p>
+            </a>
+            <a href="{{ path('app_forgot_password_request') }}">
+                <p class="my-2 underline hover:italic hover:text-cyan-500">Forgot Password?</p>
+            </a>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control border-2 border-slate-400" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control border-2 border-slate-400" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    </form>
 {% endblock %}

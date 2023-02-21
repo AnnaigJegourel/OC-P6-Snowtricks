@@ -15,7 +15,7 @@ class VideoType extends AbstractType
     {
         $builder
             ->add('link', TextType::class, [
-                'label' => "Youtube video link ",
+                'label' => "Youtube video link: ",
                 'required' => false,
                 'constraints' => [
                     new Regex(['pattern' => "^((http(s)?:\\/\\/)?((w){3}.)?youtu(be|.be)?(\\.com)?\\/.+)|(#TO_DELETE#)^", 'message' => 'L\'URL de la vidéo entrée n\'est pas valide ! Nous acceptons les vidéos provenant de Youtube uniquement.'])
