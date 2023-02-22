@@ -42,7 +42,7 @@ nav li {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
-
+/*
 collection-btn {
     margin-top: 10px;
     padding-top: 0.25rem;
@@ -52,7 +52,7 @@ collection-btn {
     background-color: rgb(190 24 93);
     color: rgb(255 255 255);
 }
-
+*/
 @media (min-width: 768px) {
     h1 {
         font-size: 3rem; /* 60px */
