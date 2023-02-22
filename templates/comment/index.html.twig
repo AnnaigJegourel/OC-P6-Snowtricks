@@ -7,8 +7,8 @@
         {% if comment.author.avatar %}
             {% set avatar = asset('images/tricks_pictures/'~comment.author.avatar) %}
         {% endif %}
-        <div id="one_comment" class="flex my-3 border-2 p-1">
-            <div id="author" class="w-20 p-1">
+        <div id="one_comment" class="flex my-3 border-2 p-px">
+            <div id="author" class="w-20 p-px">
                 <img src="{{ avatar }}" class="h-14 rounded-full"/>
                 {{ comment.author.username }}
             </div>

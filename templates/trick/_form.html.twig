@@ -17,7 +17,7 @@
                     style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
             {% if trick.id %}
             <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
-                <div class="p-1">
+                <div class="p-px">
                     <!-- Ici le lien pour choisir un nouveau fichier d'image -->
                     <a href="#">
                         <svg class="w-6 h-6 fill-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -26,7 +26,7 @@
                         </svg>
                     </a>
                 </div>
-                <div class="p-1">
+                <div class="p-px">
                     <!-- Ici le lien "Remove this item" -->
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-pink-700">
@@ -59,7 +59,7 @@
             </button>
             <div id="medias_form" class="hidden sm:block md:flex bg-slate-200 ">
                 <!-- PICTURES -->
-                <div id="images_form" class="form-control md:w-3/6 mb-4 p-1">
+                <div id="images_form" class="form-control md:w-3/6 mb-4 p-px">
                     {{ form_label(form.images) }}
                     <ul id="images-fields-list"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
@@ -87,7 +87,7 @@
                     </button>
                 </div>
                 <!-- VIDEOS -->
-                <div id="videos_form" class="form-control  md:w-3/6 mb-4 p-1">
+                <div id="videos_form" class="form-control  md:w-3/6 mb-4 p-px">
                     {{ form_label(form.videos) }}
                     <ul id="videos-fields-list"
                         data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
