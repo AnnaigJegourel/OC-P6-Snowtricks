@@ -51,6 +51,9 @@ class Trick
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -197,6 +200,18 @@ class Trick
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
