@@ -12,6 +12,7 @@ use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/trick')]
@@ -19,7 +20,7 @@ class TrickController extends AbstractController
 {
     // CREATE
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrickRepository $trickRepository): Response
+    public function new(Request $request, TrickRepository $trickRepository, SluggerInterface $slugger, ): Response
     {
         $trick = new Trick();
 
@@ -29,6 +30,7 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $now = new DateTimeImmutable();
             $trick->setUpdatedAt($now);
+            $trick->setSlug($slugger->slug($trick->getName()));
             $trickRepository->save($trick, true);
             $this->addFlash(
                 'notice',
