@@ -19,14 +19,14 @@
     {% endfor %}
     <div class="text-center underline hover:italic hover:text-cyan-300">
         {% if previous >= 0 %}
-            <a href="{{ path('app_trick_show', { id: trick.id, offset: previous }) }}#trick-comment-index">
+            <a href="{{ path('app_trick_show', { slug: trick.slug, offset: previous }) }}#trick-comment-index">
                 previous comments
             </a>
         {% endif %}
     </div>
     <div class="mb-10 text-center underline hover:italic hover:text-cyan-300">
         {% if next < comments|length %}
-            <a href="{{ path('app_trick_show', { id: trick.id, offset: next }) }}#trick-comment-index">
+            <a href="{{ path('app_trick_show', { slug: trick.slug, offset: next }) }}#trick-comment-index">
                 next comments
             </a>
         {% endif %}
