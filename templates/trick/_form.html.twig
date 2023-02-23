@@ -9,7 +9,7 @@
         {% endif %}
         <section    id="form-hero" class="w-full grid grid-cols-14 p-5 text-center"
                     style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
-            {% if trick.id %}
+            {% if trick.slug %}
             <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
                 <div class="p-px">
                     <!-- Ici le lien pour choisir un nouveau fichier d'image -->
@@ -148,9 +148,9 @@
                 <!-- !!!!!!!!!!!!!!!! BOUTONS !!!!!!!!!!!!!!!!  -->
                 <div class="flex justify-center md:justify-end md:mr-10">
                     <!-- delete -->
-                    {# {% if trick.id %}
-                        <form method="post" action="{{ path('app_trick_delete', {'id': trick.id}) }}" onsubmit="return confirm('Are you sure you want to delete this trick?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                    {# {% if trick.slug %}
+                        <form method="post" action="{{ path('app_trick_delete', {'slug': trick.slug}) }}" onsubmit="return confirm('Are you sure you want to delete this trick?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.slug) }}">
                             <button class="btn m-2 w-20 text-slate-100">
                                 Delete                        
                             </button>
