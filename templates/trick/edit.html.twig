@@ -3,11 +3,20 @@
 {% block title %}Edit Trick{% endblock %}
 
 {% block main %}
-    <h1>Edit Trick</h1>
 
-    {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
+{% set bgImage = asset('images/hero.jpg') %}
+<div    class="background bg-slate-100 md:border-y-2 md:border-t-cyan-700" 
+        style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
+    <div id="trick-form" class="mb-20 md:mt-40 md:mx-32 md:flex md:flex-col md:items-center md:shadow-lg bg-white md:pb-6">
 
-    <a href="{{ path('app_home') }}">back to list</a>
+        {{ include('trick/_form.html.twig', {'button_label': 'Save'}) }}
 
-    {{ include('trick/_delete_form.html.twig') }}
+        <div class="flex justify-center md:justify-end md:mr-10 md:w-full">
+            <div class="btn m-2 w-20 bg-pink-700 text-center text-slate-100">
+                {{ include('trick/_delete_form.html.twig', {'button_label': 'Delete '}) }}
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}

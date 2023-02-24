@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block main %}
+    <div class="mx-4 mt-10 md:mt-0 md:mb-20 px-4 md:px-40 lg:px-60 xl:px-80 md:border-transparent border-2 border-slate-500 text-center text-lg">
+
+        <h1 class="not-italic font-sans font-semibold">Reset your password</h1>
+
+        <div class="text-center m-4 p-4 md:border-2 md:border-slate-500 md:px-20 xl:px-40">
+            {{ form_start(resetForm) }}
+            {{ form_errors(resetForm) }}
+
+                <div class="form-control flex flex-col mt-4 px-8">
+                    {{ form_label(resetForm.username) }}
+                    {{ form_widget(resetForm.username, {'attr': {'class': 'mb-4 border-b-2 border-slate-400'}}) }}
+                        <div class="form-error">
+                            {{ form_errors(resetForm.username) }}
+                        </div>
+                    <button class="btn my-8 py-2 px-12 text-sm hover:italic hover:bg-cyan-300">Reset</button>
+                </div>
+
+
+                <div class="form-control flex flex-col mt-4 px-8">
+                    {# {{ form_row(resetForm.plainPassword, {'attr': {'class': 'bg-slate-200 p-2'}}) }} #}
+                    {{ form_label(resetForm.plainPassword) }}
+                    {{ form_widget(resetForm.plainPassword, {'attr': {'class': 'mb-4 border-b-2 border-slate-400'}}) }}
+                        <div class="form-error">
+                            {{ form_errors(resetForm.plainPassword) }}
+                        </div>
+                    <button class="btn my-8 py-2 px-12 text-sm hover:italic hover:bg-cyan-300">Reset</button>
+                </div>
+
+            {{ form_end(resetForm) }}
+        </div>
+
+    </div>
+
+{% endblock %}

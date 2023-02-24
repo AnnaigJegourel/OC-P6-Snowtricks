@@ -1,26 +1,36 @@
-    <h2>Comment index</h2>
-
-    <table class="table">
-        {# <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead> #}
-        <tbody>
-        {% for comment in comments %}
-            <tr>
-                <td>{{ comment.author.avatar }}-AVATAR-</td>
-                <td>{{ comment.author.username }}</td>
-                <td>{{ comment.content }}</td>
-                {# <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% if comments|length > 0 %}
+    {# <div class="mb-4 lg:mb-8 text-bold text-lg lg:text-xl">
+        There are {{ comments|length }} comments about this trick.
+    </div> #}
+    {% for comment in comments %}
+        {% set avatar = asset('images/users_pictures/default.jpg') %}
+        {% if comment.author.avatar %}
+            {% set avatar = asset('images/tricks_pictures/'~comment.author.avatar) %}
+        {% endif %}
+        <div id="one_comment" class="flex my-3 border-2">
+            <div id="author" class="w-24 p-2 text-left">
+                <img src="{{ avatar }}" class="h-14 rounded-full"/>
+                {{ comment.author.username }}
+            </div>
+            <p class="p-2 text-left ">
+                {{ comment.content }}
+            </p>
+        </div>
+    {% endfor %}
+    <div class="text-center underline hover:italic hover:text-cyan-300">
+        {% if previous >= 0 %}
+            <a href="{{ path('app_trick_show', { slug: trick.slug, offset: previous }) }}#trick-comment-index">
+                previous comments
+            </a>
+        {% endif %}
+    </div>
+    <div class="mb-10 text-center underline hover:italic hover:text-cyan-300">
+        {% if next < comments|length %}
+            <a href="{{ path('app_trick_show', { slug: trick.slug, offset: next }) }}#trick-comment-index">
+                next comments
+            </a>
+        {% endif %}
+    </div>
+{% else %}
+    <div>No comments have been posted yet for this trick.</div>
+{% endif %}
