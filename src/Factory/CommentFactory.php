@@ -47,9 +47,10 @@ final class CommentFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'content' => self::faker()->text(),
+            'content' => self::faker()->sentence(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'trick' => TrickFactory::new(),
+            // 'trick' => TrickFactory::new(),
+            // 'author' => UserFactory::new(),
         ];
     }
 
