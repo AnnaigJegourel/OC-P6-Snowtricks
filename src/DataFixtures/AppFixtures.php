@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Factory\CategoryFactory;
 use App\Factory\CommentFactory;
+use App\Factory\ImageFactory;
 use App\Factory\TrickFactory;
 use App\Factory\UserFactory;
 use App\Factory\VideoFactory;
@@ -26,6 +27,15 @@ class AppFixtures extends Fixture
         );
 
         VideoFactory::createMany(
+            2,
+            function() {
+                return [
+                    'trick' => TrickFactory::random()
+                ];
+            }
+        );
+
+        ImageFactory::createMany(
             2,
             function() {
                 return [
