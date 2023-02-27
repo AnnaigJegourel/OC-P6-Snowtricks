@@ -77,7 +77,7 @@ class TrickController extends AbstractController
                 'Your comment has been created'
             );
 
-            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         //Render
