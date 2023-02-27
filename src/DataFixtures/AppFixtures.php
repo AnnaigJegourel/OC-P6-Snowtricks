@@ -6,6 +6,7 @@ use App\Factory\CategoryFactory;
 use App\Factory\CommentFactory;
 use App\Factory\TrickFactory;
 use App\Factory\UserFactory;
+use App\Factory\VideoFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -21,6 +22,15 @@ class AppFixtures extends Fixture
             5,
             function() {
                 return ['category' => CategoryFactory::random()];
+            }
+        );
+
+        VideoFactory::createMany(
+            2,
+            function() {
+                return [
+                    'trick' => TrickFactory::random()
+                ];
             }
         );
     
