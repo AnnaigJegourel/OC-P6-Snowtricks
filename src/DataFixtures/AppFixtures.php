@@ -15,19 +15,17 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
         CategoryFactory::createMany(5);
 
         TrickFactory::createMany(
-            5,
+            25,
             function() {
                 return ['category' => CategoryFactory::random()];
             }
         );
 
         VideoFactory::createMany(
-            2,
+            30,
             function() {
                 return [
                     'trick' => TrickFactory::random()
@@ -36,7 +34,7 @@ class AppFixtures extends Fixture
         );
 
         ImageFactory::createMany(
-            2,
+            30,
             function() {
                 return [
                     'trick' => TrickFactory::random()
@@ -47,7 +45,7 @@ class AppFixtures extends Fixture
         UserFactory::createMany(5);
 
         CommentFactory::createMany(
-            5,
+            50,
             function() {
                 return [
                     'author' => UserFactory::random(),
@@ -55,7 +53,6 @@ class AppFixtures extends Fixture
                 ];
             }
         );
-        // CommentFactory::createMany(2);
 
         $manager->flush();
     }
