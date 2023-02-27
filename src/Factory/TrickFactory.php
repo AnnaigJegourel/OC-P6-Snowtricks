@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -29,13 +30,16 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class TrickFactory extends ModelFactory
 {
+    protected $slugger;
+
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
      * @todo inject services if required
      */
-    public function __construct()
+    public function __construct(SluggerInterface $slugger)
     {
+        $this->slugger = $slugger;
         parent::__construct();
     }
 
@@ -46,10 +50,12 @@ final class TrickFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $name = self::faker()->words(2, true);
+
         return [
-            'description' => self::faker()->text(),
-            'name' => self::faker()->text(255),
-            'slug' => self::faker()->text(100),
+            'description' => self::faker()->paragraph(),
+            'name' => $name,
+            'slug' => $this->slugger->slug($name),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
