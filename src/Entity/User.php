@@ -38,8 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $activated = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?bool $activated = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
     private Collection $comments;
@@ -146,17 +146,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isActivated(): ?bool
-    {
-        return $this->activated;
-    }
+    // public function isActivated(): ?bool
+    // {
+    //     return $this->activated;
+    // }
 
-    public function setActivated(bool $activated): self
-    {
-        $this->activated = $activated;
+    // public function setActivated(bool $activated): self
+    // {
+    //     $this->activated = $activated;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Comment>
