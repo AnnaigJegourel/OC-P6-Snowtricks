@@ -37,6 +37,19 @@
                 </div>
             </section>
             <section id="trick-details" class="p-6 text-center">
+
+
+
+            <!-- MAIN IMAGE -->
+            <div class="p-2 border-2">
+                <img   src="{{ asset('images/tricks_pictures/main_images/' ~ trick.mainImageName) }}" 
+                        alt="{{ trick.name }}'s main image" 
+                />
+            </div>
+
+
+
+
                 <button class="sm:hidden mt-2 mb-6   rounded-lg shadow-md p-2 bg-cyan-400 text-center align-middle text-slate-600" onclick="toggleMedias()">See / hide medias</button>
 
                 <div id="medias" class="hidden sm:block md:flex">
