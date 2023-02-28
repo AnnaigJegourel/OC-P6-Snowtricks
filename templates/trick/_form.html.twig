@@ -51,6 +51,16 @@
 
             {{ form_start(form) }}
             {{ form_errors(form) }}
+
+            <!-- upload main image -->
+            <div>
+                {{ form_label(form.mainImageFile) }}
+                {{ form_widget(form.mainImageFile, {'attr': {'class': 'mb-4 bg-cyan-400'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.mainImageFile) }}
+                </div>
+            </div>
+
             <div id="medias_form" class="hidden sm:block md:flex bg-slate-200 ">
                 <!-- PICTURES -->
                 <div id="images_form" class="form-control md:w-3/6 mb-4 p-px">
