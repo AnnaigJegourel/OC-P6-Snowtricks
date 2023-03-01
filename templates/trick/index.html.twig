@@ -15,7 +15,7 @@
     <!-- CREATION BUTTON -->
     {% if is_granted('IS_AUTHENTICATED')%}
         <div class="-mt-40 mb-32 sm:mb-40 text-center">
-            <a  class="btn p-4 rounded border-2 border-cyan-600  bg-cyan-500 hover:bg-slate-500 text-center text-xl text-white italic font-medium"
+            <a  class="border-2 border-cyan-600 shadow-lg p-4 rounded  bg-cyan-500 hover:bg-slate-500 text-center text-xl text-white italic font-medium"
                 href="{{ path('app_trick_new') }}">
                     Create a new Trick!
             </a>
