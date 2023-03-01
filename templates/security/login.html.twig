@@ -5,20 +5,27 @@
 {% block main %}
     <form method="post"
         class="mx-4 mt-20 md:mt-0 md:mb-20 px-4 md:px-40 lg:px-60 xl:px-80 md:border-transparent border-2 border-slate-500 text-center text-lg">
-        {% if error %}
+        {# {% if error %}
             <div class="alert alert-danger">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
-        {% endif %}
-        {% if app.user %}
+        {% endif %} #}
+        {# {% if app.user %}
             <div class="mb-3">
                 You are logged in as {{ app.user.userIdentifier }}, 
                 <a href="{{ path('app_logout') }}">
                     Logout
                 </a>
             </div>
-        {% endif %}
+            {{dump(last_username)}}
+        {% endif %} #}
         <h1 class="not-italic font-sans font-semibold">Login</h1>
+        {% if error %}
+            <div class="bg-pink-700 text-white"> 
+                {{error.messageKey}}
+            </div>
+        {% endif %}
+
         <div class="md:border-2 md:border-slate-500 md:px-20 xl:px-40">
             <div class="flex flex-col mt-4 px-8">
                 <label for="inputUsername" class="">Username</label>
