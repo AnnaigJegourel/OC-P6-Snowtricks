@@ -1,14 +1,14 @@
 {% if comments|length > 0 %}
-    <div class="mb-4 lg:mb-8 text-bold text-lg lg:text-xl">
+    {# <div class="mb-4 lg:mb-8 text-bold text-lg lg:text-xl">
         There are {{ comments|length }} comments about this trick.
-    </div>
+    </div> #}
     {% for comment in comments %}
         {% set avatar = asset('images/users_pictures/default.jpg') %}
         {% if comment.author.avatar %}
             {% set avatar = asset('images/tricks_pictures/'~comment.author.avatar) %}
         {% endif %}
-        <div id="one_comment" class="flex my-3 border-2 p-1">
-            <div id="author" class="w-20 p-1">
+        <div id="one_comment" class="flex my-3 border-2">
+            <div id="author" class="w-24 p-2 text-left">
                 <img src="{{ avatar }}" class="h-14 rounded-full"/>
                 {{ comment.author.username }}
             </div>
@@ -19,20 +19,14 @@
     {% endfor %}
     <div class="text-center underline hover:italic hover:text-cyan-300">
         {% if previous >= 0 %}
-            <a href="{{ path('app_trick_show', { id: trick.id, offset: previous }) }}#trick-comment-index">
-                {# <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> #}
+            <a href="{{ path('app_trick_show', { slug: trick.slug, offset: previous }) }}#trick-comment-index">
                 previous comments
             </a>
         {% endif %}
     </div>
     <div class="mb-10 text-center underline hover:italic hover:text-cyan-300">
         {% if next < comments|length %}
-            <a href="{{ path('app_trick_show', { id: trick.id, offset: next }) }}#trick-comment-index">
-                {# <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> #}
+            <a href="{{ path('app_trick_show', { slug: trick.slug, offset: next }) }}#trick-comment-index">
                 next comments
             </a>
         {% endif %}

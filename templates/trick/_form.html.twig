@@ -1,9 +1,3 @@
-{% set bgImage = asset('images/hero.jpg') %}
-<div    class="background bg-slate-100 md:border-y-2 md:border-t-cyan-700" 
-        style="background-image: url({{ bgImage }}); background-position: top; background-size: contain; background-repeat: no-repeat;">
-    
-    <div id="trick-form" class="mb-20 md:mt-40 md:mx-32 md:flex md:flex-col md:items-center md:shadow-lg bg-white md:pb-6">
-        
         <!-- HERO -->
         {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
         {% if trick.images %}
@@ -15,21 +9,21 @@
         {% endif %}
         <section    id="form-hero" class="w-full grid grid-cols-14 p-5 text-center"
                     style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
-            {% if trick.id %}
+            {% if trick.slug %}
             <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
-                <div class="p-1">
+                <div class="p-px">
                     <!-- Ici le lien pour choisir un nouveau fichier d'image -->
                     <a href="#">
-                        <svg class="w-6 h-6 fill-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="w-6 h-6 fill-pink-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
                             <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                         </svg>
                     </a>
                 </div>
-                <div class="p-1">
+                <div class="p-px">
                     <!-- Ici le lien "Remove this item" -->
                     <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-pink-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-pink-600">
                             <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
                         </svg>
                     </a>
@@ -50,16 +44,17 @@
 
         <!-- FORM -->
         <section id="form-details" class="md:w-5/6 p-2 text-center">
-
-            {{ form_start(form) }}
-            {{ form_errors(form) }}
             <button class="btn sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-400 text-center align-middle text-slate-600"
+                    type="button"
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
             <div id="medias_form" class="hidden sm:block md:flex bg-slate-200 ">
                 <!-- PICTURES -->
-                <div id="images_form" class="form-control md:w-3/6 mb-4 p-1">
+                <div id="images_form" class="form-control md:w-3/6 mb-4 p-px">
                     {{ form_label(form.images) }}
                     <ul id="images-fields-list"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
@@ -74,9 +69,15 @@
                                         src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
                                         alt="picture of a snowboarder doing a {{ trick.name }}" 
                                     />
-                                    <div class="bg-slate-300">
+                                    <div id="imgfile" class="hidden bg-slate-300">
                                         {{ form_widget(input_image, {'attr': {'class': 'mb-2'}}) }}
                                     </div>
+                                    <button type="button" onclick="toggleFile()">
+                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                        </svg>
+                                    </button>
                                 </li>
                             {% endfor %}
                     </ul>
@@ -87,7 +88,7 @@
                     </button>
                 </div>
                 <!-- VIDEOS -->
-                <div id="videos_form" class="form-control  md:w-3/6 mb-4 p-1">
+                <div id="videos_form" class="form-control  md:w-3/6 mb-4 p-px">
                     {{ form_label(form.videos) }}
                     <ul id="videos-fields-list"
                         data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
@@ -105,21 +106,16 @@
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                             allowfullscreen>
                                     </iframe>
-                                    {{ form_widget(input_video, {'attr': {'class': 'overflow-hidden mb-2 bg-slate-300 p-4'}}) }}
-
-                                    {# <div id="trick_videos_0">
-                                        <div>
-                                            <label for="trick_videos_0_link">
-                                                Youtube video link: 
-                                            </label>
-                                            <input  type="text" 
-                                                    id="trick_videos_0_link" 
-                                                    name="trick[videos][0][link]" 
-                                                    value="https://www.youtube.com/embed/Upnyf5QZHXY" />
-                                        </div>
-                                    </div>  #}
+                                    <div id="video_link" class="hidden">
+                                        {{ form_widget(input_video, {'attr': {'class': 'overflow-hidden mb-2 bg-slate-300 p-4'}}) }}
+                                    </div>
+                                    <button type="button" onclick="toggleVideoLink()">
+                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                        </svg>
+                                    </button>
                                 </li>
-                                {# {{dump(input_video)}} #}
                             {% endfor %}
                     </ul>
                     <button type="button"
@@ -150,31 +146,25 @@
                     </br>
                     {{ form_widget(form.category, {'attr': {'class': 'm-4 border-2 border-slate-500 bg-slate-100 p-2'}}) }}
                 </div>
-                <!-- BOUTONS  -->
+                <!-- !!!!!!!!!!!!!!!! BOUTONS !!!!!!!!!!!!!!!!  -->
                 <div class="flex justify-center md:justify-end md:mr-10">
                     <!-- delete -->
-                    {% if trick.id %}
-                        <form method="post" action="{{ path('app_trick_delete', {'id': trick.id}) }}" onsubmit="return confirm('Are you sure you want to delete this trick?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
-                            <button class="btn m-2 w-20 bg-pink-700 text-slate-100">
+                    {# {% if trick.slug %}
+                        <form method="post" action="{{ path('app_trick_delete', {'slug': trick.slug}) }}" onsubmit="return confirm('Are you sure you want to delete this trick?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.slug) }}">
+                            <button class="btn m-2 w-20 text-slate-100">
                                 Delete                        
                             </button>
                         </form>
-                    {% endif %}
+                    {% endif %} #}
                     <!-- edit -->
                     <button class="btn m-2  w-20 bg-cyan-100 text-slate-700">
-                        {{ button_label|default('Save') }}
+                        {{ button_label|default('Create') }}
                     </button>
                 </div>
             </div>
             {{ form_end(form) }}
         </section>
-    </div>
-</div>
-
-
-
-
 
 <!-- CODE JS -->
 {% block javascripts %}
@@ -184,7 +174,7 @@
                 //Bouton dans update / new (sélection avant envoi en db)
                 const removeFormButton = document.createElement('button');
                 removeFormButton.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-pink-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
                     </svg>
                 `;
@@ -249,4 +239,19 @@
             element.classList.toggle("hidden");
         }
     </script>
+
+    <script>
+        function toggleVideoLink() {
+            var element = document.getElementById("video_link");
+            element.classList.toggle("hidden");
+        }
+    </script>
+
+    <script>
+        function toggleFile() {
+            var element = document.getElementById("imgfile");
+            element.classList.toggle("hidden");
+        }
+    </script>
+
 {% endblock %}
