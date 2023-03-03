@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Reset Password{% endblock %}
 
 {% block main %}
     <div class="mx-4 mt-10 md:mt-0 md:mb-20 px-4 md:px-40 lg:px-60 xl:px-80 md:border-transparent border-2 border-slate-500 text-center text-lg">
@@ -17,9 +17,7 @@
                         <div class="form-error">
                             {{ form_errors(resetForm.username) }}
                         </div>
-                    <button class="btn my-8 py-2 px-12 text-sm hover:italic hover:bg-cyan-300">Reset</button>
                 </div>
-
 
                 <div class="form-control flex flex-col mt-4 px-8">
                     {# {{ form_row(resetForm.plainPassword, {'attr': {'class': 'bg-slate-200 p-2'}}) }} #}
@@ -28,8 +26,9 @@
                         <div class="form-error">
                             {{ form_errors(resetForm.plainPassword) }}
                         </div>
-                    <button class="btn my-8 py-2 px-12 text-sm hover:italic hover:bg-cyan-300">Reset</button>
                 </div>
+
+                <button class="btn my-8 py-2 px-12 text-sm hover:italic hover:bg-cyan-300">Reset</button>
 
             {{ form_end(resetForm) }}
         </div>
