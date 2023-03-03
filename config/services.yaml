@@ -9,7 +9,7 @@ parameters:
     router.request_context.base_url: ''
     asset.request_context.base_path: '%router.request_context.base_url%'
     asset.request_context.secure: true
-        main_images_directory: '%kernel.project_dir%/public/images/tricks_pictures/main_images'
+    main_images_directory: '%kernel.project_dir%/public/images/tricks_pictures/main_images'
     
 services:
     # default configuration for services in *this* file
