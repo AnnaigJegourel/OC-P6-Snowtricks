@@ -1,11 +1,15 @@
         <!-- HERO -->
         {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
-        {% if trick.images %}
-            {% for image in trick.images %}
-                {% if trick.images[0].name %}                        
-                    {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
-                {% endif %}
-            {% endfor %}
+        {% if trick.mainImageName %}
+            {% set mainImage = asset('images/tricks_pictures/main_images/'~trick.mainImageName) %}
+        {% else %}
+            {% if trick.images %}
+                {% for image in trick.images %}
+                    {% if trick.images[0].name %}                        
+                        {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         {% endif %}
         <section    id="form-hero" class="w-full grid grid-cols-14 p-5 text-center"
                     style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
