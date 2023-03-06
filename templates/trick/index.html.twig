@@ -52,12 +52,16 @@
                             class="overflow-hidden m-4 w-60 shadow-lg hover:shadow-2xl border-2 border-slate-500 transition duration-500 ease-in-out hover:-translate-y-5 cursor-pointer">
                             <a  href="{{ path('app_trick_show', {'slug': trick.slug}) }}">
                                 {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
-                                {% if trick.images %}
-                                    {% for image in trick.images %}
-                                        {% if trick.images[0].name %}
-                                            {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
-                                        {% endif %}
-                                    {% endfor %}
+                                {% if trick.mainImageName %}
+                                    {% set mainImage = asset('images/tricks_pictures/main_images/'~trick.mainImageName) %}
+                                {% else %}
+                                    {% if trick.images %}
+                                        {% for image in trick.images %}
+                                            {% if trick.images[0].name %}
+                                                {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endif %}
                                 <img    class="h-28 w-full object-cover border-b-2 border-slate-500"
                                         src="{{ mainImage }}"

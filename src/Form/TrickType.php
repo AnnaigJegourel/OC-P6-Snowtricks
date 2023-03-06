@@ -2,14 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
 use App\Entity\Trick;
-use Symfony\Component\Form\AbstractType;
+use App\Form\ImageType;
+use App\Form\VideoType;
+use App\Entity\Category;
+// use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class TrickType extends AbstractType
 {
@@ -45,6 +50,29 @@ class TrickType extends AbstractType
                 'label'         => false,
                 'by_reference'  => false,
                 'disabled'      => false,
+            ])
+            ->add('mainImageFile', FileType::class, [
+                'label' => 'Main Image (jpg or jpeg file)',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the file
+                // every time you edit the Trick details
+                'required' => false,
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid jpg or jpeg document',
+                    ])
+                ],
             ])
         ;
     }

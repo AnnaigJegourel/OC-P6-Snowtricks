@@ -1,35 +1,53 @@
         <!-- HERO -->
         {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
-        {% if trick.images %}
-            {% for image in trick.images %}
-                {% if trick.images[0].name %}                        
-                    {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
-                {% endif %}
-            {% endfor %}
+        {% if trick.mainImageName %}
+            {% set mainImage = asset('images/tricks_pictures/main_images/'~trick.mainImageName) %}
+        {% else %}
+            {% if trick.images %}
+                {% for image in trick.images %}
+                    {% if trick.images[0].name %}                        
+                        {% set mainImage = asset('images/tricks_pictures/'~trick.images[0].name) %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         {% endif %}
         <section    id="form-hero" class="w-full grid grid-cols-14 p-5 text-center"
                     style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
-            {% if trick.slug %}
-            <div class="col-start-12 col-span-2 flex w-fit rounded-lg shadow-lg pt-1 px-1 bg-white/60">
-                <div class="p-px">
-                    <!-- Ici le lien pour choisir un nouveau fichier d'image -->
-                    <a href="#">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <!--- IMAGE A LA UNE -->
+                <!-- upload main image -->
+            <div class="text-right">
+                <div class="flex flex-col w-fit p-2 bg-white">
+                    <div id="mainImg" class="hidden">
+                        {{ form_label(form.mainImageFile) }}
+                        {% if trick.mainImageName %}
+                            <div class="sm:w-3/6 lg:w-2/6 p-2">
+                                <img    
+                                    src="{{ mainImage }}"
+                                    alt="picture of a snowboarder doing a {{ trick.name }}" 
+                                />
+                            </div>
+                        {% endif %}
+                        {{ form_widget(form.mainImageFile, {'attr': {'class': 'mb-4'}}) }}
+                        <div class="form-error">
+                            {{ form_errors(form.mainImageFile) }}
+                        </div>
+                    </div>
+                    <button type="button" class="update_main_image" onclick="toggleMainImg()">
                         <svg class="w-6 h-6 fill-pink-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
                             <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                         </svg>
-                    </a>
-                </div>
-                <div class="p-px">
-                    <!-- Ici le lien "Remove this item" -->
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-pink-600">
+                    </button>
+                    <button type="button" class="remove_main_img">
+                        <svg  class="w-6 h-6 fill-pink-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
                         </svg>
-                    </a>
+                    </button>
                 </div>
             </div>
-            {% endif %}
+            <!-- Title: trick name -->
             <div class="col-start-2 col-span-12 m-6 md:m-20 text-center">
                 {% if trick.name %}
                     {% set trick_name = trick.name %}
@@ -41,7 +59,6 @@
                 </h1>
             </div>
         </section>
-
         <!-- FORM -->
         <section id="form-details" class="md:w-5/6 p-2 text-center">
             <button class="btn sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-400 text-center align-middle text-slate-600"
@@ -49,9 +66,6 @@
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
-
-            {{ form_start(form) }}
-            {{ form_errors(form) }}
             <div id="medias_form" class="hidden sm:block md:flex bg-slate-200 ">
                 <!-- PICTURES -->
                 <div id="images_form" class="form-control md:w-3/6 mb-4 p-px">
@@ -125,7 +139,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- INFORMATIONS -->
             <div id="trick-infos" class="text-left">
                 <div class="form-control">
@@ -168,6 +181,17 @@
 
 <!-- CODE JS -->
 {% block javascripts %}
+    <!--- Toggle main image form -->
+    <script>
+        function toggleMainImg() {
+            var element = document.getElementById("mainImg");
+            element.classList.toggle("hidden");
+        }
+    </script>
+
+    <!--- Manage main image ???? -->
+
+    <!--- Manage collections -->
     <script>
         window.addEventListener('load', function () {
             const addTagFormDeleteLink = (item) => {
@@ -233,6 +257,7 @@
         })
     </script>
 
+    <!--- Toggle media (collections block) -->
     <script>
         function toggleMedias() {
             var element = document.getElementById("medias_form");
@@ -240,6 +265,7 @@
         }
     </script>
 
+    <!--- Toggle collection video link -->
     <script>
         function toggleVideoLink() {
             var element = document.getElementById("video_link");
@@ -247,6 +273,7 @@
         }
     </script>
 
+    <!--- Toggle collection image file -->
     <script>
         function toggleFile() {
             var element = document.getElementById("imgfile");

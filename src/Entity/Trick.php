@@ -54,6 +54,9 @@ class Trick
     #[ORM\Column(length: 100)]
     private ?string $slug = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mainImageName = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -212,6 +215,18 @@ class Trick
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getMainImageName(): ?string
+    {
+        return $this->mainImageName;
+    }
+
+    public function setMainImageName(?string $mainImageName): self
+    {
+        $this->mainImageName = $mainImageName;
 
         return $this;
     }
