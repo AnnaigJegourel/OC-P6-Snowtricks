@@ -52,7 +52,7 @@ class TrickType extends AbstractType
                 'disabled'      => false,
             ])
             ->add('mainImageFile', FileType::class, [
-                'label' => 'Main Image (jpeg file)',
+                'label' => 'Main Image (jpg or jpeg file)',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -67,10 +67,10 @@ class TrickType extends AbstractType
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'images/tricks_pictures',
-                            // 'application/x-pdf',
+                            'image/jpeg',
+                            'image/jpg',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid JPEG document',
+                        'mimeTypesMessage' => 'Please upload a valid jpg or jpeg document',
                     ])
                 ],
             ])
