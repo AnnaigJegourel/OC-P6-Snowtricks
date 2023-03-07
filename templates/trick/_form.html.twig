@@ -134,7 +134,7 @@
                 </div>
             </div>
             <!-- INFORMATIONS -->
-            <div id="trick-infos" class="text-left">
+            <div id="trick-infos" class="ml-4 text-left">
                 <div class="form-control">
                     {{ form_label(form.name) }}
                     </br>
@@ -153,18 +153,7 @@
                     </br>
                     {{ form_widget(form.category, {'attr': {'class': 'm-4 border-2 border-slate-500 bg-slate-100 p-2'}}) }}
                 </div>
-                <!-- !!!!!!!!!!!!!!!! BOUTONS !!!!!!!!!!!!!!!!  -->
                 <div class="flex justify-center lg:justify-end lg:mr-10 lg:mb-1">
-                    <!-- delete -->
-                    {# {% if trick.slug %}
-                        <form method="post" action="{{ path('app_trick_delete', {'slug': trick.slug}) }}" onsubmit="return confirm('Are you sure you want to delete this trick?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.slug) }}">
-                            <button class="btn m-2 w-20 text-slate-100">
-                                Delete                        
-                            </button>
-                        </form>
-                    {% endif %} #}
-                    <!-- edit -->
                     <button class="btn m-2 w-20 bg-cyan-100 text-slate-700">
                         {{ button_label|default('Create') }}
                     </button>
