@@ -40,7 +40,7 @@
                         </button>
                     </div>
                 </div>
-            {# </div> #}
+            </div>
             <!-- Title: trick name -->
             <div class="col-start-2 col-span-12 m-6 md:m-20 text-center">
                 {% if trick.name %}
@@ -60,16 +60,16 @@
                     onclick="toggleMedias()">
                         See / hide medias
             </button>
-            <div id="medias_form" class="hidden sm:block md:flex bg-slate-200 ">
+            <div id="medias_form" class="hidden sm:block lg:flex">
                 <!-- PICTURES -->
-                <div id="images_form" class="form-control md:w-3/6 mb-4 p-px">
+                <div id="images_form" class="form-control lg:w-3/6 mb-4 p-px">
                     {{ form_label(form.images) }}
                     <ul id="images-fields-list"
                         data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
                         data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
                         data-widget-tags="{{ '<li></li>'|e }}"
                         data-widget-counter="{{ form.images|length }}"
-                        class="holder-images flex flex-wrap justify-center">
+                        class="holder-images flex flex-wrap justify-center p-2">
                             {{ form_errors(form.images) }}
                             {% for input_image in form.images %}
                                 <li class="sm:w-3/6 lg:w-2/6 p-2">     
@@ -77,7 +77,7 @@
                                         src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
                                         alt="picture of a snowboarder doing a {{ trick.name }}" 
                                     />
-                                    <div id="imgfile" class="hidden bg-slate-200">
+                                    <div id="imgfile" class="hidden p-2 text-sm">
                                         {{ form_widget(input_image, {'attr': {'class': 'mb-2'}}) }}
                                     </div>
                                     <button type="button" onclick="toggleFile()">
@@ -96,17 +96,17 @@
                     </button>
                 </div>
                 <!-- VIDEOS -->
-                <div id="videos_form" class="form-control  md:w-3/6 mb-4 p-px">
+                <div id="videos_form" class="form-control bg-slate-200 lg:w-3/6 mb-4 p-px">
                     {{ form_label(form.videos) }}
                     <ul id="videos-fields-list"
                         data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
                         data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
                         data-widget-tags="{{ '<li></li>'|e }}"
                         data-widget-counter="{{ form.videos|length }}"
-                        class="holder-videos flex flex-wrap justify-center">
+                        class="holder-videos flex flex-wrap justify-center p-2">
                             {{ form_errors(form.videos) }}
                             {% for input_video in form.videos %}
-                                <li class="sm:w-3/6  lg:w-2/6 p-2">                        
+                                <li class="sm:w-3/6 lg:w-2/6 p-2">                        
                                     <iframe src="{{input_video.vars.value.link}}"
                                             class="w-full"
                                             title="YouTube video player"
@@ -115,7 +115,7 @@
                                             allowfullscreen>
                                     </iframe>
                                     <div id="video_link" class="hidden">
-                                        {{ form_widget(input_video, {'attr': {'class': 'overflow-hidden mb-2 bg-slate-200 p-4'}}) }}
+                                        {{ form_widget(input_video, {'attr': {'class': 'overflow-hidden mb-2 p-4'}}) }}
                                     </div>
                                     <button type="button" onclick="toggleVideoLink()">
                                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
