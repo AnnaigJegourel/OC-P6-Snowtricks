@@ -1,20 +1,22 @@
 {% if comments|length > 0 %}
-    {# <div class="mb-4 lg:mb-8 text-bold text-lg lg:text-xl">
-        There are {{ comments|length }} comments about this trick.
-    </div> #}
     {% for comment in comments %}
         {% set avatar = asset('images/users_pictures/default.jpg') %}
         {% if comment.author.avatar %}
             {% set avatar = asset('images/tricks_pictures/'~comment.author.avatar) %}
         {% endif %}
         <div id="one_comment" class="flex my-3 border-2">
-            <div id="author" class="w-24 p-2 text-left">
-                <img src="{{ avatar }}" class="h-14 rounded-full"/>
+            <div id="author" class="w-32 p-2 text-left">
+                <img src="{{ avatar }}" class="h-12 w-12 rounded-full"/>
                 {{ comment.author.username }}
             </div>
-            <p class="p-2 text-left ">
-                {{ comment.content }}
-            </p>
+            <article class="w-1/2 p-2 text-left">
+                <p class="pl-px text-cyan-600">
+                    {{ comment.createdAt|date('Y-m-d H:i:s') }}
+                </p>
+                <p class="pl-px">
+                    {{ comment.content }}
+                </p>
+            </article>
         </div>
     {% endfor %}
     <div class="text-center underline hover:italic hover:text-cyan-300">

@@ -22,11 +22,11 @@
     <body class="bg-white text-slate-600 text-sm md:text-base">
         <header class="flex-col-reverse md:flex-col fixed bottom-0 md:bottom-auto md:top-0 left-0 right-0 bg-cyan-700 p-2 text-white">
             <div class="flex justify-between items-center">
-                <a class="hidden md:block md:w-14 md:h-14" href="{{path('app_home')}}">
+                <a class="hidden md:block md:w-14 md:h-14 md:ml-10" href="{{path('app_home')}}">
                     <img src="{{ asset("images/Logo.png") }}" alt="Snowtricks' Logo"/>
                 </a>
                 <nav class="w-full md:w-3/6">
-                    <ul class="flex justify-between">
+                    <ul class="flex justify-between md:mr-10">
                         <li>
                             <a href="{{ path('app_home') }}">
                                 <svg class="w-6 h-6 block md:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -97,7 +97,7 @@
         {# {{ dump(app.user) }} #}
         {% block main %}
         {% endblock %}
-        <footer class="hidden md:block headfoot bg-slate-600">
+        <footer class="hidden md:block headfoot md:pl-10 bg-slate-600">
                 <p>Copyright Annaig Jégourel @ {{ "now"|date("Y") }}</p>
         </footer>
     </body>

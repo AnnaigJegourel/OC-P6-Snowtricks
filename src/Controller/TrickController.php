@@ -7,20 +7,25 @@ use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\CommentType;
+use App\Service\FileUploader;
 use App\Repository\TrickRepository;
 use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[Route('/trick')]
 class TrickController extends AbstractController
 {
     // CREATE
     #[Route('/new', name: 'app_trick_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrickRepository $trickRepository, SluggerInterface $slugger): Response
+    public function new(Request $request, TrickRepository $trickRepository, SluggerInterface $slugger, FileUploader $fileUploader): Response
     {
         $trick = new Trick();
 
@@ -31,6 +36,41 @@ class TrickController extends AbstractController
             $now = new DateTimeImmutable();
             $trick->setUpdatedAt($now);
             $trick->setSlug($slugger->slug($trick->getName()));
+
+            //  --------------   UPLOAD MAIN IMAGE FILE  -------------- 
+            // V2
+            /** @var UploadedFile $mainImageFile */
+            $mainImageFile = $form->get('mainImageFile')->getData();
+            if ($mainImageFile) {
+                $mainImageName = $fileUploader->upload($mainImageFile);
+                $trick->setMainImageName($mainImageName);
+            }
+            // V1
+            // /** @var UploadedFile $mainImageFile */
+            // $mainImageFile = $form->get('mainImageFile')->getData();
+            // // this condition is needed because the 'brochure' field is not required
+            // // so the PDF file must be processed only when a file is uploaded
+            // if ($mainImageFile) {
+            //     $originalFilename = pathinfo($mainImageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            //     // this is needed to safely include the file name as part of the URL
+            //     $safeFilename = $slugger->slug($originalFilename);
+            //     $newFilename = $safeFilename.'-'.uniqid().'.'.$mainImageFile->guessExtension();
+            //     // Move the file to the directory where main images are stored
+            //     try {
+            //         $mainImageFile->move(
+            //             $this->getParameter('main_images_directory'),
+            //             $newFilename
+            //         );
+            //     } catch (FileException $e) {
+            //         // ... handle exception if something happens during file upload
+            //     }
+            //     // updates the 'mainImageName' property to store the JPEG file name
+            //     // instead of its contents
+            //     $trick->setMainImageName($newFilename);
+            // }
+            // // ... persist the $product variable or any other work
+            //  --------------   --------------  --------------   -------------- 
+
             $trickRepository->save($trick, true);
             $this->addFlash(
                 'notice',
@@ -92,7 +132,7 @@ class TrickController extends AbstractController
 
     // UPDATE
     #[Route('/{slug}/edit', name: 'app_trick_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
+    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SluggerInterface $slugger, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
@@ -101,6 +141,17 @@ class TrickController extends AbstractController
             $now = new DateTimeImmutable();
             $trick->setUpdatedAt($now);
 
+            //  --------------   UPDATE MAIN IMAGE FILE  -------------- 
+            /** @var UploadedFile $mainImageFile */
+            $mainImageFile = $form->get('mainImageFile')->getData();
+            if ($mainImageFile) {
+                $mainImageName = $fileUploader->upload($mainImageFile);
+                $trick->setMainImageName(
+                    // new File($this->getParameter('main_images_directory').'/'.$trick->getMainImageName())
+                    // new File($this->getParameter('main_images_directory').'/'.$mainImageName)
+                    $mainImageName
+                );
+            }
             $trickRepository->save($trick, true);
 
             $this->addFlash(
