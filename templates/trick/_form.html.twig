@@ -1,5 +1,5 @@
-{# {{ form_start(form) }}
-{{ form_errors(form) }} #}
+{{ form_start(form) }}
+{{ form_errors(form) }}
     <!-- HERO -->
     {% set mainImage = asset('images/tricks_pictures/default.jpg') %}
     {% if trick.mainImageName %}
@@ -13,12 +13,10 @@
             {% endfor %}
         {% endif %}
     {% endif %}
-    <section    id="form-hero" class="w-full grid grid-cols-14 p-5 text-center"
+    <section    id="form-hero" class="w-full p-5 text-center"
                 style="background-image: url({{ mainImage }}); background-position: center; background-size: cover;">
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        <!--- IMAGE A LA UNE -->
-        <div class="col-start-1 col-span-14 flex justify-center">
+        <!--- Main Image form -->
+        <div class="flex justify-center">
             <div class="flex flex-col items-center w-fit rounded-md p-2 bg-white/60">
                 <div id="mainImg" class="hidden">
                     {{ form_label(form.mainImageFile) }}
@@ -46,26 +44,27 @@
             </div>
         </div>
         <!-- Title: trick name -->
-        <div class="col-start-2 col-span-12 m-6 md:m-20 text-center">
+        <div class="grid grid-cols-14 m-6 md:m-20 text-center">
             {% if trick.name %}
                 {% set trick_name = trick.name %}
             {% else %}
                 {% set trick_name = "New trick" %}
             {% endif %}
-            <h1 class="h-fit rounded-lg shadow-lg p-5 bg-white/60">
+            <h1 class="col-start-2 col-span-12 h-fit rounded-lg shadow-lg p-5 bg-white/60">
                 {{ trick_name }}
             </h1>
         </div>
     </section>
-    <!-- FORM -->
+    <!-- DETAILS -->
     <section id="form-details" class="md:w-5/6 p-2 text-center">
+        <!-- Medias Collections -->
         <button class="btn sm:hidden mt-2 mb-6 border-2 border-slate-500 p-2 bg-cyan-400 text-center align-middle text-slate-600"
                 type="button"
                 onclick="toggleMedias()">
                     See / hide medias
         </button>
         <div id="medias_form" class="hidden sm:block lg:flex">
-            <!-- PICTURES -->
+            <!-- pictures -->
             <div id="images_form" class="form-control lg:w-3/6 mb-4 p-px">
                 {{ form_label(form.images) }}
                 <ul id="images-fields-list"
@@ -99,7 +98,7 @@
                             Add an image!
                 </button>
             </div>
-            <!-- VIDEOS -->
+            <!-- videos -->
             <div id="videos_form" class="form-control bg-slate-200 lg:w-3/6 mb-4 p-px">
                 {{ form_label(form.videos) }}
                 <ul id="videos-fields-list"
@@ -137,7 +136,7 @@
                 </button>
             </div>
         </div>
-        <!-- INFORMATIONS -->
+        <!-- Informations -->
         <div id="trick-infos" class="ml-4 text-left">
             <div class="form-control">
                 {{ form_label(form.name) }}
@@ -157,16 +156,14 @@
                 </br>
                 {{ form_widget(form.category, {'attr': {'class': 'm-4 border-2 border-slate-500 bg-slate-100 p-2'}}) }}
             </div>
-            {# <div class="flex justify-center lg:justify-end lg:mr-10 lg:mb-1"> #}
             <div class="flex justify-end mr-10">
                 <button class="btn m-2 w-20 bg-cyan-100 text-slate-700">
                     {{ button_label|default('Create') }}
                 </button>
             </div>
         </div>
-        {{ form_end(form) }}
     </section>
-{# {{ form_end(form) }} #}
+{{ form_end(form) }}
 
 <!-- CODE JS -->
 {% block javascripts %}
@@ -177,8 +174,6 @@
             element.classList.toggle("hidden");
         }
     </script>
-
-    <!--- Manage main image ???? -->
 
     <!--- Manage collections -->
     <script>
