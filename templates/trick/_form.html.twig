@@ -75,13 +75,13 @@
                     class="holder-images flex flex-wrap justify-center p-2">
                         {{ form_errors(form.images) }}
                         {% for input_image in form.images %}
-                            <li class="sm:w-3/6 lg:w-2/6 p-2">     
+                            <li class="bg-slate-200 m-2 sm:w-3/6 lg:w-2/6 p-2">     
                                 <img    
                                     src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
                                     alt="picture of a snowboarder doing a {{ trick.name }}" 
                                 />
                                 {# <div id="imgfile" class="hidden p-2 text-sm"> #}
-                                <div id="{{ input_image.vars.value.id }}" class="hidden target:block p-2 text-sm">
+                                <div id="{{ input_image.vars.value.id }}" class="hidden target:block overflow-hidden p-2 text-sm">
                                     {{ form_widget(input_image, {'attr': {'class': 'mb-2'}}) }}
                                 </div>
                                 {# <button type="button" onclick="toggleFile()"> #}
@@ -102,7 +102,7 @@
                 </button>
             </div>
             <!-- videos -->
-            <div id="videos_form" class="form-control bg-slate-200 lg:w-3/6 mb-4 p-px">
+            <div id="videos_form" class="form-control lg:w-3/6 mb-4 p-px">
                 {{ form_label(form.videos) }}
                 <ul id="videos-fields-list"
                     data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name + 1 : 0 }}"
@@ -112,7 +112,7 @@
                     class="holder-videos flex flex-wrap justify-center p-2">
                         {{ form_errors(form.videos) }}
                         {% for input_video in form.videos %}
-                            <li class="sm:w-3/6 lg:w-2/6 p-2">                        
+                            <li class="bg-slate-200 m-2 sm:w-3/6 lg:w-2/6 p-2">                        
                                 <iframe src="{{input_video.vars.value.link}}"
                                         class="w-full"
                                         title="YouTube video player"
