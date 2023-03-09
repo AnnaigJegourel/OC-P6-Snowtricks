@@ -65,17 +65,17 @@
         </button>
         <div id="medias_form" class="hidden sm:block lg:flex">
             <!-- pictures -->
-            <div id="images_form" class="form-control lg:w-3/6 mb-4 p-px">
+            <div id="images_form" class="form-control overflow-hidden lg:w-3/6 mb-4 p-px">
                 {{ form_label(form.images) }}
                 <ul id="images-fields-list"
                     data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
                     data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
                     data-widget-tags="{{ '<li></li>'|e }}"
                     data-widget-counter="{{ form.images|length }}"
-                    class="holder-images flex flex-wrap justify-center p-2">
+                    class="holder-images overflow-hidden flex flex-wrap justify-center p-2">
                         {{ form_errors(form.images) }}
                         {% for input_image in form.images %}
-                            <li class="bg-slate-200 m-2 sm:w-3/6 lg:w-2/6 p-2">     
+                            <li class="overflow-hidden bg-slate-200 m-2 sm:w-3/6 lg:w-2/6 p-2">     
                                 <img    
                                     src="{{ vich_uploader_asset(input_image.vars.value, 'file') }}"
                                     alt="picture of a snowboarder doing a {{ trick.name }}" 
@@ -256,7 +256,7 @@
         }
     </script>
 
-    <!--- Toggle collection video link -->
+    {# <!--- Toggle collection video link -->
     <script>
         function toggleVideoLink() {
             var element = document.getElementById("video_link");
@@ -270,6 +270,6 @@
             var element = document.getElementById("imgfile");
             element.classList.toggle("hidden");
         }
-    </script>
+    </script> #}
 
 {% endblock %}
