@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/trick')]
 class TrickController extends AbstractController
@@ -183,4 +184,22 @@ class TrickController extends AbstractController
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
+
+    // REMOVE MAIN IMAGE
+    #[Route('/{slug}/remove_main_image', name: 'app_trick_remove_main_image', methods: ['GET'])]
+    public function removeMainImage(Trick $trick, FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
+    {
+        $fileUploader->remove($trick->getMainImageName());
+        $trick->setMainImageName(null);
+
+        $entityManager->persist($trick);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            'The main image has been removed.'
+        );
+
+        return $this->redirectToRoute('app_trick_edit', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
+    }    
 }

@@ -11,9 +11,8 @@
 
         {{ include('trick/_form.html.twig', {'button_label': 'Save'}) }}
 
-        {# <div class="flex justify-center lg:justify-end lg:mr-10 lg:-mt-16 lg:w-full"> #}
-        <div class="flex justify-end mr-12 md:self-end md:mr-20">
-            <div class="m-2 md:mr-4 lg:mr-10 w-20 border-2 border-slate-500 shadow-lg py-1 px-2 bg-pink-700 text-center text-slate-100">
+        <div class="flex justify-center">
+            <div class="ml-4 w-20 border-2 border-slate-500 shadow-lg py-1 px-2 bg-pink-700 text-center text-slate-100">
                 {{ include('trick/_delete_form.html.twig', {'button_label': 'Delete', 'no_icon': 'true'}) }}
             </div>
         </div>
