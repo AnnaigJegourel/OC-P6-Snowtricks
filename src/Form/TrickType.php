@@ -6,7 +6,6 @@ use App\Entity\Trick;
 use App\Form\ImageType;
 use App\Form\VideoType;
 use App\Entity\Category;
-// use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

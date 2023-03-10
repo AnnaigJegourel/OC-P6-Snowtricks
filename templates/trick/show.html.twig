@@ -45,7 +45,6 @@
                         type="button" onclick="toggleMedias()">
                     See / hide medias
                 </button>
-
                 <div id="medias" class="hidden sm:block md:flex">
                     <ul class="md:w-3/6 flex flex-wrap justify-center">
                         {% if trick.images %}
@@ -74,7 +73,6 @@
                         {% endif %}
                     </ul>
                 </div>
-
                 <article class="p-2 md:p-10 lg:px-40">
                     <p class="text-left"> {{ trick.description }} </p>
                     <ul class="flex justify-center my-5 p-2">
@@ -83,7 +81,6 @@
                         <li class="w-3/6 p-px bg-slate-200 text-center align-middle text-slate-600"> {{ trick.updatedAt|date("m/d/Y") }} </li>
                     </ul>
                 </article>
-
                 <div id="trick-comments" class="p-2 md:px-10 md:pb-10 lg:px-20">
                     <div class="bg-slate-300 px-2 py-8 text-center text-bold">
                         {% if is_granted('IS_AUTHENTICATED') %}

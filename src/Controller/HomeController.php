@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Component\Mailer\MailerInterface;
-// use Symfony\Component\Mime\Email;
 
 class HomeController extends AbstractController
 {
@@ -17,9 +15,6 @@ class HomeController extends AbstractController
     {
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $trickRepository->getTrickPaginator($offset);
-        // $email = new Email();
-        // $email->text('toto')->from('truc@france.fr')->to('a_jegourel@yahoo.fr');
-        // $mailerInterface->send($email);
         return $this->render('trick/index.html.twig', [
             'user' => $this->getUser(),
             'tricks' => $paginator,
