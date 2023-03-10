@@ -49,8 +49,6 @@ final class CommentFactory extends ModelFactory
         return [
             'content' => self::faker()->sentence(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            // 'trick' => TrickFactory::new(),
-            // 'author' => UserFactory::new(),
         ];
     }
 
