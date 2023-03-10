@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,7 @@
                 The "defer" attribute on the script tags delays the execution of the JavaScript until the page loads e -->
         {% endblock %}
     </head>
+
     <body class="bg-white text-slate-600 text-sm md:text-base">
         <header class="flex-col-reverse md:flex-col fixed bottom-0 md:bottom-auto md:top-0 left-0 right-0 bg-cyan-700 p-2 text-white">
             <div class="flex justify-between items-center">
@@ -66,7 +68,6 @@
                             </li>
                         {% else %}
                             <li>
-                                {# <a href="{{ path('app_user_new') }}"> #}
                                 <a href="{{ path('app_register') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                         fill="currentColor" class="w-6 h-6 block md:hidden">
@@ -94,7 +95,6 @@
                 </div>
             {% endfor %}
         </header>
-        {# {{ dump(app.user) }} #}
         {% block main %}
         {% endblock %}
         <footer class="hidden md:block headfoot md:pl-10 bg-slate-600">
