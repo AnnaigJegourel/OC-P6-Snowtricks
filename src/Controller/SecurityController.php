@@ -13,7 +13,6 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            // if($this->getUser()->isVerified()) {}
             return $this->redirectToRoute('target_path');
         }
 
